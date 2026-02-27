@@ -1,5 +1,5 @@
-<div id="renderViewContainer" class="bg-black">
-    <svg id="renderView" width="500" height="500">
+<div id="renderViewContainer" class="flex-1 bg-black flex items-stretch">
+    <svg class="flex-1 h-full" id="renderView">
         @for (element of elements(); track element.id) {
             <!-- <ng-container
                 *ngComponentOutlet="getElementComponent(element); inputs: getElementComponentInputs(element)">

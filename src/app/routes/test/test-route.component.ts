@@ -6,6 +6,7 @@ import { RenderViewComponent } from "../../components/render-view/render-view.co
 @Component({
     selector: "app-route-test",
     templateUrl: "./test-route.component.html",
+    styleUrls: ["./test-route.component.css"],
     imports: [RenderViewComponent]
 })
 export class TestRouteComponent {
