@@ -1,10 +1,15 @@
-import { afterEveryRender, afterNextRender, Component, effect, ElementRef, inject } from "@angular/core";
+import { afterEveryRender, afterNextRender, Component, effect, ElementRef, inject, signal } from "@angular/core";
 import { ElementsService } from "../../services/elements.service";
 import { RenderingService } from "../../services/rendering.service";
+import { WadElement } from "../../models/element";
+import { SquareWadComponent } from "../wad-components/square-wad.component";
+import { ErrorWadComponent } from "../wad-components/error-wad.component";
+import { NgComponentOutlet } from "@angular/common";
 
 @Component({
     selector: "app-render-view",
-    templateUrl: "./render-view.component.html"
+    templateUrl: "./render-view.component.html",
+    imports: [NgComponentOutlet]
 })
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
@@ -16,6 +21,20 @@ export class RenderViewComponent {
 
     constructor() {
         
+    }
+
+    getElementComponent(element: WadElement) {
+        console.debug(`[#${this.getElementComponent.name}] ${element.type}#${element.id}`, element);
+        switch (element.type) {
+            case "square":
+                return SquareWadComponent;
+            default:
+                return null
+        }
+    }
+
+    getElementComponentInputs(element: WadElement) {
+        return { element: element };
     }
 
     protected getCanvas(): HTMLCanvasElement {

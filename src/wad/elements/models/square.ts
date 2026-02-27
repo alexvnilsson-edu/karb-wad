@@ -1,6 +1,6 @@
 import { signal, WritableSignal } from "@angular/core";
-import { Coordinate } from "../../../wad/types/coordinate";
-import { WadElement } from "../element";
+import { Coordinate } from "../../types/coordinate";
+import { WadElement } from "./element";
 
 export class SquareWadElement extends WadElement {
     private _coordinate: WritableSignal<Coordinate> = signal({ x: 0, y: 0 });

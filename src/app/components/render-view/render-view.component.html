@@ -1,3 +1,9 @@
 <div id="renderViewContainer" class="bg-black">
-    <svg id="renderView" width="500" height="500"></svg>
+    <svg id="renderView" width="500" height="500">
+        @for (element of elements(); track element.id) {
+            <ng-container
+                *ngComponentOutlet="getElementComponent(element); inputs: getElementComponentInputs(element)">
+            </ng-container>
+        }
+    </svg>
 </div>
