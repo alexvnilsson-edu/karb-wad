@@ -1,9 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { WadModule } from '../wad/wad.module';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, WadModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

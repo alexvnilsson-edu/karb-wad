@@ -1,15 +1,17 @@
-import { afterEveryRender, afterNextRender, Component, effect, ElementRef, inject, signal } from "@angular/core";
-import { ElementsService } from "../../services/elements.service";
-import { RenderingService } from "../../services/rendering.service";
-import { WadElement } from "../../models/element";
-import { SquareWadComponent } from "../wad-components/square-wad.component";
-import { ErrorWadComponent } from "../wad-components/error-wad.component";
+import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, NO_ERRORS_SCHEMA, signal } from "@angular/core";
+import { ElementsService } from "../../../wad/services/elements.service";
+import { RenderingService } from "../../../wad/services/rendering.service";
+import { WadElement } from "../../../wad/elements/models/element";
 import { NgComponentOutlet } from "@angular/common";
+import { SquareWadComponent } from "../../../wad/elements/components/square.component";
+import { WadModule } from "../../../wad/wad.module";
 
 @Component({
     selector: "app-render-view",
     templateUrl: "./render-view.component.html",
-    imports: [NgComponentOutlet]
+    imports: [
+        WadModule
+    ]
 })
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
@@ -33,8 +35,8 @@ export class RenderViewComponent {
         }
     }
 
-    getElementComponentInputs(element: WadElement) {
-        return { element: element };
+    onElementClick(element: WadElement) {
+        console.debug(`[#${this.onElementClick.name}] ID: ${element.id}`);
     }
 
     protected getCanvas(): HTMLCanvasElement {

@@ -1,6 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { ElementsService } from "../../services/elements.service";
-import { SquareWadElement } from "../../models/elements/square";
+import { ElementsService } from "../../../wad/services/elements.service";
 
 @Component({
     selector: "app-route-home",

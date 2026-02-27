@@ -1,9 +1,18 @@
 <div id="renderViewContainer" class="bg-black">
     <svg id="renderView" width="500" height="500">
         @for (element of elements(); track element.id) {
-            <ng-container
+            <!-- <ng-container
                 *ngComponentOutlet="getElementComponent(element); inputs: getElementComponentInputs(element)">
-            </ng-container>
+            </ng-container> -->
+            @switch (element.type.toLowerCase()) {
+                @case ("square") {
+                    <!-- <wad-square [element]="element"></wad-square> -->
+                    <rect x="10" y="10" width="10" height="10" stroke="white" (click)="onElementClick(element)"></rect>
+                }
+                @default {
+                    <wad-error [element]="element"></wad-error>
+                }
+            }
         }
     </svg>
 </div>

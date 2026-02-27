@@ -1,16 +1,24 @@
-import { Component, HostBinding, input, NO_ERRORS_SCHEMA } from "@angular/core";
+import { Component, computed, HostBinding, input, NO_ERRORS_SCHEMA } from "@angular/core";
 import { SquareWadElement } from "../models/square";
 import { BaseWadComponent } from "./base.component";
+import { WadModule } from "../../wad.module";
 
 @Component({
-    selector: "[wad-square]",
-    template: `<rect></rect>`,
+    selector: "rect[wad-square]",
+    template: `<rect [attr.x]="x()" [attr.y]="y()"></rect>`,
     standalone: false
 })
 export class SquareWadComponent extends BaseWadComponent<SquareWadElement> {
-    @HostBinding("attr.x")
-    x: number = this.element().coordinate().x;
+    x = computed(() => this.getElement()?.coordinate().x || 0);
 
-    @HostBinding("attr.y")
-    y: number = this.element().coordinate().y;
+    y = computed(() => this.getElement()?.coordinate().y || 0);
+
+    constructor() {
+        super();
+        console.debug(`[${SquareWadComponent.name}] Constructed`);
+    }
+
+    ngOnInit() {
+        console.debug(`[${SquareWadComponent.name}] Init`);
+    }
 }
