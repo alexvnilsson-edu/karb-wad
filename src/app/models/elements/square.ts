@@ -1,4 +1,4 @@
-import { WadElement } from "../wad-element";
+import { WadElement } from "../element";
 
 export class SquareWadElement extends WadElement {
     x!: number;

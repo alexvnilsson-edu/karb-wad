@@ -1,5 +1,5 @@
 import { Injectable, Signal, signal, WritableSignal } from "@angular/core";
-import { WadElement } from "../models/wad-element";
+import { WadElement } from "../models/element";
 
 @Injectable({
     providedIn: "root"
