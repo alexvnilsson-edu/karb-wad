@@ -5,9 +5,11 @@ import { TestRouteComponent } from './route-components/test-route/test-route.com
 export const routes: Routes = [
     {
         path: "",
-        component: HomeRouteComponent
+        component: HomeRouteComponent,
+        title: "Drawing"
     }, {
         path: "test",
-        component: TestRouteComponent
+        component: TestRouteComponent,
+        title: "Rendering Test"
     }
 ];

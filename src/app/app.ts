@@ -1,6 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RenderViewComponent } from "./components/render-view/render-view.component";
+import { Component, computed, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,10 @@ import { RenderViewComponent } from "./components/render-view/render-view.compon
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('wad');
+  private activatedRoute = inject(ActivatedRoute);
+  title = signal("TITLE");
+
+  constructor() {
+    this.activatedRoute.title.subscribe(title => this.title.set(title || "TITLE NULL"));
+  }
 }
