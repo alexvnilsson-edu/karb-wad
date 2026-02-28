@@ -11,7 +11,7 @@ export class ElementsService {
     private readonly _elements = signal<WadElementMap>(new Map<string, WadElement>());
     readonly elements = this._elements.asReadonly();
 
-    readonly allElements = linkedSignal(() => Object.values(this._elements())).asReadonly();
+    readonly allElements = linkedSignal(() => this._elements().values()).asReadonly();
 
     /** IDs of focused elements. */
     protected focused = linkedSignal(() => {
