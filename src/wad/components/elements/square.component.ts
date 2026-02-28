@@ -8,22 +8,19 @@ import { coordify } from "../../types/coordinate";
     selector: `[wad-square]`,
     template: ``,
     host: {
-        "[attr.x]": "coordinate()?.x || 0",
-        "[attr.y]": "coordinate()?.y || 0",
-        "[attr.width]": "length()",
-        "[attr.height]": "length()",
+        "[attr.points]": "coordinates()"
     },
     standalone: false
 })
 export class SquareWadComponent extends WadComponent<SquareWadElement> {
-    coordinate = computed(() => {
+    coordinates = computed(() => {
+        const element = this.getElement();
         if (this.getElement()) {
-            const coord = this.rendering.translateCoordinate(this.getElement().coordinate);
-
-            // Required to fully invert positioning.
-            return coordify(coord.x, coord.y - this.getElement().length);
+            const coords = element.getCoordinates().map(coord => this.rendering.translateCoordinateArray(coord));
+            
+            return coords;
         } else {
-            return { x: 0, y: 0 };
+            return [0, 0];
         }
     });
 

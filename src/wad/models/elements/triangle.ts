@@ -12,4 +12,12 @@ export class TriangleWadElement extends WadElement {
         this.b = b;
         this.c = c;
     }
+
+    override getCoordinates(): Array<Array<number>> {
+        return [
+            [this.a.x, this.a.y],
+            [this.b.x, this.b.y],
+            [this.c.x, this.c.y]
+        ];
+    }
 }

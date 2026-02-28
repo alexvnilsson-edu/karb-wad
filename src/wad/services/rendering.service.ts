@@ -13,6 +13,17 @@ export class RenderingService {
         return { x: coordinate.x, y: this.translateYCoordinate(coordinate.y, target) };
     }
 
+    translateCoordinateArray(coordinate: Array<number>, target: "canvasian" | "cartesian" = "canvasian"): Array<number> {
+        if (coordinate === undefined || coordinate.length === 2) {
+            throw new Error(`Coordinate array misformed, two items are required.`);
+        }
+        if (typeof coordinate[0] !== "number" || typeof coordinate[1] !== "number") {
+            throw new TypeError(`Coordinate array misformed; two items with number type required.`);
+        }
+        
+        return [coordinate[0], this.translateYCoordinate(coordinate[1])];
+    }
+
     translateYCoordinate(y: number, target: "canvasian" | "cartesian" = "canvasian"): number {
         if (target === "canvasian") {
             return -(y - this.height());

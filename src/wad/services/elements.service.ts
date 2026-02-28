@@ -55,23 +55,41 @@ export class ElementsService {
         }
 
         if (this._elements().has(id)) {
-            throw new Error(`Element already exists in table.`);
+            throw new Error(`Element already exists in element map.`);
         }
 
         this._elements.update(e => {
-            e.delete(id);
+            e.set(id, element);
             return e;
         });
     }
 
-    remove(query: WadElement | string) {
-        if (typeof query === "string") {
-            this.removeById(query);
-        } else if (typeof query === "object") {
-            this.removeByElement(query);
-        } else {
-            throw new Error("Unknown query.", { cause: query });
+    update(id: string, element: WadElement) {
+        if (!this._elements().has(id)) {
+            throw new Error(`Element does not exists in element map.`);
         }
+
+        this._elements.update(e => {
+            e.set(id, element);
+            return e;
+        });
+    }
+    
+    remove(element: WadElement) {
+        const id = element.id;
+
+        if (id === undefined) {
+            throw new Error("Element ID is undefined.");
+        } 
+
+        if (!this._elements().has(id)) {
+            throw new Error(`Missing element with ID ${id} in element map.`);
+        }
+
+        this._elements.update((e) => {
+            e.delete(id);
+            return e;
+        });
     }
 
     focus(element: WadElement) {
@@ -97,21 +115,4 @@ export class ElementsService {
             return e;
         });
     }
-
-    private removeById(id: string) {
-        if (!this._elements().has(id)) {
-            throw new Error(`No element with ID ${id} found.`);
-        }
-        this._elements.update((e) => {
-            e.delete(id);
-            return e;
-        });
-    }
-
-    private removeByElement(element: WadElement) {
-        if (element.id == undefined) {
-            throw new Error("Element's ID property is undefined.")
-        }
-        this.removeById(element.id);
-    } 
 }

@@ -4,7 +4,7 @@
             @for (element of elements(); track element.id) {
                 @switch (element.type.toLowerCase()) {
                     @case ("square") {
-                        <rect wad-square [element]="element" (elementClick)="elementClick($event)"></rect>
+                        <polygon wad-square [element]="element" (elementClick)="elementClick($event)"></polygon>
                     }
                     @case ("triangle") {
                         <polygon wad-triangle [element]="element" (elementClick)="elementClick($event)"></polygon>

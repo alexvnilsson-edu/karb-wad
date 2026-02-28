@@ -1,6 +1,6 @@
 import * as shortUuid from "short-uuid"
 
-export class WadElement {
+export abstract class WadElement {
     id!: string;
     type!: string;
 
@@ -10,6 +10,8 @@ export class WadElement {
         this.id = this.generateId();
         this.type = type;
     }
+
+    abstract getCoordinates(): Array<Array<number>>;
 
     focus() {
         this.isFocused = true;
