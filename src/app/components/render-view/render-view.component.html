@@ -7,7 +7,7 @@
             @switch (element.type.toLowerCase()) {
                 @case ("square") {
                     <!-- <wad-square [element]="element"></wad-square> -->
-                    <rect x="10" y="10" width="10" height="10" stroke="white" (click)="onElementClick(element)"></rect>
+                    <rect wad-square x="10" y="10" width="10" height="10" stroke="white" (click)="onElementClick(element)"></rect>
                 }
                 @default {
                     <wad-error [element]="element"></wad-error>

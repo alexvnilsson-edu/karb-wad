@@ -4,8 +4,12 @@ import { WadComponent } from "../../components/wad.component";
 import { WadModule } from "../../wad.module";
 
 @Component({
-    selector: "rect[wad-square]",
-    template: `<rect [attr.x]="x()" [attr.y]="y()"></rect>`,
+    selector: `[wad-square]`,
+    template: ``,
+    host: {
+        "[attr.x]": "x()",
+        "[attr.y]": "y()"
+    },
     standalone: false
 })
 export class SquareWadComponent extends WadComponent<SquareWadElement> {
