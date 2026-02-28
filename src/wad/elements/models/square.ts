@@ -1,17 +1,15 @@
-import { signal, WritableSignal } from "@angular/core";
+import { inject, signal, WritableSignal } from "@angular/core";
 import { Coordinate } from "../../types/coordinate";
 import { WadElement } from "./element";
+import { RenderingService } from "../../services/rendering.service";
 
 export class SquareWadElement extends WadElement {
-    private _coordinate: WritableSignal<Coordinate> = signal({ x: 0, y: 0 });
-    private _length: WritableSignal<number> = signal(0);
-
-    coordinate = this._coordinate.asReadonly();
-    length = this._length.asReadonly();
+    coordinate!: Coordinate;
+    length!: number;
 
     constructor(x: number, y: number, length: number) {
         super("square");
-        this._coordinate.set({ x: x, y: y });
-        this._length.set(length);
+        this.coordinate = { x: x, y: y };
+        this.length = length;
     }
 }

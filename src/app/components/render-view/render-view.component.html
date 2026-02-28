@@ -6,8 +6,10 @@
             </ng-container> -->
             @switch (element.type.toLowerCase()) {
                 @case ("square") {
-                    <!-- <wad-square [element]="element"></wad-square> -->
-                    <rect wad-square x="10" y="10" width="10" height="10" stroke="white" (click)="onElementClick(element)"></rect>
+                    <rect wad-square [element]="element"></rect>
+                }
+                @case ("triangle") {
+                    <polygon wad-triangle [element]="element"></polygon>
                 }
                 @default {
                     <wad-error [element]="element"></wad-error>
