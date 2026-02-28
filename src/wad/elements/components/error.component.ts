@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { BaseWadComponent } from "./base.component";
+import { WadComponent } from "../../components/wad.component";
 import { WadElement } from "../models/element";
 
 @Component({
@@ -7,4 +7,4 @@ import { WadElement } from "../models/element";
     template: `<text x="10" y="10"><strong>Error:</strong> Element #{{ element()?.id || "unknown" }} with type <q>{{ element()?.type || "unknown" }}</q></text>`,
     standalone: false
 })
-export class ErrorWadComponent extends BaseWadComponent<WadElement> { }
+export class ErrorWadComponent extends WadComponent<WadElement> { }
