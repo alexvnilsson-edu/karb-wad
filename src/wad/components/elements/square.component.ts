@@ -1,6 +1,6 @@
 import { Component, computed, HostBinding, input, NO_ERRORS_SCHEMA, signal } from "@angular/core";
-import { SquareWadElement } from "../models/square";
-import { WadComponent } from "../../components/wad.component";
+import { SquareWadElement } from "../../models/elements/square";
+import { WadComponent } from "../wad.component";
 import { WadModule } from "../../wad.module";
 import { coordify } from "../../types/coordinate";
 

@@ -2,18 +2,15 @@
     <div id="renderViewContainer" class="flex-4 bg-black flex items-stretch">
         <svg class="flex-1 h-full cursor-crosshair" id="renderView">
             @for (element of elements(); track element.id) {
-                <!-- <ng-container
-                    *ngComponentOutlet="getElementComponent(element); inputs: getElementComponentInputs(element)">
-                </ng-container> -->
                 @switch (element.type.toLowerCase()) {
                     @case ("square") {
-                        <rect wad-square [element]="element"></rect>
+                        <rect wad-square [element]="element" (elementClick)="elementClick($event)"></rect>
                     }
                     @case ("triangle") {
-                        <polygon wad-triangle [element]="element"></polygon>
+                        <polygon wad-triangle [element]="element" (elementClick)="elementClick($event)"></polygon>
                     }
                     @default {
-                        <wad-error [element]="element"></wad-error>
+                        <text x="10" y="10">Unable to render element {{ element.id }} with type {{ element.type }}.</text>
                     }
                 }
             }

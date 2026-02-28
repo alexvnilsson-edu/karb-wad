@@ -1,27 +1,40 @@
-import { Component, computed, inject, input, signal } from "@angular/core";
-import { WadElement } from "../elements/models/element";
+import { Component, computed, inject, input, linkedSignal, output, signal } from "@angular/core";
+import { WadElement } from "../models/element";
 import { RenderingService } from "../services/rendering.service";
+import { ElementsService } from "../services/elements.service";
+import { WadElementClickEvent } from "../events/wad-element-clicked";
 
 @Component({
     selector: "[wad-base]",
     template: ``,
     host: {
-        "[attr.stroke]": "stroke()"
+        "[attr.stroke]": "stroke()",
+        "(click)": "click($event)"
     },
     standalone: false
 })
-export class WadComponent<TElement extends WadElement>  {
-    private _active = signal(false);
-
+export class WadComponent<TElement extends WadElement> {
     protected rendering = inject(RenderingService);
 
-    element = input<WadElement>();
+    element = input.required<WadElement>();
 
-    active = this._active.asReadonly();
+    elementClick = output<WadElementClickEvent>();
+
+    isFocused = linkedSignal(() => this.element()?.isFocused);
 
     stroke = computed(() => {
-        return this.active() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
+        return this.isFocused() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
     });
+
+    protected click(event: MouseEvent) {
+        console.debug(`Element ${this.element()?.id || "unknown id"} was clicked.`);
+
+        if (this.element()) {
+            const eventData: WadElementClickEvent = { element: this.element()! };
+            console.debug(`Emitting event elementClick with data: `, eventData);
+            this.elementClick.emit(eventData);
+        }
+    }
 
     protected getElement(): TElement {
         return this.element() as TElement;

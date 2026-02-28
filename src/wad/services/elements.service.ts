@@ -1,21 +1,51 @@
-import { Injectable, linkedSignal, Signal, signal, WritableSignal } from "@angular/core";
-import { WadElement } from "../elements/models/element";
+import { computed, effect, Injectable, linkedSignal, Signal, signal, WritableSignal } from "@angular/core";
+import { WadElement } from "../models/element";
+import { filter, from, map } from "rxjs";
 
-interface WadElementMap {
-    [key: string]: WadElement
-}
+type WadElementMap = Map<string, WadElement>;
 
 @Injectable({
     providedIn: "root"
 })
 export class ElementsService {
-    private readonly _elements = signal<WadElementMap>({});
+    private readonly _elements = signal<WadElementMap>(new Map<string, WadElement>());
     readonly elements = this._elements.asReadonly();
 
     readonly allElements = linkedSignal(() => Object.values(this._elements())).asReadonly();
 
     /** IDs of focused elements. */
-    protected focused: string[] = [];
+    protected focused = linkedSignal(() => {
+        const elements = this.elements();
+        if (!elements) {
+            return [];
+        }
+
+        from(this.elements().values()).pipe(filter(v => v.isFocused), map(v => v.id)).subscribe(function (ids) {
+            console.debug("focused: ", ids);
+        }).unsubscribe();
+
+        const ids = [];
+
+        for (const element of elements.values()) {
+            if (element.isFocused) {
+                ids.push(element.id);
+            }
+        }
+
+        return ids;
+    });
+
+    constructor() {
+        effect(() => {
+            this.elements().forEach((element, key, map) => {
+            
+        });
+        }, { 
+            debugName: `${ElementsService.name} effects`
+        });
+
+        
+    }
 
     add(element: WadElement) {
         const id = element.id;
@@ -24,12 +54,12 @@ export class ElementsService {
             throw new Error(`Element is missing ID property.`);
         }
 
-        if (this._elements()[id] !== undefined) {
+        if (this._elements().has(id)) {
             throw new Error(`Element already exists in table.`);
         }
 
         this._elements.update(e => {
-            e[id] = element;
+            e.delete(id);
             return e;
         });
     }
@@ -45,28 +75,35 @@ export class ElementsService {
     }
 
     focus(element: WadElement) {
-        if (this.focused.length > 0) {
-            this.focused.forEach(id => {
-                if (this._elements()[id]) {
-                    this._elements()[id].defocus();
+        if (this.focused().length > 0) {
+            this.focused().forEach(id => {
+                if (this._elements().has(element.id)) {
+                    this._elements.update(e => {
+                        e.get(id)!.defocus();
+                        return e;
+                    });
                 }
             })
         }
         
-        if (!this._elements()[element.id]) {
+        if (!this._elements().has(element.id)) {
             throw new Error(`Element not found in map: ${element.id}`);
         }
 
-        this._elements()[element.id].focus();
-        this.focused.push(element.id);
+        console.debug(`Focusing element ${element.id}...`);
+
+        this._elements.update(e => {
+            e.get(element.id)!.focus();
+            return e;
+        });
     }
 
     private removeById(id: string) {
-        if (!this._elements()[id]) {
+        if (!this._elements().has(id)) {
             throw new Error(`No element with ID ${id} found.`);
         }
         this._elements.update((e) => {
-            delete e[id];
+            e.delete(id);
             return e;
         });
     }

@@ -1,4 +1,4 @@
-import { v7 as uuidV7 } from "uuid"
+import * as shortUuid from "short-uuid"
 
 export class WadElement {
     id!: string;
@@ -20,6 +20,6 @@ export class WadElement {
     }
 
     private generateId(): string {
-        return uuidV7();
+        return shortUuid.generate();
     }
 }

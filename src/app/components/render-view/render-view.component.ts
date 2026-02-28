@@ -1,18 +1,20 @@
-import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal } from "@angular/core";
+import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal, ViewContainerRef } from "@angular/core";
 import { ElementsService } from "../../../wad/services/elements.service";
 import { RenderingService } from "../../../wad/services/rendering.service";
-import { WadElement } from "../../../wad/elements/models/element";
+import { WadElement } from "../../../wad/models/element";
 import { NgComponentOutlet } from "@angular/common";
-import { SquareWadComponent } from "../../../wad/elements/components/square.component";
+import { SquareWadComponent } from "../../../wad/components/elements/square.component";
 import { WadModule } from "../../../wad/wad.module";
 import { RenderViewStatusComponent } from "../render-view-status/render-view-status.component";
 import { coordify } from "../../../wad/types/coordinate";
 import { RenderViewSidebarComponent } from "../render-view-sidebar/render-view-sidebar.component";
+import { WadElementClickEvent } from "../../../wad/events/wad-element-clicked";
 
 @Component({
     selector: "app-render-view",
     templateUrl: "./render-view.component.html",
     host: {
+        "class": "flex-1 flex flex-col items-stretch",
         "(mousemove)": "mousemove($event)"
     },
     imports: [
@@ -23,6 +25,7 @@ import { RenderViewSidebarComponent } from "../render-view-sidebar/render-view-s
 })
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
+    private viewContainerRef = inject(ViewContainerRef);
 
     private rendering = inject(RenderingService);
     private elementService = inject(ElementsService);
@@ -46,8 +49,9 @@ export class RenderViewComponent {
         }
     }
 
-    onElementClick(element: WadElement) {
-        console.debug(`[#${this.onElementClick.name}] ID: ${element.id}`);
+    elementClick(event: WadElementClickEvent) {
+        console.debug(`Element clicked: ${event.element.id}`, event);
+        this.elementService.focus(event.element);
     }
 
     protected getCanvas(): HTMLCanvasElement {

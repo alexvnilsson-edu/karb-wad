@@ -1,5 +1,5 @@
 import { Coordinate } from "../../types/coordinate";
-import { WadElement } from "./element";
+import { WadElement } from "../../models/element";
 
 export class TriangleWadElement extends WadElement {
     a!: Coordinate;

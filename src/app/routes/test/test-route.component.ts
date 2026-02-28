@@ -1,10 +1,9 @@
 import { Component, inject } from "@angular/core";
 import { ElementsService } from "../../../wad/services/elements.service";
-import { SquareWadElement } from "../../../wad/elements/models/square";
+import { SquareWadElement } from "../../../wad/models/elements/square";
 import { RenderViewComponent } from "../../components/render-view/render-view.component";
-import { TriangleWadElement } from "../../../wad/elements/models/triangle";
+import { TriangleWadElement } from "../../../wad/models/elements/triangle";
 import { coordify } from "../../../wad/types/coordinate";
-import { WadElement } from "../../../wad/elements/models/element";
 
 @Component({
     selector: "app-route-test",

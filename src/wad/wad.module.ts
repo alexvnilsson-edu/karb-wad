@@ -1,18 +1,18 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 
-// Elements
+// ---- COMPONENTS ----
 import { WadComponent } from "./components/wad.component";
-import { ErrorWadComponent } from "./elements/components/error.component";
-import { SquareWadComponent } from "./elements/components/square.component";
-import { TriangleWadComponent } from "./elements/components/triangle.component";
 
-// Services
+// -- ELEMENT COMPONENTS --
+import { SquareWadComponent } from "./components/elements/square.component";
+import { TriangleWadComponent } from "./components/elements/triangle.component";
+
+// ---- SERVICES ----
 import { ElementsService } from "./services/elements.service";
 import { RenderingService } from "./services/rendering.service";
 
 const ELEMENTS = [ 
     WadComponent,
-    ErrorWadComponent,
     SquareWadComponent,
     TriangleWadComponent
 ];
