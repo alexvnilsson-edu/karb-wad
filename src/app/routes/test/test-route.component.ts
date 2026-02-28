@@ -13,7 +13,6 @@ export class TestRouteComponent {
     private elements = inject(ElementsService);
     
     ngOnInit() {
-        console.log("test init");
         this.elements.add(new SquareWadElement(10, 10, 10));
     }
 }
