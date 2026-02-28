@@ -3,6 +3,8 @@ import { ElementsService } from "../../../wad/services/elements.service";
 import { SquareWadElement } from "../../../wad/elements/models/square";
 import { RenderViewComponent } from "../../components/render-view/render-view.component";
 import { TriangleWadElement } from "../../../wad/elements/models/triangle";
+import { coordify } from "../../../wad/types/coordinate";
+import { WadElement } from "../../../wad/elements/models/element";
 
 @Component({
     selector: "app-route-test",
@@ -11,10 +13,14 @@ import { TriangleWadElement } from "../../../wad/elements/models/triangle";
     imports: [RenderViewComponent]
 })
 export class TestRouteComponent {
-    private elements = inject(ElementsService);
+    private elementService = inject(ElementsService);
+
+    elements = [
+      new SquareWadElement(10, 10, 50),
+      new TriangleWadElement(coordify(60, 60), coordify(110, 60), coordify(110, 110))
+    ];
     
     ngOnInit() {
-        this.elements.add(new SquareWadElement(10, 10, 10));
-        this.elements.add(new TriangleWadElement({ x: 30, y: 10 }, { x: 40, y: 10}, {x: 40, y: 20 }));
+        this.elements.forEach(e => this.elementService.add(e));
     }
 }

@@ -1,4 +1,4 @@
-import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, NO_ERRORS_SCHEMA, signal } from "@angular/core";
+import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal } from "@angular/core";
 import { ElementsService } from "../../../wad/services/elements.service";
 import { RenderingService } from "../../../wad/services/rendering.service";
 import { WadElement } from "../../../wad/elements/models/element";
@@ -27,7 +27,7 @@ export class RenderViewComponent {
     private rendering = inject(RenderingService);
     private elementService = inject(ElementsService);
 
-    elements = this.elementService.elements;
+    elements = linkedSignal(() => this.elementService.allElements());
 
     constructor() {
         afterNextRender(() => {

@@ -1,4 +1,4 @@
-import { Component, computed, inject } from "@angular/core";
+import { Component, computed, inject, linkedSignal } from "@angular/core";
 import { ElementsService } from "../../../wad/services/elements.service";
 
 @Component({
@@ -8,11 +8,5 @@ import { ElementsService } from "../../../wad/services/elements.service";
 export class RenderViewSidebarComponent {
     elementsService = inject(ElementsService)
 
-    elements = computed(() => {
-        if (!this.elementsService.elements()) {
-            return [];
-        }
-
-        return this.elementsService.elements();
-    });
+    elements = linkedSignal(() => this.elementsService.allElements());
 }

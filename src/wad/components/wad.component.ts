@@ -1,4 +1,4 @@
-import { Component, inject, input } from "@angular/core";
+import { Component, computed, inject, input, signal } from "@angular/core";
 import { WadElement } from "../elements/models/element";
 import { RenderingService } from "../services/rendering.service";
 
@@ -6,14 +6,22 @@ import { RenderingService } from "../services/rendering.service";
     selector: "[wad-base]",
     template: ``,
     host: {
-        "stroke": "rgb(225,225,225)"
+        "[attr.stroke]": "stroke()"
     },
     standalone: false
 })
 export class WadComponent<TElement extends WadElement>  {
+    private _active = signal(false);
+
     protected rendering = inject(RenderingService);
 
     element = input<WadElement>();
+
+    active = this._active.asReadonly();
+
+    stroke = computed(() => {
+        return this.active() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
+    });
 
     protected getElement(): TElement {
         return this.element() as TElement;

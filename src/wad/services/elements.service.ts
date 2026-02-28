@@ -1,25 +1,37 @@
-import { Injectable, Signal, signal, WritableSignal } from "@angular/core";
+import { Injectable, linkedSignal, Signal, signal, WritableSignal } from "@angular/core";
 import { WadElement } from "../elements/models/element";
+
+interface WadElementMap {
+    [key: string]: WadElement
+}
 
 @Injectable({
     providedIn: "root"
 })
 export class ElementsService {
-    private readonly _elements = signal<WadElement[]>([]);
+    private readonly _elements = signal<WadElementMap>({});
     readonly elements = this._elements.asReadonly();
+
+    readonly allElements = linkedSignal(() => Object.values(this._elements())).asReadonly();
+
+    /** IDs of focused elements. */
+    protected focused: string[] = [];
 
     add(element: WadElement) {
         const id = element.id;
 
         if (element.id == undefined) {
-            throw new Error(`Element is missing ID property.`, { cause: element });
+            throw new Error(`Element is missing ID property.`);
         }
 
-        if (this._elements().find(e => e.id === id) !== undefined) {
-            throw new Error(`Element already exists in table.`, { cause: element });
+        if (this._elements()[id] !== undefined) {
+            throw new Error(`Element already exists in table.`);
         }
 
-        this._elements().push(element);
+        this._elements.update(e => {
+            e[id] = element;
+            return e;
+        });
     }
 
     remove(query: WadElement | string) {
@@ -32,12 +44,31 @@ export class ElementsService {
         }
     }
 
+    focus(element: WadElement) {
+        if (this.focused.length > 0) {
+            this.focused.forEach(id => {
+                if (this._elements()[id]) {
+                    this._elements()[id].defocus();
+                }
+            })
+        }
+        
+        if (!this._elements()[element.id]) {
+            throw new Error(`Element not found in map: ${element.id}`);
+        }
+
+        this._elements()[element.id].focus();
+        this.focused.push(element.id);
+    }
+
     private removeById(id: string) {
-        const index = this.elements().findIndex(e => e.id === id);
-        if (index === -1) {
+        if (!this._elements()[id]) {
             throw new Error(`No element with ID ${id} found.`);
         }
-        this.elements().splice(index, 1);
+        this._elements.update((e) => {
+            delete e[id];
+            return e;
+        });
     }
 
     private removeByElement(element: WadElement) {
