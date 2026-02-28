@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { ElementsService } from "../../../wad/services/elements.service";
+import { ElementService } from "../../../wad/services/element.service";
 import { SquareWadElement } from "../../../wad/models/elements/square";
 import { RenderViewComponent } from "../../components/render-view/render-view.component";
 import { TriangleWadElement } from "../../../wad/models/elements/triangle";
@@ -12,7 +12,7 @@ import { coordify } from "../../../wad/types/coordinate";
     imports: [RenderViewComponent]
 })
 export class TestRouteComponent {
-    private elementService = inject(ElementsService);
+    private elementService = inject(ElementService);
 
     elements = [
       new SquareWadElement(10, 10, 50),

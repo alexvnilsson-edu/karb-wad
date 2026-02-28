@@ -7,7 +7,7 @@ type WadElementMap = Map<string, WadElement>;
 @Injectable({
     providedIn: "root"
 })
-export class ElementsService {
+export class ElementService {
     private readonly _elements = signal<WadElementMap>(new Map<string, WadElement>());
     readonly elements = this._elements.asReadonly();
 
@@ -41,7 +41,7 @@ export class ElementsService {
             
         });
         }, { 
-            debugName: `${ElementsService.name} effects`
+            debugName: `${ElementService.name} effects`
         });
 
         

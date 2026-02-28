@@ -8,7 +8,7 @@ import { SquareWadComponent } from "./components/elements/square.component";
 import { TriangleWadComponent } from "./components/elements/triangle.component";
 
 // ---- SERVICES ----
-import { ElementsService } from "./services/elements.service";
+import { ElementService } from "./services/element.service";
 import { RenderService } from "./services/render.service";
 
 const ELEMENTS = [ 
@@ -22,7 +22,7 @@ const ELEMENTS = [
         ELEMENTS
     ],
     providers: [
-        ElementsService,
+        ElementService,
         RenderService
     ],
     exports: [ ELEMENTS ],

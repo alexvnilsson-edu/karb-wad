@@ -1,5 +1,5 @@
 import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal, ViewContainerRef } from "@angular/core";
-import { ElementsService } from "../../../wad/services/elements.service";
+import { ElementService } from "../../../wad/services/element.service";
 import { RenderService } from "../../../wad/services/render.service";
 import { WadElement } from "../../../wad/models/element";
 import { NgComponentOutlet } from "@angular/common";
@@ -27,7 +27,7 @@ export class RenderViewComponent {
     private elementRef = inject(ElementRef);
 
     private renderService = inject(RenderService);
-    private elementService = inject(ElementsService);
+    private elementService = inject(ElementService);
 
     elements = linkedSignal(() => this.elementService.allElements());
 

@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, linkedSignal, output, signal } from "@angular/core";
 import { WadElement } from "../models/element";
 import { RenderService } from "../services/render.service";
-import { ElementsService } from "../services/elements.service";
+import { ElementService } from "../services/element.service";
 import { WadElementClickEvent } from "../events/wad-element-clicked";
 
 @Component({
