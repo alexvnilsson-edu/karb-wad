@@ -14,13 +14,13 @@ export class RenderingService {
     }
 
     translateCoordinateArray(coordinate: Array<number>, target: "canvasian" | "cartesian" = "canvasian"): Array<number> {
-        if (coordinate === undefined || coordinate.length === 2) {
-            throw new Error(`Coordinate array misformed, two items are required.`);
+        if (coordinate === undefined || coordinate.length !== 2) {
+            throw new Error(`Coordinate array misformed. Two items are required.`);
         }
         if (typeof coordinate[0] !== "number" || typeof coordinate[1] !== "number") {
-            throw new TypeError(`Coordinate array misformed; two items with number type required.`);
+            throw new TypeError(`Coordinate array misformed. Two items of the number type required.`);
         }
-        
+
         return [coordinate[0], this.translateYCoordinate(coordinate[1])];
     }
 

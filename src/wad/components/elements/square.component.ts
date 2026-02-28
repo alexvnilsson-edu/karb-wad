@@ -23,16 +23,4 @@ export class SquareWadComponent extends WadComponent<SquareWadElement> {
             return [0, 0];
         }
     });
-
-    length = computed(() => {
-        if (this.getElement()) {
-            return this.getElement().length
-        } else { 
-            return 0
-        }
-    });
-
-    constructor() {
-        super();
-    }
 }
