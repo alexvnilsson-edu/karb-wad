@@ -1,10 +1,12 @@
 import { ElementRef, inject, Injectable, Signal, signal } from "@angular/core";
-import { Coordinate } from "../types/coordinate";
+import { coordify, Coordinate } from "../types/coordinate";
 
 @Injectable({ providedIn: "root" })
 export class RenderingService {
+    private _coord = signal(coordify(0, 0));
     private _height = signal(0);   
 
+    coord = this._coord.asReadonly();
     height = this._height.asReadonly();
 
     translateCoordinate(coordinate: Coordinate, target: "canvasian" | "cartesian" = "canvasian"): Coordinate {
@@ -19,6 +21,10 @@ export class RenderingService {
         } else {
             throw new Error(`Invalid translation target: ${target}`);
         }
+    }
+
+    setCoord(coord: Coordinate, canvasian: boolean = true) {
+        this._coord.set(canvasian ? this.translateCoordinate(coord) : coord);
     }
 
     setHeight(height: number) {

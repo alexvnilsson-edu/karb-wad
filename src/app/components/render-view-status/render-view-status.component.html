@@ -1,9 +1,8 @@
-<div id="status">
-    <div id="coordinates">
-        <label>Koordinater: </label>
-        <span id="rendererStatusCoordinatesX">0</span>
+<div class="grid grid-cols-6 bg-gray-800 font-mono text-white p-2 gap-2 divide-gray-600 divide-x-1 divide-dashed" id="status">
+    <div class="px-2">
+        <span>{{ coord().x }}</span>
         <span>, </span>
-        <span id="rendererStatusCoordinatesY">0</span>
+        <span>{{ coord().y }}</span>
     </div>
 
     <div id="origin">

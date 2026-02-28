@@ -1,0 +1,11 @@
+<div class="p-2 text-white">
+    <h4 class="text-lg">Elements</h4>
+    <div class="overflow-y-scroll scroll-smooth">
+        @for (element of elements(); track element.id) {
+            <div class="p-2 border-solid border-1 border-gray-200">
+                <p><strong>ID:</strong> {{ element.id }}</p>
+                <p><strong>Type: </strong> {{ element.type }}</p>
+            </div>
+        }
+    </div>
+</div>

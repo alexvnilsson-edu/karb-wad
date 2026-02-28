@@ -1,20 +1,26 @@
-<div id="renderViewContainer" class="flex-1 bg-black flex items-stretch">
-    <svg class="flex-1 h-full" id="renderView">
-        @for (element of elements(); track element.id) {
-            <!-- <ng-container
-                *ngComponentOutlet="getElementComponent(element); inputs: getElementComponentInputs(element)">
-            </ng-container> -->
-            @switch (element.type.toLowerCase()) {
-                @case ("square") {
-                    <rect wad-square [element]="element"></rect>
-                }
-                @case ("triangle") {
-                    <polygon wad-triangle [element]="element"></polygon>
-                }
-                @default {
-                    <wad-error [element]="element"></wad-error>
+<div class="flex-1 flex flex-row items-stretch">
+    <div id="renderViewContainer" class="flex-4 bg-black flex items-stretch">
+        <svg class="flex-1 h-full cursor-crosshair" id="renderView">
+            @for (element of elements(); track element.id) {
+                <!-- <ng-container
+                    *ngComponentOutlet="getElementComponent(element); inputs: getElementComponentInputs(element)">
+                </ng-container> -->
+                @switch (element.type.toLowerCase()) {
+                    @case ("square") {
+                        <rect wad-square [element]="element"></rect>
+                    }
+                    @case ("triangle") {
+                        <polygon wad-triangle [element]="element"></polygon>
+                    }
+                    @default {
+                        <wad-error [element]="element"></wad-error>
+                    }
                 }
             }
-        }
-    </svg>
+        </svg>
+    </div>
+    <div class="flex-1 bg-gray-600">
+        <app-render-view-sidebar></app-render-view-sidebar>
+    </div>
 </div>
+<app-render-view-status></app-render-view-status>

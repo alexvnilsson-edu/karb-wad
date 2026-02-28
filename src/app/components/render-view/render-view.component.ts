@@ -5,13 +5,21 @@ import { WadElement } from "../../../wad/elements/models/element";
 import { NgComponentOutlet } from "@angular/common";
 import { SquareWadComponent } from "../../../wad/elements/components/square.component";
 import { WadModule } from "../../../wad/wad.module";
+import { RenderViewStatusComponent } from "../render-view-status/render-view-status.component";
+import { coordify } from "../../../wad/types/coordinate";
+import { RenderViewSidebarComponent } from "../render-view-sidebar/render-view-sidebar.component";
 
 @Component({
     selector: "app-render-view",
     templateUrl: "./render-view.component.html",
+    host: {
+        "(mousemove)": "mousemove($event)"
+    },
     imports: [
-        WadModule
-    ]
+    WadModule,
+    RenderViewStatusComponent,
+    RenderViewSidebarComponent
+]
 })
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
@@ -56,5 +64,9 @@ export class RenderViewComponent {
             throw new Error("Canvas Container not found.");
         }
         return container;
+    }
+
+    mousemove(event: MouseEvent) {
+        this.rendering.setCoord(coordify(event.offsetX, event.offsetY));
     }
 }
