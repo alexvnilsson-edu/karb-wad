@@ -36,15 +36,7 @@ export class ElementService {
     });
 
     constructor() {
-        effect(() => {
-            this.elements().forEach((element, key, map) => {
-            
-        });
-        }, { 
-            debugName: `${ElementService.name} effects`
-        });
-
-        
+                
     }
 
     add(element: WadElement) {
