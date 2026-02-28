@@ -2,6 +2,7 @@ import { Component, computed, HostBinding, input, NO_ERRORS_SCHEMA, signal } fro
 import { SquareWadElement } from "../models/square";
 import { WadComponent } from "../../components/wad.component";
 import { WadModule } from "../../wad.module";
+import { coordify } from "../../types/coordinate";
 
 @Component({
     selector: `[wad-square]`,
@@ -17,7 +18,10 @@ import { WadModule } from "../../wad.module";
 export class SquareWadComponent extends WadComponent<SquareWadElement> {
     coordinate = computed(() => {
         if (this.getElement()) {
-            return this.rendering.translateCoordinate(this.getElement().coordinate);
+            const coord = this.rendering.translateCoordinate(this.getElement().coordinate);
+
+            // Required to fully invert positioning.
+            return coordify(coord.x, coord.y - this.getElement().length);
         } else {
             return { x: 0, y: 0 };
         }
