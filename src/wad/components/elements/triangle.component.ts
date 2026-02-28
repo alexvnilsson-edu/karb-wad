@@ -1,7 +1,7 @@
 import { Component, computed, inject } from "@angular/core";
 import { WadComponent } from "../wad.component";
 import { TriangleWadElement } from "../../models/elements/triangle";
-import { RenderingService } from "../../services/rendering.service";
+import { RenderService } from "../../services/render.service";
 import { coordify } from "../../types/coordinate";
 
 @Component({

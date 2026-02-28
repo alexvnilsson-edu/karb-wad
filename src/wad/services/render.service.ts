@@ -2,7 +2,7 @@ import { ElementRef, inject, Injectable, Signal, signal } from "@angular/core";
 import { coordify, Coordinate } from "../types/coordinate";
 
 @Injectable({ providedIn: "root" })
-export class RenderingService {
+export class RenderService {
     private _coord = signal(coordify(0, 0));
     private _height = signal(0);   
 

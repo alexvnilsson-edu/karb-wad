@@ -1,5 +1,5 @@
 import { Component, computed, inject } from "@angular/core";
-import { RenderingService } from "../../../wad/services/rendering.service";
+import { RenderService } from "../../../wad/services/render.service";
 import { coordify } from "../../../wad/types/coordinate";
 
 @Component({
@@ -7,7 +7,7 @@ import { coordify } from "../../../wad/types/coordinate";
     templateUrl: "./render-view-status.component.html"
 })
 export class RenderViewStatusComponent {
-    private rendering = inject(RenderingService);
+    private rendering = inject(RenderService);
 
     coord = computed(() => {
         if (!this.rendering.coord()) {

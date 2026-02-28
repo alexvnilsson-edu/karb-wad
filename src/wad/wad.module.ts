@@ -9,7 +9,7 @@ import { TriangleWadComponent } from "./components/elements/triangle.component";
 
 // ---- SERVICES ----
 import { ElementsService } from "./services/elements.service";
-import { RenderingService } from "./services/rendering.service";
+import { RenderService } from "./services/render.service";
 
 const ELEMENTS = [ 
     WadComponent,
@@ -23,7 +23,7 @@ const ELEMENTS = [
     ],
     providers: [
         ElementsService,
-        RenderingService
+        RenderService
     ],
     exports: [ ELEMENTS ],
     schemas: [ NO_ERRORS_SCHEMA ]

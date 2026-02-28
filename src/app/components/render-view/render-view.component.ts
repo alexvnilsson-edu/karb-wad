@@ -1,6 +1,6 @@
 import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal, ViewContainerRef } from "@angular/core";
 import { ElementsService } from "../../../wad/services/elements.service";
-import { RenderingService } from "../../../wad/services/rendering.service";
+import { RenderService } from "../../../wad/services/render.service";
 import { WadElement } from "../../../wad/models/element";
 import { NgComponentOutlet } from "@angular/common";
 import { SquareWadComponent } from "../../../wad/components/elements/square.component";
@@ -18,16 +18,15 @@ import { WadElementClickEvent } from "../../../wad/events/wad-element-clicked";
         "(mousemove)": "mousemove($event)"
     },
     imports: [
-    WadModule,
-    RenderViewStatusComponent,
-    RenderViewSidebarComponent
-]
+        WadModule,
+        RenderViewStatusComponent,
+        RenderViewSidebarComponent
+    ]
 })
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
-    private viewContainerRef = inject(ViewContainerRef);
 
-    private rendering = inject(RenderingService);
+    private renderService = inject(RenderService);
     private elementService = inject(ElementsService);
 
     elements = linkedSignal(() => this.elementService.allElements());
@@ -35,7 +34,7 @@ export class RenderViewComponent {
     constructor() {
         afterNextRender(() => {
             const canvas = this.getCanvas();
-            this.rendering.setHeight(canvas.clientHeight);
+            this.renderService.setHeight(canvas.clientHeight);
         });
     }
 
@@ -71,6 +70,6 @@ export class RenderViewComponent {
     }
 
     mousemove(event: MouseEvent) {
-        this.rendering.setCoord(coordify(event.offsetX, event.offsetY));
+        this.renderService.setCoord(coordify(event.offsetX, event.offsetY));
     }
 }
