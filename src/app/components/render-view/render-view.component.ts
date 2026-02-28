@@ -22,7 +22,10 @@ export class RenderViewComponent {
     elements = this.elementService.elements;
 
     constructor() {
-        
+        afterNextRender(() => {
+            const canvas = this.getCanvas();
+            this.rendering.setHeight(canvas.clientHeight);
+        });
     }
 
     getElementComponent(element: WadElement) {
