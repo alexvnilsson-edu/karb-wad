@@ -16,7 +16,6 @@ export class App {
   title = signal("TITLE");
 
   constructor() {
-    this.activatedRoute.title.subscribe(t => console.debug(t));
     this.activatedRoute.title.subscribe(title => this.title.set(title || "TITLE NULL"));
   }
 }
