@@ -1,4 +1,4 @@
-import { Component, computed, inject } from "@angular/core";
+import { Component, computed, inject, linkedSignal } from "@angular/core";
 import { RenderService } from "../../../wad/services/render.service";
 import { coordify } from "../../../wad/types/coordinate";
 
@@ -9,11 +9,19 @@ import { coordify } from "../../../wad/types/coordinate";
 export class RenderViewStatusComponent {
     private rendering = inject(RenderService);
 
-    coord = computed(() => {
+    coord = linkedSignal(() => {
         if (!this.rendering.coord()) {
             return coordify(0, 0);
         }
 
         return this.rendering.coord();
     });
+
+    origin = linkedSignal(() => {
+        if (!this.rendering.origin()) {
+            return coordify(0, 0);
+        }
+
+        return this.rendering.origin();
+    })
 }

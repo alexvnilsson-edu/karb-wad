@@ -9,12 +9,16 @@ import { RenderViewStatusComponent } from "../render-view-status/render-view-sta
 import { coordify } from "../../../wad/types/coordinate";
 import { RenderViewSidebarComponent } from "../render-view-sidebar/render-view-sidebar.component";
 import { WadElementClickEvent } from "../../../wad/events/wad-element-clicked";
+import { debounce, fromEvent, interval } from "rxjs";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-render-view",
     templateUrl: "./render-view.component.html",
     host: {
         "class": "flex-1 flex flex-col items-stretch",
+        "(mousedown)": "mousedown($event)",
+        "(mouseup)": "mouseup($event)",
         "(mousemove)": "mousemove($event)"
     },
     imports: [
@@ -30,6 +34,8 @@ export class RenderViewComponent {
     private elementService = inject(ElementService);
 
     elements = linkedSignal(() => this.elementService.allElements());
+
+    private isMouseDown = false;
 
     constructor() {
         afterNextRender(() => {
@@ -69,7 +75,27 @@ export class RenderViewComponent {
         return container;
     }
 
+    mousedown(event: MouseEvent) {
+        this.isMouseDown = true;
+    }
+
+    mouseup(event: MouseEvent) {
+        this.isMouseDown = false;
+    }
+
     mousemove(event: MouseEvent) {
         this.renderService.setCoord(coordify(event.offsetX, event.offsetY));
+
+        if (this.isMouseDown) {
+            const panCoord = coordify(event.movementX, event.movementY);
+
+            if (panCoord.x !== 0 || panCoord.y !== 0) {
+                const coords = coordify(
+                    this.renderService.origin().x + panCoord.x,
+                    this.renderService.origin().y + panCoord.y
+                );
+                this.renderService.setOrigin(coords);
+            }
+        }
     }
 }

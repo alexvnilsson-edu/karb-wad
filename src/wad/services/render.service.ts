@@ -4,10 +4,14 @@ import { coordify, Coordinate } from "../types/coordinate";
 @Injectable({ providedIn: "root" })
 export class RenderService {
     private _coord = signal(coordify(0, 0));
+    private _origin = signal(coordify(0, 0));
+
     private _height = signal(0);   
 
-    coord = this._coord.asReadonly();
-    height = this._height.asReadonly();
+    readonly coord = this._coord.asReadonly();
+    readonly origin = this._origin.asReadonly();
+
+    readonly height = this._height.asReadonly();
 
     translateCoordinate(coordinate: Coordinate, target: "canvasian" | "cartesian" = "canvasian"): Coordinate {
         return { x: coordinate.x, y: this.translateYCoordinate(coordinate.y, target) };
@@ -36,6 +40,10 @@ export class RenderService {
 
     setCoord(coord: Coordinate, canvasian: boolean = true) {
         this._coord.set(canvasian ? this.translateCoordinate(coord) : coord);
+    }
+
+    setOrigin(coord: Coordinate) {
+        this._origin.set(coord);
     }
 
     setHeight(height: number) {
