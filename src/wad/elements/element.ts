@@ -1,6 +1,6 @@
 import * as shortUuid from "short-uuid"
 
-export abstract class WadElementModel {
+export abstract class WadModel {
     id!: string;
     type!: string;
 

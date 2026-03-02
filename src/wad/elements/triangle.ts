@@ -1,7 +1,7 @@
 import { Coordinate } from "../rendering/coordinate";
-import { WadElementModel } from "./element-model";
+import { WadModel } from "./element";
 
-export class TriangleWadModel extends WadElementModel {
+export class TriangleWadModel extends WadModel {
     a!: Coordinate;
     b!: Coordinate;
     c!: Coordinate;

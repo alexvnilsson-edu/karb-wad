@@ -1,10 +1,10 @@
 import { inject, signal, WritableSignal } from "@angular/core";
 import { Coordinate } from "../rendering/coordinate";
-import { WadElementModel } from "./element-model";
+import { WadModel } from "./element";
 import { RenderService } from "../rendering/render.service";
 import { RectangleWadElement } from "../models/elements/rectangle";
 
-export class CircleWadModel extends WadElementModel {
+export class CircleWadModel extends WadModel {
     x!: number;
     y!: number;
     radius!: number;
