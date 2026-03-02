@@ -1,28 +1,33 @@
 <div class="flex-1 flex flex-row items-stretch">
     <div id="renderViewContainer" class="flex-4 bg-black flex items-stretch">
         <svg
-            render-view-svg
             xmlns="http://www.w3.org/2000/svg"
+            render-view-canvas
             class="flex-1 h-full cursor-crosshair"
-            id="renderView">
-            @for (entry of elements(); track entry[1].id) {
-                @let element = entry[1];
-
-                @switch (element.type.toLowerCase()) {
-                    @case ("square") {
-                        <polygon wad-square [element]="element" (elementClick)="elementClick($event)"></polygon>
-                    }
-                    @case ("triangle") {
-                        <polygon wad-triangle [element]="element" (elementClick)="elementClick($event)"></polygon>
-                    }
-                    @case ("circle") {
-                        <circle wad-circle [element]="element" (elementClick)="elementClick($event)"></circle>
-                    }
-                    @default {
-                        <text x="10" y="10">Unable to render element {{ element.id }} with type {{ element.type }}.</text>
-                    }
+            id="renderView"
+            [origin]="origin$()"
+            [area]="area$()"
+            (mousemove)="mousemove($event)"
+            (mousedown)="mousedown($event)"
+            (mouseup)="mouseup($event)">
+        @for (entry of allElements(); track entry[1].id) {
+            @let element = entry[1];
+            <text>id: {{ element.id }}, type: {{ element.type }}</text>
+            @switch (element.type.toLowerCase()) {
+                @case ("rectangle") {
+                    <polygon wad-rectangle [element]="element" (elementClick)="elementClick($event)"></polygon>
+                }
+                @case ("triangle") {
+                    <polygon wad-triangle [element]="element" (elementClick)="elementClick($event)"></polygon>
+                }
+                @case ("circle") {
+                    <circle wad-circle [element]="element" (elementClick)="elementClick($event)"></circle>
+                }
+                @default {
+                    <text x="10" y="10">Unable to render element {{ element.id }} with type {{ element.type }}.</text>
                 }
             }
+        }
         </svg>
     </div>
     <div class="flex-1 bg-gray-600">

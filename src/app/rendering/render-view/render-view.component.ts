@@ -1,43 +1,47 @@
-import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal, ViewContainerRef } from "@angular/core";
+import { afterNextRender, Component, ElementRef, inject, linkedSignal } from "@angular/core";
 import { ElementStorageService } from "@wad/elements/element-storage.service";
 import { RenderService } from "@wad/rendering/render.service";
-import { WadModel} from "@wad/elements/element";
-import { NgComponentOutlet } from "@angular/common";
-import { SquareWadElement } from "@wad/rendering/square";
 import { WadModule } from "@wad/wad.module";
 import { RenderViewStatusComponent } from "./render-view-status/render-view-status.component";
 import { createCoordinate } from "@wad/rendering/coordinate";
 import { RenderViewSidebarComponent } from "./render-view-sidebar/render-view-sidebar.component";
 import { WadElementClickEvent } from "@wad/elements/element-click.event";
-import { debounce, fromEvent, interval } from "rxjs";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { RenderViewSvg } from "./render-view-svg/render-view-svg";
+import { RenderViewCanvas } from "./render-view-canvas/render-view-canvas";
 
 @Component({
     selector: "app-render-view",
     templateUrl: "./render-view.component.html",
     host: {
-        "class": "flex-1 flex flex-col items-stretch",
-        "(mousedown)": "mousedown($event)",
-        "(mouseup)": "mouseup($event)",
-        "(mousemove)": "mousemove($event)"
+        "class": "flex-1 flex flex-col items-stretch"
     },
     imports: [
         WadModule,
+        RenderViewCanvas,
         RenderViewStatusComponent,
-        RenderViewSidebarComponent,
-        RenderViewSvg
+        RenderViewSidebarComponent
     ]
 })
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
 
-    private renderService = inject(RenderService);
     private elementStorage = inject(ElementStorageService);
+    private renderService = inject(RenderService);
 
     readonly elements = linkedSignal(() => this.elementStorage.elements());
 
+    readonly allElements = linkedSignal(() => 
+        Array.from(this.elements().entries())
+    );
+
+    readonly origin$ = linkedSignal(() => this.renderService.origin());
+    readonly area$ = linkedSignal(() => this.renderService.area());
+
     private isMouseDown = false;
+
+    elementClick(event: WadElementClickEvent) {
+        console.debug(`Element clicked: ${event.element.id}`, event);
+        this.elementStorage.focus(event.element);
+    }
 
     constructor() {
         afterNextRender(() => {
@@ -45,21 +49,6 @@ export class RenderViewComponent {
             this.renderService.setArea(canvas.clientWidth, canvas.clientHeight);
             this.renderService.setHeight(canvas.clientHeight);
         });
-    }
-
-    getElementComponent(element: WadModel) {
-        console.debug(`[#${this.getElementComponent.name}] ${element.type}#${element.id}`, element);
-        switch (element.type) {
-            case "square":
-                return SquareWadElement;
-            default:
-                return null
-        }
-    }
-
-    elementClick(event: WadElementClickEvent) {
-        console.debug(`Element clicked: ${event.element.id}`, event);
-        this.elementStorage.focus(event.element);
     }
 
     protected getCanvas(): HTMLCanvasElement {

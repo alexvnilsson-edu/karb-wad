@@ -1,6 +1,6 @@
 import { Component, inject, signal } from "@angular/core";
 import { ElementStorageService } from "../../../wad/elements/element-storage.service";
-import { SquareWadModel } from "../../../wad/elements/square";
+import { RectangleWadModel } from "../../../wad/elements/rectangle";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
 import { TriangleWadModel } from "../../../wad/elements/triangle";
 import { createCoordinate } from "../../../wad/rendering/coordinate";
@@ -15,7 +15,7 @@ export class TestRouteComponent {
     private elementStorage = inject(ElementStorageService);
 
     elements = signal([
-      new SquareWadModel(10, 10, 50),
+      new RectangleWadModel(10, 10, 50, 50),
       new TriangleWadModel(createCoordinate(60, 60), createCoordinate(110, 60), createCoordinate(110, 110))
     ]);
     

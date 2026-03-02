@@ -5,7 +5,7 @@ import { WadElement } from "./rendering/element";
 
 // -- ELEMENT COMPONENTS --
 import { CircleleWadElement } from "./rendering/circle";
-import { SquareWadElement } from "./rendering/square";
+import { RectangleWadElement } from "./rendering/rectangle";
 import { TriangleWadElement } from "./rendering/triangle";
 
 // ---- SERVICES ----
@@ -15,7 +15,7 @@ import { RenderService } from "./rendering/render.service";
 const ELEMENTS = [ 
     WadElement,
     CircleleWadElement,
-    SquareWadElement,
+    RectangleWadElement,
     TriangleWadElement
 ];
 
