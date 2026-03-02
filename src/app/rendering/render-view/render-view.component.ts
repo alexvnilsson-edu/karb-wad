@@ -84,8 +84,8 @@ export class RenderViewComponent {
 
             if (x !== 0 || y !== 0) {
                 const coords = createCoordinate(
-                    originX + x,
-                    originY + y
+                    originX - x,
+                    originY - y
                 );
                 this.renderService.setOrigin(coords);
             }
