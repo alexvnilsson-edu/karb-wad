@@ -1,8 +1,8 @@
 import { Component, computed, inject, input, linkedSignal, output, signal } from "@angular/core";
-import { WadElement } from "../models/element";
-import { RenderService } from "../services/render.service";
-import { ElementService } from "../services/element.service";
-import { WadElementClickEvent } from "../events/wad-element-clicked";
+import { WadElementModel } from "../elements/element-model";
+import { RenderService } from "./render.service";
+import { ElementService } from "../elements/element.service";
+import { WadElementClickEvent } from "../elements/element-click-event";
 
 @Component({
     selector: "[wad-base]",
@@ -13,10 +13,10 @@ import { WadElementClickEvent } from "../events/wad-element-clicked";
     },
     standalone: false
 })
-export class WadComponent<TElement extends WadElement> {
+export class WadElement<TElement extends WadElementModel> {
     protected rendering = inject(RenderService);
 
-    element = input.required<WadElement>();
+    element = input.required<WadElementModel>();
 
     elementClick = output<WadElementClickEvent>();
 

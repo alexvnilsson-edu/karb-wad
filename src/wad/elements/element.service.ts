@@ -1,14 +1,14 @@
 import { computed, effect, Injectable, linkedSignal, Signal, signal, WritableSignal } from "@angular/core";
-import { WadElement } from "../models/element";
+import { WadElementModel } from "./element-model";
 import { filter, from, map } from "rxjs";
 
-type WadElementMap = Map<string, WadElement>;
+type WadElementMap = Map<string, WadElementModel>;
 
 @Injectable({
     providedIn: "root"
 })
 export class ElementService {
-    private readonly _elements = signal<WadElementMap>(new Map<string, WadElement>());
+    private readonly _elements = signal<WadElementMap>(new Map<string, WadElementModel>());
     readonly elements = this._elements.asReadonly();
 
     readonly allElements = linkedSignal(() => this._elements().values()).asReadonly();
@@ -35,7 +35,7 @@ export class ElementService {
                 
     }
 
-    add(element: WadElement) {
+    add(element: WadElementModel) {
         const id = element.id;
 
         if (element.id == undefined) {
@@ -52,7 +52,7 @@ export class ElementService {
         });
     }
 
-    update(id: string, element: WadElement) {
+    update(id: string, element: WadElementModel) {
         if (!this._elements().has(id)) {
             throw new Error(`Element does not exists in element map.`);
         }
@@ -63,7 +63,7 @@ export class ElementService {
         });
     }
     
-    remove(element: WadElement) {
+    remove(element: WadElementModel) {
         const id = element.id;
 
         if (id === undefined) {
@@ -80,7 +80,7 @@ export class ElementService {
         });
     }
 
-    focus(element: WadElement) {
+    focus(element: WadElementModel) {
         if (this.focused().length > 0) {
             this.focused().forEach(id => {
                 if (this._elements().has(element.id)) {

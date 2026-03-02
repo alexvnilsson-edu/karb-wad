@@ -1,5 +1,5 @@
 import { ElementRef, inject, Injectable, Signal, signal } from "@angular/core";
-import { coordify, Coordinate } from "../types/coordinate";
+import { coordify, Coordinate } from "./coordinate";
 
 @Injectable({ providedIn: "root" })
 export class RenderService {

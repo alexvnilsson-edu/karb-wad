@@ -1,8 +1,6 @@
 import { Component, computed, HostBinding, input, NO_ERRORS_SCHEMA, signal } from "@angular/core";
-import { SquareWadElement } from "../../models/elements/square";
-import { WadComponent } from "../wad.component";
-import { WadModule } from "../../wad.module";
-import { coordify } from "../../types/coordinate";
+import { WadElement } from "./element";
+import { SquareWadModel } from "../elements/square";
 
 @Component({
     selector: `[wad-square]`,
@@ -12,7 +10,7 @@ import { coordify } from "../../types/coordinate";
     },
     standalone: false
 })
-export class SquareWadComponent extends WadComponent<SquareWadElement> {
+export class SquareWadElement extends WadElement<SquareWadModel> {
     coordinates = computed(() => {
         const element = this.getElement();
         if (this.getElement()) {

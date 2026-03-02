@@ -1,6 +1,6 @@
-import { WadElement } from "../element";
+import { WadElementModel } from "../../elements/element-model";
 
-export class RectangleWadElement extends WadElement {
+export class RectangleWadElement extends WadElementModel {
     x!: number;
     y!: number;
     width!: number;

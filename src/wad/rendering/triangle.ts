@@ -1,8 +1,7 @@
 import { Component, computed, inject } from "@angular/core";
-import { WadComponent } from "../wad.component";
-import { TriangleWadElement } from "../../models/elements/triangle";
-import { RenderService } from "../../services/render.service";
-import { coordify } from "../../types/coordinate";
+import { WadElement } from "./element";
+import { TriangleWadModel } from "../elements/triangle";
+import { coordify } from "./coordinate";
 
 @Component({
     selector: "[wad-triangle]",
@@ -12,7 +11,7 @@ import { coordify } from "../../types/coordinate";
     },
     standalone: false,
 })
-export class TriangleWadComponent extends WadComponent<TriangleWadElement> {
+export class TriangleWadElement extends WadElement<TriangleWadModel> {
     coordinates = computed(() => {
         if (!this.getElement()) {
             return [coordify(0, 0), coordify(0, 0), coordify(0, 0)]
