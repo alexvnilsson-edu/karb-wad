@@ -7,7 +7,9 @@ import { coordify } from "./coordinate";
     selector: "[wad-circle]",
     template: ``,
     host: {
-        "[attr.points]": "points()"
+        "[attr.cx]": "x()",
+        "[attr.cy]": "y()",
+        "[attr.r]": "radius()"
     },
     standalone: false,
 })
