@@ -1,5 +1,5 @@
 import { Component, inject, signal } from "@angular/core";
-import { ElementService } from "../../../wad/elements/element.service";
+import { ElementStorageService } from "../../../wad/elements/element-storage.service";
 import { SquareWadModel } from "../../../wad/elements/square";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
 import { TriangleWadModel } from "../../../wad/elements/triangle";
@@ -12,7 +12,7 @@ import { coordify } from "../../../wad/rendering/coordinate";
     imports: [RenderViewComponent]
 })
 export class TestRouteComponent {
-    private elementService = inject(ElementService);
+    private elementStorage = inject(ElementStorageService);
 
     elements = signal([
       new SquareWadModel(10, 10, 50),
@@ -20,6 +20,6 @@ export class TestRouteComponent {
     ]);
     
     ngOnInit() {
-        this.elements().forEach(element => this.elementService.add(element));
+        this.elements().forEach(element => this.elementStorage.add(element));
     }
 }

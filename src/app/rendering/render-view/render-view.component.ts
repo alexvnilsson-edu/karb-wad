@@ -1,5 +1,5 @@
 import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal, ViewContainerRef } from "@angular/core";
-import { ElementService } from "@wad/elements/element.service";
+import { ElementStorageService } from "@wad/elements/element-storage.service";
 import { RenderService } from "@wad/rendering/render.service";
 import { WadModel} from "@wad/elements/element";
 import { NgComponentOutlet } from "@angular/common";
@@ -8,7 +8,7 @@ import { WadModule } from "@wad/wad.module";
 import { RenderViewStatusComponent } from "./render-view-status/render-view-status.component";
 import { coordify } from "@wad/rendering/coordinate";
 import { RenderViewSidebarComponent } from "./render-view-sidebar/render-view-sidebar.component";
-import { WadElementClickEvent } from "@wad/elements/element-click-event";
+import { WadElementClickEvent } from "@wad/elements/element-click.event";
 import { debounce, fromEvent, interval } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -31,9 +31,9 @@ export class RenderViewComponent {
     private elementRef = inject(ElementRef);
 
     private renderService = inject(RenderService);
-    private elementService = inject(ElementService);
+    private elementStorage = inject(ElementStorageService);
 
-    elements = linkedSignal(() => this.elementService.allElements());
+    readonly elements = linkedSignal(() => this.elementStorage.elements());
 
     private isMouseDown = false;
 
@@ -56,7 +56,7 @@ export class RenderViewComponent {
 
     elementClick(event: WadElementClickEvent) {
         console.debug(`Element clicked: ${event.element.id}`, event);
-        this.elementService.focus(event.element);
+        this.elementStorage.focus(event.element);
     }
 
     protected getCanvas(): HTMLCanvasElement {

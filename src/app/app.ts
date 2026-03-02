@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { WadModule } from '../wad/wad.module';
-import { ElementService } from '../wad/elements/element.service';
+import { ElementStorageService } from '../wad/elements/element-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { ElementService } from '../wad/elements/element.service';
   styleUrl: './app.css'
 })
 export class App {
-  private elementService = inject(ElementService)
+  private elementService = inject(ElementStorageService)
 
   private activatedRoute = inject(ActivatedRoute);
   title = signal("TITLE");

@@ -1,8 +1,8 @@
 import { Component, computed, inject, input, linkedSignal, output, signal } from "@angular/core";
 import { WadModel } from "../elements/element";
 import { RenderService } from "./render.service";
-import { ElementService } from "../elements/element.service";
-import { WadElementClickEvent } from "../elements/element-click-event";
+import { ElementStorageService } from "../elements/element-storage.service";
+import { WadElementClickEvent } from "../elements/element-click.event";
 
 @Component({
     selector: "[wad-base]",
