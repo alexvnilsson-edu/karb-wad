@@ -1,14 +1,14 @@
 import { afterEveryRender, afterNextRender, Component, CUSTOM_ELEMENTS_SCHEMA, effect, ElementRef, inject, linkedSignal, NO_ERRORS_SCHEMA, signal, ViewContainerRef } from "@angular/core";
-import { ElementService } from "../../../wad/services/element.service";
-import { RenderService } from "../../../wad/services/render.service";
-import { WadElement } from "../../../wad/models/element";
+import { ElementService } from "@wad/elements/element.service";
+import { RenderService } from "@wad/rendering/render.service";
+import { WadModel} from "@wad/elements/element";
 import { NgComponentOutlet } from "@angular/common";
-import { SquareWadComponent } from "../../../wad/components/elements/square.component";
-import { WadModule } from "../../../wad/wad.module";
-import { RenderViewStatusComponent } from "../render-view-status/render-view-status.component";
-import { coordify } from "../../../wad/types/coordinate";
-import { RenderViewSidebarComponent } from "../render-view-sidebar/render-view-sidebar.component";
-import { WadElementClickEvent } from "../../../wad/events/wad-element-clicked";
+import { SquareWadElement } from "@wad/rendering/square";
+import { WadModule } from "@wad/wad.module";
+import { RenderViewStatusComponent } from "./render-view-status/render-view-status.component";
+import { coordify } from "@wad/rendering/coordinate";
+import { RenderViewSidebarComponent } from "./render-view-sidebar/render-view-sidebar.component";
+import { WadElementClickEvent } from "@wad/elements/element-click-event";
 import { debounce, fromEvent, interval } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -44,11 +44,11 @@ export class RenderViewComponent {
         });
     }
 
-    getElementComponent(element: WadElement) {
+    getElementComponent(element: WadModel) {
         console.debug(`[#${this.getElementComponent.name}] ${element.type}#${element.id}`, element);
         switch (element.type) {
             case "square":
-                return SquareWadComponent;
+                return SquareWadElement;
             default:
                 return null
         }

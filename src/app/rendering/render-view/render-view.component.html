@@ -9,6 +9,9 @@
                     @case ("triangle") {
                         <polygon wad-triangle [element]="element" (elementClick)="elementClick($event)"></polygon>
                     }
+                    @case ("circle") {
+                        <circle wad-circle [element]="element" (elementClick)="elementClick($event)"></circle>
+                    }
                     @default {
                         <text x="10" y="10">Unable to render element {{ element.id }} with type {{ element.type }}.</text>
                     }

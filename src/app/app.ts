@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { WadModule } from '../wad/wad.module';
-import { ElementService } from '../wad/services/element.service';
+import { ElementService } from '../wad/elements/element.service';
 
 @Component({
   selector: 'app-root',

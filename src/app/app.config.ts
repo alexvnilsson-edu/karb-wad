@@ -3,7 +3,7 @@ import { provideRouter, TitleStrategy } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { AppTitleStrategy } from './services/app-title-strategy.service';
+import { AppTitleStrategy } from './routing/app-title-strategy.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [

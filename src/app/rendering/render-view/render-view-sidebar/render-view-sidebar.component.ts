@@ -1,5 +1,5 @@
 import { Component, computed, inject, linkedSignal } from "@angular/core";
-import { ElementService } from "../../../wad/services/element.service";
+import { ElementService } from "../../../../wad/elements/element.service";
 
 @Component({
     selector: "app-render-view-sidebar",
