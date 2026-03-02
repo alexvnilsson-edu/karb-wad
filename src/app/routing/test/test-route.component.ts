@@ -1,7 +1,7 @@
 import { Component, inject } from "@angular/core";
 import { ElementService } from "../../../wad/elements/element.service";
 import { SquareWadModel } from "../../../wad/elements/square";
-import { RenderViewComponent } from "../../render-view/render-view.component";
+import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
 import { TriangleWadModel } from "../../../wad/elements/triangle";
 import { coordify } from "../../../wad/rendering/coordinate";
 

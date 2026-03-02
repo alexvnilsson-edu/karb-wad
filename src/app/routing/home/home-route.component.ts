@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { RenderViewComponent } from "../../render-view/render-view.component";
+import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
 
 @Component({
     selector: "app-route-home",
