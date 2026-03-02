@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { ElementService } from "../../../wad/elements/element.service";
 import { SquareWadModel } from "../../../wad/elements/square";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
@@ -14,12 +14,12 @@ import { coordify } from "../../../wad/rendering/coordinate";
 export class TestRouteComponent {
     private elementService = inject(ElementService);
 
-    elements = [
+    elements = signal([
       new SquareWadModel(10, 10, 50),
       new TriangleWadModel(coordify(60, 60), coordify(110, 60), coordify(110, 110))
-    ];
+    ]);
     
     ngOnInit() {
-        this.elements.forEach(e => this.elementService.add(e));
+        this.elements().forEach(element => this.elementService.add(element));
     }
 }
