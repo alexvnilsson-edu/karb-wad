@@ -20,10 +20,6 @@ export class ElementService {
             return [];
         }
 
-        from(this.elements().values()).pipe(filter(v => v.isFocused), map(v => v.id)).subscribe(function (ids) {
-            console.debug("focused: ", ids);
-        }).unsubscribe();
-
         const ids = [];
 
         for (const element of elements.values()) {
