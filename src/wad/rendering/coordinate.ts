@@ -1,10 +1,5 @@
-export function coordify(x: number, y: number): Coordinate {
-    return { x, y };
-}
+export type Coordinate = Float32Array;
 
-export interface Coordinate {
-    x: number;
-    y: number;
+export function createCoordinate(x: number, y: number): Coordinate {
+    return new Float32Array([x, y]);
 }
-
-export type CoordinateArray = Array<number>

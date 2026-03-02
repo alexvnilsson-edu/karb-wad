@@ -14,7 +14,7 @@ export class SquareWadElement extends WadElement<SquareWadModel> {
     coordinates = computed(() => {
         const element = this.getElement();
         if (this.getElement()) {
-            const coords = element.getCoordinates().map(coord => this.rendering.translateCoordinateArray(coord));
+            const coords = element.getCoordinates().map(coord => this.rendering.translateCoordinate(coord));
             
             return coords;
         } else {

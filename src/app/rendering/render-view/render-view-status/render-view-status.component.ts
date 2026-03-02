@@ -1,6 +1,6 @@
 import { Component, computed, inject, linkedSignal } from "@angular/core";
 import { RenderService } from "@wad/rendering/render.service";
-import { coordify } from "@wad/rendering/coordinate";
+import { createCoordinate } from "@wad/rendering/coordinate";
 
 @Component({
     selector: "app-render-view-status",
@@ -11,7 +11,7 @@ export class RenderViewStatusComponent {
 
     coord = linkedSignal(() => {
         if (!this.rendering.coord()) {
-            return coordify(0, 0);
+            return createCoordinate(0, 0);
         }
 
         return this.rendering.coord();
@@ -19,7 +19,7 @@ export class RenderViewStatusComponent {
 
     origin = linkedSignal(() => {
         if (!this.rendering.origin()) {
-            return coordify(0, 0);
+            return createCoordinate(0, 0);
         }
 
         return this.rendering.origin();

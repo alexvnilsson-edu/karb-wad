@@ -1,3 +1,4 @@
+import { Coordinate } from "@wad/rendering/coordinate";
 import * as shortUuid from "short-uuid"
 
 export abstract class WadModel {
@@ -10,8 +11,6 @@ export abstract class WadModel {
         this.id = this.generateId();
         this.type = type;
     }
-
-    abstract getCoordinates(): Array<Array<number>>;
 
     focus() {
         this.isFocused = true;

@@ -3,7 +3,7 @@ import { ElementStorageService } from "../../../wad/elements/element-storage.ser
 import { SquareWadModel } from "../../../wad/elements/square";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
 import { TriangleWadModel } from "../../../wad/elements/triangle";
-import { coordify } from "../../../wad/rendering/coordinate";
+import { createCoordinate } from "../../../wad/rendering/coordinate";
 
 @Component({
     selector: "app-route-test",
@@ -16,7 +16,7 @@ export class TestRouteComponent {
 
     elements = signal([
       new SquareWadModel(10, 10, 50),
-      new TriangleWadModel(coordify(60, 60), coordify(110, 60), coordify(110, 110))
+      new TriangleWadModel(createCoordinate(60, 60), createCoordinate(110, 60), createCoordinate(110, 110))
     ]);
     
     ngOnInit() {

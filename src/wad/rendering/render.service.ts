@@ -1,40 +1,34 @@
 import { ElementRef, inject, Injectable, Signal, signal } from "@angular/core";
-import { coordify, Coordinate } from "./coordinate";
+import { Coordinate, createCoordinate } from "./coordinate";
 
 @Injectable({ providedIn: "root" })
 export class RenderService {
-    private _coord = signal(coordify(0, 0));
-    private _origin = signal(coordify(0, 0));
+    private _coord = signal(createCoordinate(0, 0));
+    private _origin = signal(createCoordinate(0, 0));
 
-    private _height = signal(0);   
+    private _height = signal(0);
+
+    private _area = signal([0, 0]);
 
     readonly coord = this._coord.asReadonly();
     readonly origin = this._origin.asReadonly();
 
     readonly height = this._height.asReadonly();
+    readonly area = this._area.asReadonly();
 
     translateCoordinate(coordinate: Coordinate, target: "canvasian" | "cartesian" = "canvasian"): Coordinate {
-        return { x: coordinate.x, y: this.translateYCoordinate(coordinate.y, target) };
+        const [x, y] = coordinate;
+        return createCoordinate(x, this.translateCoordinateY(y));
     }
 
-    translateCoordinateArray(coordinate: Array<number>, target: "canvasian" | "cartesian" = "canvasian"): Array<number> {
-        if (coordinate === undefined || coordinate.length !== 2) {
-            throw new Error(`Coordinate array misformed. Two items are required.`);
-        }
-        if (typeof coordinate[0] !== "number" || typeof coordinate[1] !== "number") {
-            throw new TypeError(`Coordinate array misformed. Two items of the number type required.`);
-        }
-
-        return [coordinate[0], this.translateYCoordinate(coordinate[1])];
-    }
-
-    translateYCoordinate(y: number, target: "canvasian" | "cartesian" = "canvasian"): number {
-        if (target === "canvasian") {
-            return -(y - this.height());
-        } else if (target === "cartesian") {
-            return (this.height() - y);
-        } else {
-            throw new Error(`Invalid translation target: ${target}`);
+    translateCoordinateY(y: number, target: "canvasian" | "cartesian" = "canvasian"): number {
+        switch (target) {
+            case "canvasian":
+                return -(y - this.height());
+            case "cartesian":
+                return (this.height() - y);
+            default:
+                throw new Error(`Invalid translation target: ${target}`);
         }
     }
 
@@ -48,5 +42,9 @@ export class RenderService {
 
     setHeight(height: number) {
         this._height.update(h => h = height);
+    }
+
+    setArea(width: number, height: number) {
+        this._area.set([width, height]);
     }
 }

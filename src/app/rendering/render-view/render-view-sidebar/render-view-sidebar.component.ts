@@ -8,5 +8,5 @@ import { ElementStorageService } from "../../../../wad/elements/element-storage.
 export class RenderViewSidebarComponent {
     elementService = inject(ElementStorageService)
 
-    elements = linkedSignal(() => this.elementService.allElements());
+    elements = linkedSignal(() => this.elementService.elements());
 }

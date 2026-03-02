@@ -1,7 +1,7 @@
 import { Component, computed, inject } from "@angular/core";
 import { WadElement } from "./element";
 import { TriangleWadModel } from "../elements/triangle";
-import { coordify } from "./coordinate";
+import { createCoordinate } from "./coordinate";
 
 @Component({
     selector: "[wad-triangle]",
@@ -14,7 +14,7 @@ import { coordify } from "./coordinate";
 export class TriangleWadElement extends WadElement<TriangleWadModel> {
     coordinates = computed(() => {
         if (!this.getElement()) {
-            return [coordify(0, 0), coordify(0, 0), coordify(0, 0)]
+            return [createCoordinate(0, 0), createCoordinate(0, 0), createCoordinate(0, 0)]
         }
 
         const a = this.rendering.translateCoordinate(this.getElement().a);
@@ -28,7 +28,7 @@ export class TriangleWadElement extends WadElement<TriangleWadModel> {
             return "";
         }
 
-        const coords = this.coordinates().map(coord => `${coord.x} ${coord.y}`);
+        const coords = this.coordinates().map(coord => coord.join(" "));
         return coords.join(" ")
     })
 }

@@ -1,5 +1,5 @@
 import { inject, signal, WritableSignal } from "@angular/core";
-import { Coordinate } from "../rendering/coordinate";
+import { Coordinate, createCoordinate } from "../rendering/coordinate";
 import { WadModel } from "./element";
 import { RenderService } from "../rendering/render.service";
 import { RectangleWadElement } from "../models/elements/rectangle";
@@ -16,12 +16,12 @@ export class SquareWadModel extends WadModel {
         this.length = length;
     }
 
-    override getCoordinates(): Array<Array<number>> {
+    getCoordinates(): Array<Coordinate> {
         return [
-            [this.x, this.y],
-            [this.x + this.length, this.y],
-            [this.x + this.length, this.y + this.length],
-            [this.x, this.y + this.length]
+            createCoordinate(this.x, this.y),
+            createCoordinate(this.x + this.length, this.y),
+            createCoordinate(this.x + this.length, this.y + this.length),
+            createCoordinate(this.x, this.y + this.length)
         ];
     }
 }

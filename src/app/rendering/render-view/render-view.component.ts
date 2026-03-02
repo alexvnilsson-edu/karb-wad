@@ -6,11 +6,12 @@ import { NgComponentOutlet } from "@angular/common";
 import { SquareWadElement } from "@wad/rendering/square";
 import { WadModule } from "@wad/wad.module";
 import { RenderViewStatusComponent } from "./render-view-status/render-view-status.component";
-import { coordify } from "@wad/rendering/coordinate";
+import { createCoordinate } from "@wad/rendering/coordinate";
 import { RenderViewSidebarComponent } from "./render-view-sidebar/render-view-sidebar.component";
 import { WadElementClickEvent } from "@wad/elements/element-click.event";
 import { debounce, fromEvent, interval } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
+import { RenderViewSvg } from "./render-view-svg/render-view-svg";
 
 @Component({
     selector: "app-render-view",
@@ -24,7 +25,8 @@ import { toSignal } from "@angular/core/rxjs-interop";
     imports: [
         WadModule,
         RenderViewStatusComponent,
-        RenderViewSidebarComponent
+        RenderViewSidebarComponent,
+        RenderViewSvg
     ]
 })
 export class RenderViewComponent {
@@ -40,6 +42,7 @@ export class RenderViewComponent {
     constructor() {
         afterNextRender(() => {
             const canvas = this.getCanvas();
+            this.renderService.setArea(canvas.clientWidth, canvas.clientHeight);
             this.renderService.setHeight(canvas.clientHeight);
         });
     }
@@ -84,15 +87,16 @@ export class RenderViewComponent {
     }
 
     mousemove(event: MouseEvent) {
-        this.renderService.setCoord(coordify(event.offsetX, event.offsetY));
+        this.renderService.setCoord(createCoordinate(event.offsetX, event.offsetY));
 
         if (this.isMouseDown) {
-            const panCoord = coordify(event.movementX, event.movementY);
+            const [originX, originY] = this.renderService.origin();
+            const [x, y] = createCoordinate(event.movementX, event.movementY);
 
-            if (panCoord.x !== 0 || panCoord.y !== 0) {
-                const coords = coordify(
-                    this.renderService.origin().x + panCoord.x,
-                    this.renderService.origin().y + panCoord.y
+            if (x !== 0 || y !== 0) {
+                const coords = createCoordinate(
+                    originX + x,
+                    originY + y
                 );
                 this.renderService.setOrigin(coords);
             }
