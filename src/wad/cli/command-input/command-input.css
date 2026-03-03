@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  position: fixed;
+
+  bottom: 10%;
+  left: 20%;
+  right: 20%;
+
+  min-height: 100px;
+  max-height: 20%;
+}

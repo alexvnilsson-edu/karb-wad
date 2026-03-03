@@ -4,12 +4,13 @@ import { RectangleWadModel } from "../../../wad/elements/rectangle";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
 import { TriangleWadModel } from "../../../wad/elements/triangle";
 import { createCoordinate } from "../../../wad/rendering/coordinate";
+import { WadModule } from "wad/wad.module";
 
 @Component({
     selector: "app-route-test",
     templateUrl: "./test-route.component.html",
     styleUrl: "./test-route.component.css",
-    imports: [RenderViewComponent]
+    imports: [RenderViewComponent, WadModule]
 })
 export class TestRouteComponent {
     private elementStorage = inject(ElementStorageService);
