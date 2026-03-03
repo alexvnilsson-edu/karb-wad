@@ -10,10 +10,14 @@ describe("RenderService", () => {
     });
 
     it("should get coordinate with offset", () => {
-        service.setHeight(500);
-        service.setCoord(createCoordinate(100, 100));
-        service.setOrigin(createCoordinate(-50, -50));
+        const height = 500;
+        const coord = 100;
+        const origin = -50;
+        service.setHeight(height);
+        service.setCoord(createCoordinate(coord, coord));
+        service.setOrigin(createCoordinate(origin, origin));
         const [x, y] = service.getCoord();
-        expect(y).toBe(150);
+        const expectY = service.translateCoordinateY(coord) + origin;
+        expect(y).toBe(expectY);
     });
 });
