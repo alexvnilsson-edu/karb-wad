@@ -25,7 +25,7 @@ export class RenderViewComponent {
     private elementRef = inject(ElementRef);
 
     private elementStorage = inject(ElementStorageService);
-    private renderService = inject(RenderService);
+    renderService = inject(RenderService);
 
     readonly elements = linkedSignal(() => this.elementStorage.elements());
 
