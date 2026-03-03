@@ -1,11 +1,11 @@
 import { afterNextRender, Component, ElementRef, inject, linkedSignal } from "@angular/core";
-import { ElementStorageService } from "@wad/elements/element-storage.service";
-import { RenderService } from "@wad/rendering/render.service";
-import { WadModule } from "@wad/wad.module";
+import { ElementStorageService } from "../../../wad/elements/element-storage.service";
+import { RenderService } from "../../../wad/rendering/render.service";
+import { WadModule } from "../../../wad/wad.module";
 import { RenderViewStatusComponent } from "./render-view-status/render-view-status.component";
-import { createCoordinate } from "@wad/rendering/coordinate";
+import { createCoordinate } from "../../../wad/rendering/coordinate";
 import { RenderViewSidebarComponent } from "./render-view-sidebar/render-view-sidebar.component";
-import { WadElementClickEvent } from "@wad/elements/element-click.event";
+import { WadElementClickEvent } from "../../../wad/elements/element-click.event";
 import { RenderViewCanvas } from "./render-view-canvas/render-view-canvas";
 
 @Component({

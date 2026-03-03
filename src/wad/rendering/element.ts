@@ -20,11 +20,11 @@ export class WadElement<TElement extends WadModel> {
 
     elementClick = output<WadElementClickEvent>();
 
-    isFocused = linkedSignal(() => this.element()?.isFocused);
+    isFocused = linkedSignal(() => this.element()!.isFocused);
 
-    stroke = computed(() => {
-        return this.isFocused() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
-    });
+    stroke = computed(() => 
+        this.isFocused() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
+    );
 
     protected click(event: MouseEvent) {
         console.debug(`Element ${this.element()?.id || "unknown id"} was clicked.`);

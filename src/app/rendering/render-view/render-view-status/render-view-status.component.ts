@@ -1,6 +1,6 @@
 import { Component, computed, inject, linkedSignal } from "@angular/core";
-import { RenderService } from "@wad/rendering/render.service";
-import { createCoordinate } from "@wad/rendering/coordinate";
+import { RenderService } from "../../../../wad/rendering/render.service";
+import { createCoordinate } from "../../../../wad/rendering/coordinate";
 
 @Component({
     selector: "app-render-view-status",

@@ -1,7 +1,8 @@
 <div class="p-2 text-white">
     <h4 class="text-lg">Elements</h4>
     <div class="flex flex-col gap-1 overflow-y-scroll scroll-smooth">
-        <!-- @for (element of elements(); track element.id) {
+        @for (entry of elements(); track entry[0]) {
+            @let element = entry[1];
             <div class="p-2 bg-gray-200 text-black rounded-md font-mono">
                 <p><strong>ID:</strong>&nbsp;<span class="text-sm">{{ element.id }}</span></p>
                 <p><strong>Type: </strong> <span>{{ element.type }}</span></p>
@@ -10,6 +11,6 @@
                     <p><i>Focused</i></p>
                 }
             </div>
-        } -->
+        }
     </div>
 </div>

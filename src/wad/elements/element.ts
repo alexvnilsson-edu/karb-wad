@@ -1,7 +1,7 @@
-import { Coordinate } from "@wad/rendering/coordinate";
+import { Coordinate } from "../rendering/coordinate";
 import * as shortUuid from "short-uuid"
 
-export abstract class WadModel {
+export class WadModel {
     id!: string;
     type!: string;
 
