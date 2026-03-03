@@ -27,7 +27,6 @@ const ELEMENTS = [
         ElementStorageService,
         RenderService
     ],
-    exports: [ ELEMENTS ],
-    schemas: [ NO_ERRORS_SCHEMA ]
+    exports: [ CommandInput, ELEMENTS ]
 })
 export class WadModule { }
