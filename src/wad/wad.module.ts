@@ -6,6 +6,9 @@ import { CircleleWadElement } from "./rendering/circle";
 import { RectangleWadElement } from "./rendering/rectangle";
 import { TriangleWadElement } from "./rendering/triangle";
 
+import { LineWadSystemElement } from "./rendering/system/line";
+import { TextWadSystemElement } from "./rendering/system/text";
+
 import { CommandInput } from "./cli/command-input/command-input";
 
 import { ElementStorageService } from "./elements/element-storage.service";
@@ -15,7 +18,9 @@ const ELEMENTS = [
     WadElement,
     CircleleWadElement,
     RectangleWadElement,
-    TriangleWadElement
+    TriangleWadElement,
+    LineWadSystemElement,
+    TextWadSystemElement
 ];
 
 @NgModule({
