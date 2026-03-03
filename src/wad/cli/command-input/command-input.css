@@ -1,5 +1,7 @@
 :host {
-  display: block;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
   position: fixed;
 
   bottom: 10%;
@@ -8,4 +10,10 @@
 
   min-height: 100px;
   max-height: 20%;
+
+  z-index: 100;
+}
+
+:host:not(.active) {
+  opacity: 0.5;
 }

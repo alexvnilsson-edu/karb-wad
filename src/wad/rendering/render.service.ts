@@ -1,4 +1,4 @@
-import { ElementRef, inject, Injectable, Signal, signal } from "@angular/core";
+import { ElementRef, inject, Injectable, linkedSignal, Signal, signal } from "@angular/core";
 import { Coordinate, createCoordinate } from "./coordinate";
 
 @Injectable({ providedIn: "root" })
@@ -10,7 +10,8 @@ export class RenderService {
 
     private _area = signal([0, 0]);
 
-    readonly coord = this._coord.asReadonly();
+    readonly actualCoord = this._coord.asReadonly();
+    readonly coord = linkedSignal(() => this.getCoord());
     readonly origin = this._origin.asReadonly();
 
     readonly height = this._height.asReadonly();
@@ -34,6 +35,18 @@ export class RenderService {
 
     setCoord(coord: Coordinate, canvasian: boolean = true) {
         this._coord.set(canvasian ? this.translateCoordinate(coord) : coord);
+    }
+
+    /**
+     * Returns a coordinate that is offset by origin.
+     * @returns Coordinates based on screen coordinates and offset by origin.
+     */
+    getCoord() {
+        const [realCoordX, realCoordY] = this._coord();
+        const [originX, originY] = this._origin();
+        const x = realCoordX - originX;
+        const y = realCoordY - originY;
+        return createCoordinate(x, y);
     }
 
     setOrigin(coord: Coordinate) {
