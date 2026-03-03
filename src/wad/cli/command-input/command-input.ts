@@ -5,10 +5,17 @@ import { ChangeDetectionStrategy, Component, HostBinding, signal } from '@angula
   templateUrl: "./command-input.html",
   styleUrl: './command-input.css',
   standalone: false,
+  host: {
+    "[class.active]": "inFocus()",
+    'window:keyup': 'onKeyup()'
+  }
 })
 export class CommandInput {
-  @HostBinding("class.active")
   inFocus = signal(false);
+
+  onKeyup(event: KeyboardEvent) {
+    console.debug("enter");
+  }
 
   focus(event: FocusEvent) {
     console.debug("focus");
