@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, linkedSignal, output, signal } from "@angular/core";
+import { ChangeDetectorRef, Component, computed, inject, input, linkedSignal, output, signal } from "@angular/core";
 import { WadModel } from "../elements/element";
 import { RenderService } from "./render.service";
 import { ElementStorageService } from "../elements/element-storage.service";
@@ -8,12 +8,14 @@ import { WadElementClickEvent } from "../elements/element-click.event";
     selector: "[wad-base]",
     template: ``,
     host: {
+        "fill": "none",
         "[attr.stroke]": "stroke()",
         "(click)": "click($event)"
     },
     standalone: false
 })
 export class WadElement<TElement extends WadModel> {
+    protected changeDetection = inject(ChangeDetectorRef);
     protected rendering = inject(RenderService);
 
     element = input.required<WadModel>();
@@ -34,6 +36,8 @@ export class WadElement<TElement extends WadModel> {
             console.debug(`Emitting event elementClick with data: `, eventData);
             this.elementClick.emit(eventData);
         }
+
+        this.changeDetection.markForCheck();
     }
 
     protected getElement(): TElement {
