@@ -44,7 +44,7 @@ export class RenderService {
     getCoord() {
         const [realCoordX, realCoordY] = this._coord();
         const [originX, originY] = this._origin();
-        const x = realCoordX - originX;
+        const x = realCoordX + originX;
         const y = realCoordY - originY;
         return createCoordinate(x, y);
     }
