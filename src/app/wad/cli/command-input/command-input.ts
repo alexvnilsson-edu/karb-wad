@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, model, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, model, signal, viewChild } from '@angular/core';
 import { WadCommandService } from '../commands/command.service';
 import { FormsModule } from '@angular/forms';
 import { stringify } from 'node:querystring';
@@ -26,7 +26,9 @@ export class CommandInput {
   showResult$ = signal(false);
   message$ = signal("");
 
-  isInputting$ = computed(() => this.command.length > 0);
+  isInputting = () => this.command !== "";
+
+  commandInput = viewChild<ElementRef<HTMLInputElement>>("commandInput");
 
   command = "";
 
@@ -37,8 +39,14 @@ export class CommandInput {
   }
 
   canvasClick(event: CanvasClickEvent) {
-    if (this.isInputting$()) {
+    if (this.isInputting()) {
       this.command += this.coordinatesTransformer.from(event.coordinates);
+
+      if (this.commandInput() && this.commandInput()!.nativeElement) {
+        this.commandInput()?.nativeElement.focus();
+      } else {
+        console.warn(`Unable to query command input element for focusing.`);
+      }
     }
   }
 

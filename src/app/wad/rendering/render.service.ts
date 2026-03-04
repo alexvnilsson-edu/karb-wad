@@ -24,7 +24,10 @@ export class RenderService {
     readonly area = this._area.asReadonly();
 
     canvasClick(x: number, y: number) {
-        this.commandService.canvasClick.next(new CanvasClickEvent(x, y));
+      const [offsetX, offsetY] = this.computeOffsetCoords(x, y);
+      this.commandService.canvasClick.next(
+        new CanvasClickEvent(offsetX, offsetY)
+      );
     }
 
     translateCoordinate(coordinate: Coordinate, target: "canvasian" | "cartesian" = "canvasian"): Coordinate {
@@ -41,6 +44,13 @@ export class RenderService {
             default:
                 throw new Error(`Invalid translation target: ${target}`);
         }
+    }
+
+    computeOffsetCoords(insetX: number, insetY: number): Coordinate {
+      const [originX, originY] = this._origin();
+      const x = insetX + originX;
+      const y = insetY - originY;
+      return createCoordinate(x, y);
     }
 
     setCoord(coord: Coordinate, canvasian: boolean = true) {
