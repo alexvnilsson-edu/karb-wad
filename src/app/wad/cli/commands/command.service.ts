@@ -1,11 +1,17 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { WadCommand } from './command';
+import { WadCommandTransformer } from './transformers/transformer';
+import { WadCommandArgument } from './command-argument';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WadCommandService {
-  private commands = new Map<string, WadCommand>();
+  private _commands = new Map<string, WadCommand>();
+  private _transformers = new Map<string, WadCommandTransformer<any>>();
+
+  readonly commands = this._commands;
+  readonly transformers = this._transformers;
 
   isPrompting$ = signal(false);
   currentCommand$ = signal<WadCommand | undefined>(undefined);
@@ -16,11 +22,37 @@ export class WadCommandService {
 
   register(name: string, args: any[]) {
     const command = new WadCommand(name);
-    this.commands.set(name, command);
+    this._commands.set(name, command);
   }
 
   registerCommand(command: WadCommand) {
-    this.commands.set(command.name, command);
+    this._commands.set(command.name, command);
+  }
+
+  registerTransformer<T>(type: string, transformer: Object) {
+    this._transformers.set(type, transformer as WadCommandTransformer<T>);
+  }
+
+  transformArgument<T>(arg: WadCommandArgument<T>, input: string) {
+    const type = arg.transformer;
+
+    if (!type) {
+      return arg.value;
+    }
+
+    if (!this._transformers.has(type)) {
+      throw new Error(`Transformer not found: ${type}`);
+    }
+
+    const transformer = this._transformers.get(type);
+
+    if (!transformer) {
+      throw new Error(`Unable to instantiate transformer: ${type}`);
+    }
+
+    const output = transformer!.to(input);
+
+    return output;
   }
   
   initiate(name: string) {
@@ -28,11 +60,11 @@ export class WadCommandService {
   }
 
   find(query: string): WadCommand | undefined {
-    if (this.commands.has(query)) {
-      return this.commands.get(query);
+    if (this._commands.has(query)) {
+      return this._commands.get(query);
     }
 
-    for (const command of this.commands.values()) {
+    for (const command of this._commands.values()) {
       if (command.alias.has(query)) {
         return command;
       }
@@ -51,6 +83,15 @@ export class WadCommandService {
     if (command === undefined) {
       throw new Error(`Command not found: ${commandName}`);
     }
+    const argsPostName = args.slice(1);
+    for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
+      const input = argsPostName[argIndex];
+      console.debug(input);
+      const arg = command.arguments[argIndex];
+      console.debug(arg);
+      const value = this.transformArgument<any>(arg, input);
+      arg.value = value;
+    }
     for (const arg in args.slice(1)) {
       console.debug(`arg: ${arg}`);
     }
@@ -58,11 +99,11 @@ export class WadCommandService {
   }
 
   execute(name: string) {
-    if (!this.commands.has(name)) {
+    if (!this._commands.has(name)) {
       throw new Error(`Command not found: ${name}`);
     }
 
-    const command = this.commands.get(name);
+    const command = this._commands.get(name);
 
     if (command === undefined) {
       throw new Error(`Command is undefined.`);

@@ -1,10 +1,10 @@
 import { createCoordinate } from "../../../rendering/coordinate";
-import {WadCoordinateTransformer} from "./coordinate.transformer";
+import {WadCoordinatesTransformer} from "./coordinates.transformer";
 
-describe("CoordinateTransformer", () => {
-    let transformer: WadCoordinateTransformer;
+describe("WadCoordinatesTransformer", () => {
+    let transformer: WadCoordinatesTransformer;
     beforeEach(() => {
-        transformer = new WadCoordinateTransformer();
+        transformer = new WadCoordinatesTransformer();
     });
     it("should transform string to Coordinate", () => {
         const input = "25..50";

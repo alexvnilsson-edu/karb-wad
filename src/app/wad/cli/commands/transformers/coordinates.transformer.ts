@@ -1,11 +1,11 @@
 import { Coordinate, createCoordinate } from "../../../rendering/coordinate";
 import { WadCommandTransformer } from "./transformer";
 
-export class WadCoordinateTransformer extends WadCommandTransformer<Coordinate> {
+export class WadCoordinatesTransformer extends WadCommandTransformer<Coordinate> {
     private separator = "..";
 
     constructor() {
-        super("coordinate");
+        super("coordinates");
     }
     
     override to(input: string): Coordinate {

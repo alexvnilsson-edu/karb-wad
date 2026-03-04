@@ -1,19 +1,34 @@
+import { Coordinate } from "app/wad/rendering/coordinate";
+import { WadCommandTransformer } from "./transformers/transformer";
+
 export class WadCommandArgument<T> {
     name!: string;
-    prompt!: string;
+
+    transformer?: string;
     
     private _value!: T;
 
-    constructor(name: string, prompt?: string) {
+    constructor(name: string, transformer?: string) {
         this.name = name;
-        this.prompt = prompt ?? name;
+        if (transformer) {
+            this.transformer = transformer;
+        }
     }
 
     get value(): T {
+        // if (this.transformer) {
+        //     return this.transformer.to(this._value as string);
+        // }
+
         return this._value;
     }
 
     set value(value: T) {
+        // if (this.transformer) {
+        //     this._value = this.transformer.from(value as T);
+        // } else {
+        //     this._value = value;
+        // }
         this._value = value;
     }
 
