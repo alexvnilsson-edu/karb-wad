@@ -81,7 +81,7 @@ export class CommandInput {
   }
 
   protected addCoordinate(coordinate: Coordinate) {
-    const padLeft = this.command.endsWith(" ") ? " " : "";
+    const padLeft = this.command.endsWith(" ") ? "" : " ";
     const coordinateString = this.coordinatesTransformer.toString(coordinate);
     const commandAddition = padLeft + coordinateString;
     this.command += commandAddition;
