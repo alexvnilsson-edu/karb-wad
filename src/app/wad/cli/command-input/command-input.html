@@ -1,5 +1,5 @@
 <div class="mx-auto w-xl lg:w-lg flex justify-center">
-  <div class="flex flex-col justify-stretch items-stretch flex-1 p-1 bg-gray-800 border-gray-600 border-2 rounded-lg">
+  <div class="flex flex-col justify-stretch items-stretch flex-1 p-1 bg-gray-800 border-gray-600 border-2 rounded-lg font-mono">
       @if (inFocus$()) {
         @if (error$()) {
             <p class="p-1 mb-2 text-red-400">
@@ -15,7 +15,7 @@
       <input
           #commandInput
           type="text"
-          class="flex-1 bg-gray-900 text-white text-xl p-1 px-2"
+          class="flex-1 bg-gray-900 text-white text-lg p-1 px-2"
           placeholder="Type help for list of commands"
           spellcheck="false"
           [(ngModel)]="command"
