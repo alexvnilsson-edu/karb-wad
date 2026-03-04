@@ -9,6 +9,7 @@ import { WadCoordinatesTransformer } from "app/wad/cli/commands/transformers/coo
 import { WadNumberTransformer } from "app/wad/cli/commands/transformers/number.transformer";
 import { TriangleWadModel } from "app/wad/elements/triangle";
 import { CircleWadModel } from "app/wad/elements/circle";
+import { LineWadModel } from "app/wad/elements/line";
 
 @Component({
     selector: "app-route-home",
@@ -28,6 +29,7 @@ export class HomeRouteComponent {
 
         // Register commands.
         this.registerCircleCommand();
+        this.registerLineCommand();
         this.registerRectangleCommand();
         this.registerTriangleCommand();
     }
@@ -54,6 +56,25 @@ export class HomeRouteComponent {
                 const radius = command.arguments.get("radius")?.value;
                 const element = new CircleWadModel(x, y, radius);
                 this.elementService.add(element);
+                return true;
+            } catch (ex) {
+                console.error(ex);
+                return false;
+            }
+        };
+        this.commandService.registerCommand(command);
+    }
+
+    private registerLineCommand() {
+        const command = new WadCommand("line", new Set(["l", "li", "linje"]));
+        command.addArgument("start", "coordinates");
+        command.addArgument("end", "coordinates");
+        command.executor = (command) => {
+            try {
+                const [startX, startY] = command.arguments.get("start")?.value;
+                const [endX, endY] = command.arguments.get("end")?.value;
+                this.elementService.add(new LineWadModel(startX, startY, endX, endY));
+
                 return true;
             } catch (ex) {
                 console.error(ex);
