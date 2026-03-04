@@ -93,7 +93,7 @@ export class WadCommandService {
         const [name, example] = [a.name, a.example];
         return `<${name} (example: ${example})>`;
       }).join(" ");
-      throw new Error(`Expected syntax: ${commandName} ${argSyntax}`);
+      throw new Error(`Syntax error. Expected: ${commandName} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];
