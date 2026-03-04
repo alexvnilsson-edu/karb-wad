@@ -1,10 +1,10 @@
 import { Component, inject, signal } from "@angular/core";
-import { ElementStorageService } from "../../../wad/elements/element-storage.service";
-import { RectangleWadModel } from "../../../wad/elements/rectangle";
+import { ElementStorageService } from "../../wad/elements/element-storage.service";
+import { RectangleWadModel } from "../../wad/elements/rectangle";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
-import { TriangleWadModel } from "../../../wad/elements/triangle";
-import { createCoordinate } from "../../../wad/rendering/coordinate";
-import { WadModule } from "wad/wad.module";
+import { TriangleWadModel } from "../../wad/elements/triangle";
+import { createCoordinate } from "../../wad/rendering/coordinate";
+import { WadModule } from "app/wad/wad.module";
 
 @Component({
     selector: "app-route-test",

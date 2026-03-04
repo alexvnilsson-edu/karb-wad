@@ -7,6 +7,9 @@ import { WadCommand } from './command';
 export class WadCommandService {
   private commands = new Map<string, WadCommand>();
 
+  isPrompting$ = signal(false);
+  currentCommand$ = signal<WadCommand | undefined>(undefined);
+
   constructor() { 
 
   }
@@ -18,6 +21,24 @@ export class WadCommandService {
 
   registerCommand(command: WadCommand) {
     this.commands.set(command.name, command);
+  }
+  
+  initiate(name: string) {
+
+  }
+
+  protected find(query: string): WadCommand | undefined {
+    if (this.commands.has(query)) {
+      return this.commands.get(query);
+    }
+
+    for (const command of this.commands.values()) {
+      if (command.alias.has(query)) {
+        return command;
+      }
+    }
+
+    return undefined;
   }
 
   execute(name: string) {

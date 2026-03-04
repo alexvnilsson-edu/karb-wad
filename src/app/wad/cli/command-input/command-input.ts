@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, signal } from '@angular/core';
+import { WadCommandService } from '../commands/command.service';
 
 @Component({
   selector: 'wad-command-input',
@@ -6,16 +7,15 @@ import { ChangeDetectionStrategy, Component, HostBinding, signal } from '@angula
   styleUrl: './command-input.css',
   standalone: false,
   host: {
-    "[class.active]": "inFocus()",
-    'window:keyup': 'onKeyup()'
+    "[class.active]": "inFocus()"
   }
 })
 export class CommandInput {
+  commandService = inject(WadCommandService);
+
   inFocus = signal(false);
 
-  onKeyup(event: KeyboardEvent) {
-    console.debug("enter");
-  }
+  prompt$ = 
 
   focus(event: FocusEvent) {
     console.debug("focus");

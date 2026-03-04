@@ -1,5 +1,5 @@
 import { Component, computed, inject, linkedSignal } from "@angular/core";
-import { ElementStorageService } from "../../../../wad/elements/element-storage.service";
+import { ElementStorageService } from "../../../wad/elements/element-storage.service";
 
 @Component({
     selector: "app-render-view-sidebar",
