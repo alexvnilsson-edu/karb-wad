@@ -1,12 +1,13 @@
 import { signal } from "@angular/core";
 import { RenderService } from "./render.service";
 import { createCoordinate } from "./coordinate";
+import { TestBed } from "@angular/core/testing";
 
 describe("RenderService", () => {
     let service: RenderService;
 
     beforeEach(() => {
-        service = new RenderService();
+        service = TestBed.inject(RenderService);
     });
 
     it("should get coordinate with offset", () => {
@@ -17,7 +18,7 @@ describe("RenderService", () => {
         service.setCoord(createCoordinate(coord, coord));
         service.setOrigin(createCoordinate(origin, origin));
         const [x, y] = service.getCoord();
-        const expectY = service.translateCoordinateY(coord) + origin;
+        const expectY = service.translateCoordinateY(coord) - origin;
         expect(y).toBe(expectY);
     });
 });
