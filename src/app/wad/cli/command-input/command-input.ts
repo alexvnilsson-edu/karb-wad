@@ -15,7 +15,7 @@ export class CommandInput {
 
   inFocus = signal(false);
 
-  prompt$ = 
+  
 
   focus(event: FocusEvent) {
     console.debug("focus");
