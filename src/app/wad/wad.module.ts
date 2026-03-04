@@ -13,6 +13,7 @@ import { CommandInput } from "./cli/command-input/command-input";
 
 import { ElementStorageService } from "./elements/element-storage.service";
 import { RenderService } from "./rendering/render.service";
+import { FormsModule } from "@angular/forms";
 
 const ELEMENTS = [ 
     WadElement,
@@ -24,6 +25,7 @@ const ELEMENTS = [
 ];
 
 @NgModule({
+    imports: [FormsModule],
     declarations: [
         CommandInput,
         ELEMENTS

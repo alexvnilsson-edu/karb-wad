@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, HostBinding, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, model, signal } from '@angular/core';
 import { WadCommandService } from '../commands/command.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'wad-command-input',
@@ -15,7 +16,18 @@ export class CommandInput {
 
   inFocus = signal(false);
 
-  
+  command = "";
+
+  protected reset() {
+    this.command = "";
+  }
+
+  enter() {
+    console.debug(this.command);
+    const command = this.commandService.interpret(this.command);
+    console.debug(command);
+    this.reset();
+  }
 
   focus(event: FocusEvent) {
     console.debug("focus");
