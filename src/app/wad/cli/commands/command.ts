@@ -1,8 +1,8 @@
 import { Subject } from "rxjs";
 import { WadCommandArgument } from "./command-argument";
 import { WadCommandResult } from "./command-result";
-
-export type WadCommandExecutor = (command: WadCommand) => boolean;
+import { WadCommandExecutor } from "./command-executor.type";
+import { WadCommandExecutorResult } from "./command-executor-result";
 
 export class WadCommand {
     name!: string;
@@ -23,11 +23,8 @@ export class WadCommand {
         this.arguments.set(name, arg);
     }
 
-    execute(): WadCommandResult {
-        const result = this.executor(this);
-
-        this.result = new WadCommandResult(result);
-
+    execute(): WadCommandExecutorResult {
+        this.result = this.executor(this);
         return this.result;
     }
 }

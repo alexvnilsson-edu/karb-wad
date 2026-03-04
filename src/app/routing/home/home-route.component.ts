@@ -10,6 +10,7 @@ import { WadNumberTransformer } from "app/wad/cli/commands/transformers/number.t
 import { TriangleWadModel } from "app/wad/elements/triangle";
 import { CircleWadModel } from "app/wad/elements/circle";
 import { LineWadModel } from "app/wad/elements/line";
+import { WadCommandExecutorResult } from "app/wad/cli/commands/command-executor-result";
 
 @Component({
     selector: "app-route-home",
@@ -56,10 +57,10 @@ export class HomeRouteComponent {
                 const radius = command.arguments.get("radius")?.value;
                 const element = new CircleWadModel(x, y, radius);
                 this.elementService.add(element);
-                return true;
+
+                return new WadCommandExecutorResult(true, `Circle #${element.id} was created.`);
             } catch (ex) {
-                console.error(ex);
-                return false;
+                return new WadCommandExecutorResult(false, `Error creating circle: ${ex}`);
             }
         };
         this.commandService.registerCommand(command);
@@ -73,12 +74,12 @@ export class HomeRouteComponent {
             try {
                 const [startX, startY] = command.arguments.get("start")?.value;
                 const [endX, endY] = command.arguments.get("end")?.value;
-                this.elementService.add(new LineWadModel(startX, startY, endX, endY));
+                const element = new LineWadModel(startX, startY, endX, endY);
+                this.elementService.add(element);
 
-                return true;
+                return new WadCommandExecutorResult(true, `Line #${element.id} was created.`);
             } catch (ex) {
-                console.error(ex);
-                return false;
+                return new WadCommandExecutorResult(false, `Error creating line: ${ex}`);
             }
         };
         this.commandService.registerCommand(command);
@@ -97,10 +98,10 @@ export class HomeRouteComponent {
                 const height = command.arguments.get("height")?.value;
                 const element = new RectangleWadModel(x, y, width, height);
                 this.elementService.add(element);
-                return true;
+
+                return new WadCommandExecutorResult(true, `Rectangle #${element.id} was created.`);
             } catch (ex) {
-                console.error(ex);
-                return false;
+                return new WadCommandExecutorResult(false, `Error creating rectangle: ${ex}`);
             }
         }
         this.commandService.registerCommand(command);
@@ -117,12 +118,12 @@ export class HomeRouteComponent {
                 const a = command.arguments.get("a")?.value;
                 const b = command.arguments.get("b")?.value;
                 const c = command.arguments.get("c")?.value;
-                this.elementService.add(new TriangleWadModel(a, b, c));
+                const element = new TriangleWadModel(a, b, c);
+                this.elementService.add(element);
 
-                return true;
+                return new WadCommandExecutorResult(true, `Triangle #${element.id} was created.`);
             } catch (ex) {
-                console.error(ex);
-                return false;
+                return new WadCommandExecutorResult(false, `Error creating triangle: ${ex}`);
             }
         };
         this.commandService.registerCommand(command);

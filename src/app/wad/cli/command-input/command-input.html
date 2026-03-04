@@ -1,7 +1,11 @@
 <div class="flex flex-col justify-stretch items-stretch flex-1 p-1 bg-gray-800 border-gray-600 border-2 rounded-lg">
     @if (error$()) {
-        <p class="p-2 mb-2 text-red-200">
-            {{ errorMessage$() }}
+        <p class="p-1 mb-2 text-red-400">
+            {{ message$() }}
+        </p>
+    } @else if (showResult$()) {
+        <p class="p-1 mb-2 text-green-400">
+            {{ message$() }}
         </p>
     }
 
@@ -11,6 +15,7 @@
         spellcheck="false"
         [(ngModel)]="command"
         (keyup.enter)="enter()"
+        (input)="input()"
         (focus)="focus($event)"
         (blur)="blur($event)"
     />

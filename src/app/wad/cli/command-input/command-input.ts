@@ -17,15 +17,21 @@ export class CommandInput {
   commandService = inject(WadCommandService);
 
   inFocus$ = signal(false);
+
   error$ = signal(false);
-  errorMessage$ = signal("");
+  showResult$ = signal(false);
+  message$ = signal("");
 
   command = "";
 
   protected reset() {
-    this.command = "";
     this.error$.set(false);
-    this.errorMessage$.set("");
+    this.showResult$.set(false);
+    this.message$.set("");
+  }
+
+  protected resetCommand() {
+    this.command = "";
   }
 
   enter() {
@@ -33,16 +39,22 @@ export class CommandInput {
       const command = this.commandService.interpret(this.command);
       const result = command.execute();
       if (result.success) {
-        this.reset();
-        this.error$.set(false);
+        this.resetCommand();
+        if (result.message) {
+          this.showResult$.set(true);
+          this.message$.set(result.message!);
+        }
       } else {
-        console.debug("error");
         this.error$.set(true);
       }
     } catch (ex: unknown) {
       this.error$.set(true);
-      this.errorMessage$.set(`${ex}`);
+      this.message$.set(`${ex}`);
     }
+  }
+
+  input() {
+    this.reset();
   }
 
   focus(event: FocusEvent) {
