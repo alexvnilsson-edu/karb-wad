@@ -96,16 +96,19 @@ export function configureCommands(commandService: WadCommandService, elementServ
 
   function registerRectangleCommand() {
     const command = new WadCommand("rectangle", new Set(["rect", "rectangel", "rektangel"]));
-    command.registerArgument("origin", "100..100", "coordinates");
-    command.registerArgument("width", "100", "number");
-    command.registerArgument("height", "100", "number");
+    command.registerArgument("a", "100..100", "coordinates");
+    command.registerArgument("b", "100..100", "coordinates");
+    command.registerArgument("c", "100..100", "coordinates");
+    command.registerArgument("d", "100..100", "coordinates");
     command.executor = (command) => {
       try {
-        const origin = command.arguments.get("origin");
-        const [x, y] = origin!.value;
-        const width = command.arguments.get("width")?.value;
-        const height = command.arguments.get("height")?.value;
-        const element = new RectangleWadModel(x, y, width, height);
+        const [a, b, c, d] = [
+          command.arguments.get("a")?.value,
+          command.arguments.get("b")?.value,
+          command.arguments.get("c")?.value,
+          command.arguments.get("d")?.value
+        ];
+        const element = new RectangleWadModel(a, b, c, d);
         elementService.add(element);
 
         return new WadCommandExecutorResult(true, `Rectangle #${element.id} was created.`);

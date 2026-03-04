@@ -2,25 +2,20 @@ import { Coordinate, createCoordinate } from "../rendering/coordinate";
 import { WadModel } from "./element";
 
 export class RectangleWadModel extends WadModel {
-    x!: number;
-    y!: number;
-    width!: number;
-    height!: number;
+    a!: Coordinate;
+    b!: Coordinate;
+    c!: Coordinate;
+    d!: Coordinate;
 
-    constructor(x: number, y: number, width: number, height: number) {
+    constructor(a: Coordinate, b: Coordinate, c: Coordinate, d: Coordinate) {
         super("rectangle");
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
     }
 
     getCoordinates(): Array<Coordinate> {
-        return [
-            createCoordinate(this.x, this.y),
-            createCoordinate(this.x + this.width, this.y),
-            createCoordinate(this.x + this.width, this.y + this.height),
-            createCoordinate(this.x, this.y + this.height)
-        ];
+      return [this.a, this.b, this.c, this.d];
     }
 }
