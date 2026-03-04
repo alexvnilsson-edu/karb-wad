@@ -36,22 +36,14 @@ describe("CommandService", () => {
     });
 
     it("should find command by alias", () => {
-        const name = "test";
-        const alias = "t";
+        const name = "rectangle";
+        const alias = "rect";
         const command = new WadCommand(name, new Set([alias]));
         service.registerCommand(command);
         const found = service.find(alias);
         expect(found).not.toBeUndefined();
         assert(found!.name === name);
-    });
-
-    it("should not find command by wrong alias", () => {
-        const name = "test";
-        const alias = "t";
-        const command = new WadCommand(name, new Set([alias]));
-        service.registerCommand(command);
-        const found = service.find(alias + "2");
-        expect(found).toBeUndefined();
+        expect(service.find(alias + "2")).toBeUndefined();
     });
 
     it("should interpret string to command", () => {
