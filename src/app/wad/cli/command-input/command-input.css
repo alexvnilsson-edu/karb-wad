@@ -19,3 +19,7 @@
 :host:not(.active) {
   opacity: 0.5;
 }
+
+:host.error > input {
+  border-color: red;
+}

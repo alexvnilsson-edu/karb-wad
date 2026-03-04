@@ -56,7 +56,7 @@
                 x
             </text>
 
-            @for (entry of allElements(); track entry[1].id) {
+            @for (entry of elements(); track entry[1].id) {
                 @let element = entry[1];
                 @switch (element.type.toLowerCase()) {
                     @case ("rectangle") {

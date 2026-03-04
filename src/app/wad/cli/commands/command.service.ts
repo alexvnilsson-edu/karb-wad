@@ -2,6 +2,7 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { WadCommand } from './command';
 import { WadCommandTransformer } from './transformers/transformer';
 import { WadCommandArgument } from './command-argument';
+import { stringify } from 'node:querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -87,7 +88,7 @@ export class WadCommandService {
     const commandArgNames = Array.from(command.arguments.keys());
     const commandArgs = Array.from(command.arguments.values());
     if (argsPostName.length !== command.arguments.size) {
-      throw new Error(`Argument length mismatch: ${command}, ${argsPostName}`);
+      throw new Error(`Argument length mismatch: ${JSON.stringify(Array.from(command.arguments.values()))}, ${JSON.stringify(argsPostName)}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];

@@ -48,7 +48,6 @@ export class HomeRouteComponent {
       const width = command.arguments.get("width")?.value;
       const height = command.arguments.get("height")?.value;
       const element = new RectangleWadModel(x, y, width, height);
-      console.debug(`adding element`, element);
       this.elementService.add(element);
       return true;
     }
