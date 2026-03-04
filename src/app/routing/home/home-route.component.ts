@@ -12,6 +12,8 @@ import { CircleWadModel } from "app/wad/elements/circle";
 import { LineWadModel } from "app/wad/elements/line";
 import { WadCommandExecutorResult } from "app/wad/cli/commands/command-executor-result";
 
+import {configureCommands} from "../../wad/cli/commands/command-config";
+
 @Component({
     selector: "app-route-home",
     templateUrl: "./home-route.component.html",
@@ -22,122 +24,10 @@ import { WadCommandExecutorResult } from "app/wad/cli/commands/command-executor-
     imports: [WadModule, RenderViewComponent]
 })
 export class HomeRouteComponent {
-    private elementService = inject(ElementStorageService);
-    private commandService = inject(WadCommandService);
+  private commandService = inject(WadCommandService);
+  private elementService = inject(ElementStorageService);
 
-    ngOnInit() {
-        this.registerCommandTransformers();
-
-        // Register commands.
-        this.registerCircleCommand();
-        this.registerHelpCommand();
-        this.registerLineCommand();
-        this.registerRectangleCommand();
-        this.registerTriangleCommand();
-    }
-
-    private registerCommandTransformers() {
-        this.commandService.registerTransformer(
-            "coordinates",
-            new WadCoordinatesTransformer()
-        );
-        this.commandService.registerTransformer(
-            "number",
-            new WadNumberTransformer()
-        );
-    }
-
-    private registerCircleCommand() {
-        const command = new WadCommand("circle", new Set(["circ", "circel", "cirkel"]));
-        command.registerArgument("origin", "100..100", "coordinates");
-        command.registerArgument("radius", "100", "number");
-        command.executor = (command) => {
-            try {
-                const origin = command.arguments.get("origin");
-                const [x, y] = origin!.value;
-                const radius = command.arguments.get("radius")?.value;
-                const element = new CircleWadModel(x, y, radius);
-                this.elementService.add(element);
-
-                return new WadCommandExecutorResult(true, `Circle #${element.id} was created.`);
-            } catch (ex) {
-                return new WadCommandExecutorResult(false, `Error creating circle: ${ex}`);
-            }
-        };
-        this.commandService.registerCommand(command);
-    }
-
-    private registerHelpCommand() {
-      const command = new WadCommand("help", new Set(["h", "hjälp"]));
-      command.executor = (command) => {
-        const commands = Array.from(this.commandService.commands.keys()).filter(c => c.toLowerCase() !== "help");
-        const helpMessage = `Commands: ${commands.join(", ")}`;
-
-        return new WadCommandExecutorResult(true, helpMessage);
-      };
-      this.commandService.registerCommand(command);
-    }
-
-    private registerLineCommand() {
-        const command = new WadCommand("line", new Set(["l", "li", "linje"]));
-        command.registerArgument("start", "100..100", "coordinates");
-        command.registerArgument("end", "100..100", "coordinates");
-        command.executor = (command) => {
-            try {
-                const [startX, startY] = command.arguments.get("start")?.value;
-                const [endX, endY] = command.arguments.get("end")?.value;
-                const element = new LineWadModel(startX, startY, endX, endY);
-                this.elementService.add(element);
-
-                return new WadCommandExecutorResult(true, `Line #${element.id} was created.`);
-            } catch (ex) {
-                return new WadCommandExecutorResult(false, `Error creating line: ${ex}`);
-            }
-        };
-        this.commandService.registerCommand(command);
-    }
-
-    private registerRectangleCommand() {
-        const command = new WadCommand("rectangle", new Set(["rect", "rectangel", "rektangel"]));
-        command.registerArgument("origin", "100..100", "coordinates");
-        command.registerArgument("width", "100", "number");
-        command.registerArgument("height", "100", "number");
-        command.executor = (command) => {
-            try {
-                const origin = command.arguments.get("origin");
-                const [x, y] = origin!.value;
-                const width = command.arguments.get("width")?.value;
-                const height = command.arguments.get("height")?.value;
-                const element = new RectangleWadModel(x, y, width, height);
-                this.elementService.add(element);
-
-                return new WadCommandExecutorResult(true, `Rectangle #${element.id} was created.`);
-            } catch (ex) {
-                return new WadCommandExecutorResult(false, `Error creating rectangle: ${ex}`);
-            }
-        }
-        this.commandService.registerCommand(command);
-    }
-
-
-    private registerTriangleCommand() {
-        const command = new WadCommand("triangle", new Set(["tri", "triangel", "trekant"]));
-        command.registerArgument("a", "10..10", "coordinates");
-        command.registerArgument("b", "20..10", "coordinates");
-        command.registerArgument("c", "20..20", "coordinates");
-        command.executor = (command) => {
-            try {
-                const a = command.arguments.get("a")?.value;
-                const b = command.arguments.get("b")?.value;
-                const c = command.arguments.get("c")?.value;
-                const element = new TriangleWadModel(a, b, c);
-                this.elementService.add(element);
-
-                return new WadCommandExecutorResult(true, `Triangle #${element.id} was created.`);
-            } catch (ex) {
-                return new WadCommandExecutorResult(false, `Error creating triangle: ${ex}`);
-            }
-        };
-        this.commandService.registerCommand(command);
-    }
+  ngOnInit() {
+    configureCommands(this.commandService, this.elementService);
+  }
 }
