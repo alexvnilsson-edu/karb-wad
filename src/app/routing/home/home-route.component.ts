@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { RenderViewComponent } from "../../rendering/render-view/render-view.component";
+import { WadModule } from "app/wad/wad.module";
 
 @Component({
     selector: "app-route-home",
@@ -8,7 +9,7 @@ import { RenderViewComponent } from "../../rendering/render-view/render-view.com
     host: {
         "class": "flex flex-col flex-1 items-stretch"
     },
-    imports: [RenderViewComponent]
+    imports: [WadModule, RenderViewComponent]
 })
 export class HomeRouteComponent {
     

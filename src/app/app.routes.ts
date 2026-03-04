@@ -6,10 +6,6 @@ export const routes: Routes = [
     {
         path: "",
         component: HomeRouteComponent,
-        title: "Drawing"
-    }, {
-        path: "test",
-        component: TestRouteComponent,
-        title: "Rendering Test"
+        title: "Home"
     }
 ];
