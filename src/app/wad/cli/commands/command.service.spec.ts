@@ -9,7 +9,7 @@ describe("CommandService", () => {
         service = new WadCommandService();
     });
 
-    it("executor should increment variable", () => {
+    it("should increment variable by executor", () => {
         const name = "test";
         const command = new WadCommand(name);
         let x = 1;
@@ -21,5 +21,33 @@ describe("CommandService", () => {
         service.execute(name);
 
         expect(x).toBe(2);
+    });
+
+    it("should find command by name", () => {
+        const name = "test";
+        const command = new WadCommand(name, new Set(["t"]));
+        service.registerCommand(command);
+        const found = service.find(name);
+        expect(found).not.toBeUndefined();
+        assert(found!.name === name);
+    });
+
+    it("should find command by alias", () => {
+        const name = "test";
+        const alias = "t";
+        const command = new WadCommand(name, new Set([alias]));
+        service.registerCommand(command);
+        const found = service.find(alias);
+        expect(found).not.toBeUndefined();
+        assert(found!.name === name);
+    });
+
+    it("should not find command by wrong alias", () => {
+        const name = "test";
+        const alias = "t";
+        const command = new WadCommand(name, new Set([alias]));
+        service.registerCommand(command);
+        const found = service.find(alias + "2");
+        expect(found).toBeUndefined();
     });
 });

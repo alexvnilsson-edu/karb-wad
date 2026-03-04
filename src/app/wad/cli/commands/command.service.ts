@@ -27,7 +27,7 @@ export class WadCommandService {
 
   }
 
-  protected find(query: string): WadCommand | undefined {
+  find(query: string): WadCommand | undefined {
     if (this.commands.has(query)) {
       return this.commands.get(query);
     }
@@ -39,6 +39,18 @@ export class WadCommandService {
     }
 
     return undefined;
+  }
+
+  interpret(input: string) {
+    const args = input.split(" ");
+    if (args.length === 0) {
+      throw new Error(`Invalid command argument length: 0`);
+    }
+    const commandName = args[0];
+    const command = this.find(commandName);
+    if (command === undefined) {
+      throw new Error(`Command not found: ${commandName}`);
+    }
   }
 
   execute(name: string) {

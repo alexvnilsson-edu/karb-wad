@@ -6,7 +6,7 @@ export type WadCommandExecutor = (command: WadCommand) => boolean;
 
 export class WadCommand {
     name!: string;
-    alias: Set<string> = new Set<string>();
+    alias!: Set<string>;
     arguments = new Set<WadCommandArgument<any>>();
 
     executor!: WadCommandExecutor;
@@ -15,8 +15,9 @@ export class WadCommand {
 
     private currentArgument = -1;
 
-    constructor(name: string) {
+    constructor(name: string, alias: Set<string> = new Set()) {
         this.name = name;
+        this.alias = alias;
     }
 
     addArgument<T>(name: string, prompt: string) {
