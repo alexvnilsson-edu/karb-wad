@@ -46,7 +46,6 @@ export class CommandInput {
   }
 
   focus(event: FocusEvent) {
-    console.debug("focus");
     this.inFocus$.set(true);
   }
 
