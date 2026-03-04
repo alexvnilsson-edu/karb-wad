@@ -86,14 +86,13 @@ export class WadCommandService {
     const argsPostName = args.slice(1);
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];
-      console.debug(input);
       const arg = command.arguments[argIndex];
-      console.debug(arg);
-      const value = this.transformArgument<any>(arg, input);
-      arg.value = value;
-    }
-    for (const arg in args.slice(1)) {
-      console.debug(`arg: ${arg}`);
+      if (arg.transformer) {
+        const value = this.transformArgument<any>(arg, input);
+        arg.value = value;
+      } else {
+        arg.value = input;
+      }
     }
     return command;
   }
