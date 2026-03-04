@@ -50,4 +50,14 @@ describe("CommandService", () => {
         const found = service.find(alias + "2");
         expect(found).toBeUndefined();
     });
+
+    it("should interpret string to command", () => {
+        const input = "test foo";
+        const command = new WadCommand("test", new Set(["t"]));
+        command.addArgument("foo", "Foo");
+        service.registerCommand(command);
+        const found = service.interpret("test bar");
+        expect(found).not.toBeUndefined();
+        expect(found.name).toBe("test");
+    });
 });

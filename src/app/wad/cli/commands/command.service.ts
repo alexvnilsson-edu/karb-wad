@@ -41,7 +41,7 @@ export class WadCommandService {
     return undefined;
   }
 
-  interpret(input: string) {
+  interpret(input: string): WadCommand {
     const args = input.split(" ");
     if (args.length === 0) {
       throw new Error(`Invalid command argument length: 0`);
@@ -51,6 +51,10 @@ export class WadCommandService {
     if (command === undefined) {
       throw new Error(`Command not found: ${commandName}`);
     }
+    for (const arg in args.slice(1)) {
+      console.debug(`arg: ${arg}`);
+    }
+    return command;
   }
 
   execute(name: string) {
