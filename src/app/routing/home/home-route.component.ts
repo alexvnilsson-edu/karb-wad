@@ -49,8 +49,8 @@ export class HomeRouteComponent {
 
     private registerCircleCommand() {
         const command = new WadCommand("circle", new Set(["circ", "circel", "cirkel"]));
-        command.addArgument("origin", "coordinates");
-        command.addArgument("radius", "number");
+        command.registerArgument("origin", "100..100", "coordinates");
+        command.registerArgument("radius", "100", "number");
         command.executor = (command) => {
             try {
                 const origin = command.arguments.get("origin");
@@ -80,8 +80,8 @@ export class HomeRouteComponent {
 
     private registerLineCommand() {
         const command = new WadCommand("line", new Set(["l", "li", "linje"]));
-        command.addArgument("start", "coordinates");
-        command.addArgument("end", "coordinates");
+        command.registerArgument("start", "100..100", "coordinates");
+        command.registerArgument("end", "100..100", "coordinates");
         command.executor = (command) => {
             try {
                 const [startX, startY] = command.arguments.get("start")?.value;
@@ -99,9 +99,9 @@ export class HomeRouteComponent {
 
     private registerRectangleCommand() {
         const command = new WadCommand("rectangle", new Set(["rect", "rectangel", "rektangel"]));
-        command.addArgument("origin", "coordinates");
-        command.addArgument("width", "number");
-        command.addArgument("height", "number");
+        command.registerArgument("origin", "100..100", "coordinates");
+        command.registerArgument("width", "100", "number");
+        command.registerArgument("height", "100", "number");
         command.executor = (command) => {
             try {
                 const origin = command.arguments.get("origin");
@@ -122,9 +122,9 @@ export class HomeRouteComponent {
 
     private registerTriangleCommand() {
         const command = new WadCommand("triangle", new Set(["tri", "triangel", "trekant"]));
-        command.addArgument("a", "coordinates");
-        command.addArgument("b", "coordinates");
-        command.addArgument("c", "coordinates");
+        command.registerArgument("a", "10..10", "coordinates");
+        command.registerArgument("b", "20..10", "coordinates");
+        command.registerArgument("c", "20..20", "coordinates");
         command.executor = (command) => {
             try {
                 const a = command.arguments.get("a")?.value;

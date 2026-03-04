@@ -89,7 +89,11 @@ export class WadCommandService {
     const commandArgNames = Array.from(command.arguments.keys());
     const commandArgs = Array.from(command.arguments.values());
     if (argsPostName.length !== command.arguments.size) {
-      throw new Error(`Argument length mismatch: ${JSON.stringify(Array.from(command.arguments.values()))}, ${JSON.stringify(argsPostName)}`);
+      const argSyntax = Array.from(command.arguments.values()).map(a => {
+        const [name, example] = [a.name, a.example];
+        return `<${name} (example: ${example})>`;
+      }).join(" ");
+      throw new Error(`Expected syntax: ${commandName} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];

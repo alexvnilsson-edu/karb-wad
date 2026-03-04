@@ -3,15 +3,16 @@ import { WadCommandTransformer } from "./transformers/transformer";
 
 export class WadCommandArgument<T> {
     name!: string;
-
     transformer?: string;
-    
+    example!: string;
+
     private _value!: T;
 
-    constructor(name: string, transformer?: string) {
+    constructor(name: string, example: string, transformer?: string) {
         this.name = name;
+        this.example = example;
         if (transformer) {
-            this.transformer = transformer;
+          this.transformer = transformer;
         }
     }
 

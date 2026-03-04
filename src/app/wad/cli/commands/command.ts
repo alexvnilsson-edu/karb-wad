@@ -18,8 +18,8 @@ export class WadCommand {
         this.alias = alias;
     }
 
-    addArgument<T>(name: string, transformer: string) {
-        const arg = new WadCommandArgument<T>(name, transformer);
+    registerArgument<T>(name: string, type: string, transformer: string) {
+        const arg = new WadCommandArgument<T>(name, type, transformer);
         this.arguments.set(name, arg);
     }
 

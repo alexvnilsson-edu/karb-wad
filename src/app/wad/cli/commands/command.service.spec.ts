@@ -49,7 +49,7 @@ describe("CommandService", () => {
     it("should interpret string to command", () => {
         const input = "test 25..50";
         const command = new WadCommand("test", new Set(["t"]));
-        command.addArgument("origin", "coordinates");
+        command.registerArgument("origin", "coordinates");
         service.registerCommand(command);
         const found = service.interpret(input);
         expect(found).not.toBeUndefined();
