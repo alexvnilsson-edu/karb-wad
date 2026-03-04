@@ -7,7 +7,7 @@ export type WadCommandExecutor = (command: WadCommand) => boolean;
 export class WadCommand {
     name!: string;
     alias!: Set<string>;
-    arguments = new Array<WadCommandArgument<any>>();
+    arguments = new Map<string, WadCommandArgument<any>>();
 
     executor!: WadCommandExecutor;
 
@@ -20,7 +20,7 @@ export class WadCommand {
 
     addArgument<T>(name: string, transformer: string) {
         const arg = new WadCommandArgument<T>(name, transformer);
-        this.arguments.push(arg);
+        this.arguments.set(name, arg);
     }
 
     execute() {

@@ -84,9 +84,14 @@ export class WadCommandService {
       throw new Error(`Command not found: ${commandName}`);
     }
     const argsPostName = args.slice(1);
+    const commandArgNames = Array.from(command.arguments.keys());
+    const commandArgs = Array.from(command.arguments.values());
+    if (argsPostName.length !== command.arguments.size) {
+      throw new Error(`Argument length mismatch: ${command}, ${argsPostName}`);
+    }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];
-      const arg = command.arguments[argIndex];
+      const arg = commandArgs[argIndex];
       if (arg.transformer) {
         const value = this.transformArgument<any>(arg, input);
         arg.value = value;

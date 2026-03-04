@@ -57,12 +57,13 @@ describe("CommandService", () => {
     it("should interpret string to command", () => {
         const input = "test 25..50";
         const command = new WadCommand("test", new Set(["t"]));
-        command.addArgument("x", "coordinates");
+        command.addArgument("origin", "coordinates");
         service.registerCommand(command);
         const found = service.interpret(input);
         expect(found).not.toBeUndefined();
         expect(found.name).toBe("test");
-        expect(found.arguments[0].value).toStrictEqual(createCoordinate(25, 50));
+        expect(found.arguments.get("origin")).not.toBeUndefined();
+        expect(found.arguments.get("origin")!.value).toStrictEqual(createCoordinate(25, 50));
     });
 
     it("should have Coordinate transformer", () => {
