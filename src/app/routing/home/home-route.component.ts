@@ -30,6 +30,7 @@ export class HomeRouteComponent {
 
         // Register commands.
         this.registerCircleCommand();
+        this.registerHelpCommand();
         this.registerLineCommand();
         this.registerRectangleCommand();
         this.registerTriangleCommand();
@@ -64,6 +65,17 @@ export class HomeRouteComponent {
             }
         };
         this.commandService.registerCommand(command);
+    }
+
+    private registerHelpCommand() {
+      const command = new WadCommand("help", new Set(["h", "hjälp"]));
+      command.executor = (command) => {
+        const commands = Array.from(this.commandService.commands.keys()).filter(c => c.toLowerCase() !== "help");
+        const helpMessage = `Commands: ${commands.join(", ")}`;
+
+        return new WadCommandExecutorResult(true, helpMessage);
+      };
+      this.commandService.registerCommand(command);
     }
 
     private registerLineCommand() {
