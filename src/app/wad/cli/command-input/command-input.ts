@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, model, signal, viewChild } from '@angular/core';
 import { WadCommandService } from '../commands/command.service';
-import { FormsModule } from '@angular/forms';
-import { stringify } from 'node:querystring';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
 import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
 import { Coordinate } from '../../rendering/coordinate';

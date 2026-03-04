@@ -1,8 +1,6 @@
-import { ElementRef, inject, Injectable, linkedSignal, output, Signal, signal } from "@angular/core";
+import { inject, Injectable, linkedSignal, output, Signal, signal } from "@angular/core";
 import { Coordinate, createCoordinate } from "./coordinate";
 import { CanvasClickEvent } from "./canvas-click.event";
-import { EventEmitter } from "stream";
-import { Subject } from "rxjs";
 import { WadCommandService } from "../cli/commands/command.service";
 
 @Injectable({ providedIn: "root" })
