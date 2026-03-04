@@ -9,7 +9,8 @@ import { WadElementClickEvent } from "../elements/element-click.event";
     template: ``,
     host: {
         "fill": "none",
-        "[attr.stroke]": "stroke()",
+        "[attr.stroke-width]": "strokeWidth$()",
+        "[attr.stroke]": "stroke$()",
         "(click)": "click($event)"
     },
     standalone: false
@@ -22,10 +23,12 @@ export class WadElement<TElement extends WadModel> {
 
     elementClick = output<WadElementClickEvent>();
 
-    isFocused = linkedSignal(() => this.element()!.isFocused);
+    isFocused$ = linkedSignal(() => this.element()?.isFocused ?? false);
 
-    stroke = computed(() => 
-        this.isFocused() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
+    strokeWidth$ = linkedSignal(() => 2);
+
+    stroke$ = linkedSignal(() => 
+        this.isFocused$() ? "rgb(255, 255, 255)" : "rgb(200, 200, 200)"
     );
 
     protected click(event: MouseEvent) {
