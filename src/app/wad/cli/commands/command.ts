@@ -23,9 +23,11 @@ export class WadCommand {
         this.arguments.set(name, arg);
     }
 
-    execute() {
+    execute(): WadCommandResult {
         const result = this.executor(this);
 
         this.result = new WadCommandResult(result);
+
+        return this.result;
     }
 }
