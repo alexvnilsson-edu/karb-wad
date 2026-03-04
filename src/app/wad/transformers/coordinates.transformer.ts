@@ -1,18 +1,22 @@
-import { Coordinate, createCoordinate } from "../../../rendering/coordinate";
-import { WadCommandTransformer } from "./transformer";
+import { Coordinate, createCoordinate } from "../rendering/coordinate";
+import { Transformer } from "./transformer";
 
-export class WadCoordinatesTransformer extends WadCommandTransformer<Coordinate> {
+export class CoordinatesTransformer extends Transformer<Coordinate> {
     private separator = "..";
 
     constructor() {
         super("coordinates");
     }
-    
-    override to(input: string): Coordinate {
-        if (!input.includes(this.separator)) {
-            throw new Error(`Missing separator (..) in input: ${input}`);
+
+    static create() {
+      return new CoordinatesTransformer();
+    }
+
+    override transform(value: string): Coordinate {
+        if (!value.includes(this.separator)) {
+            throw new Error(`Missing separator (..) in input: ${value}`);
         }
-        const parts = input.split(this.separator);
+        const parts = value.split(this.separator);
         if (parts.length !== 2) {
             throw new Error(`Invalid length of parts of coordinate: ${parts.length}, expected: 2`)
         }
@@ -22,7 +26,8 @@ export class WadCoordinatesTransformer extends WadCommandTransformer<Coordinate>
         }
         return createCoordinate(coords[0], coords[1]);
     }
-    override from(input: Coordinate): string {
+
+    override toString(input: Coordinate): string {
         const [x, y] = input;
         const output = [x, y].join(this.separator);
         return output;

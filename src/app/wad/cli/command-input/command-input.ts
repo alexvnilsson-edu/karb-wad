@@ -3,7 +3,8 @@ import { WadCommandService } from '../commands/command.service';
 import { FormsModule } from '@angular/forms';
 import { stringify } from 'node:querystring';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
-import { WadCoordinatesTransformer } from '../commands/transformers/coordinates.transformer';
+import { CoordinatesTransformer } from '../../transformers/coordinates.transformer';
+import { Coordinate } from '../../rendering/coordinate';
 
 @Component({
   selector: 'wad-command-input',
@@ -18,7 +19,7 @@ import { WadCoordinatesTransformer } from '../commands/transformers/coordinates.
 export class CommandInput {
   commandService = inject(WadCommandService);
 
-  private coordinatesTransformer = new WadCoordinatesTransformer();
+  private coordinatesTransformer = new CoordinatesTransformer();
 
   inFocus$ = signal(false);
 
@@ -40,12 +41,10 @@ export class CommandInput {
 
   canvasClick(event: CanvasClickEvent) {
     if (this.isInputting()) {
-      this.command += this.coordinatesTransformer.from(event.coordinates);
-
-      if (this.commandInput() && this.commandInput()!.nativeElement) {
-        this.commandInput()?.nativeElement.focus();
-      } else {
-        console.warn(`Unable to query command input element for focusing.`);
+      if (event && event.coordinates) {
+        const coordinate = event.coordinates;
+        this.addCoordinate(coordinate);
+        this.regainFocus();
       }
     }
   }
@@ -79,6 +78,21 @@ export class CommandInput {
 
   blur(event: FocusEvent) {
     this.inFocus$.set(false);
+  }
+
+  protected addCoordinate(coordinate: Coordinate) {
+    const padLeft = this.command.endsWith(" ") ? " " : "";
+    const coordinateString = this.coordinatesTransformer.toString(coordinate);
+    const commandAddition = padLeft + coordinateString;
+    this.command += commandAddition;
+  }
+
+  protected regainFocus() {
+    if (this.commandInput() && this.commandInput()!.nativeElement) {
+      this.commandInput()?.nativeElement.focus();
+    } else {
+      console.warn(`Unable to query command input element for focusing.`);
+    }
   }
 
   protected reset() {

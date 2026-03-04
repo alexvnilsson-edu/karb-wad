@@ -1,5 +1,5 @@
 import { Coordinate } from "app/wad/rendering/coordinate";
-import { WadCommandTransformer } from "./transformers/transformer";
+import { Transformer } from "../../transformers/transformer";
 
 export class WadCommandArgument<T> {
     name!: string;

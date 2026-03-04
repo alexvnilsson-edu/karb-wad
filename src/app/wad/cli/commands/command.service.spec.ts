@@ -1,7 +1,7 @@
 import { signal } from "@angular/core";
 import { WadCommandService } from "./command.service";
 import { WadCommand } from "./command";
-import { WadCoordinatesTransformer } from "./transformers/coordinates.transformer";
+import { CoordinatesTransformer } from "../../transformers/coordinates.transformer";
 import { createCoordinate } from "../../rendering/coordinate";
 
 describe("CommandService", () => {
@@ -9,7 +9,7 @@ describe("CommandService", () => {
 
     beforeEach(() => {
         service = new WadCommandService();
-        service.registerTransformer("coordinates", new WadCoordinatesTransformer());
+        service.registerTransformer("coordinates", new CoordinatesTransformer());
     });
 
     it("should increment variable by executor", () => {

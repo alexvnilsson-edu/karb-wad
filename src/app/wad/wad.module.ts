@@ -16,7 +16,7 @@ import { ElementStorageService } from "./elements/element-storage.service";
 import { RenderService } from "./rendering/render.service";
 import { FormsModule } from "@angular/forms";
 
-const ELEMENTS = [ 
+const ELEMENTS = [
     WadElement,
     CircleleWadElement,
     RectangleWadElement,

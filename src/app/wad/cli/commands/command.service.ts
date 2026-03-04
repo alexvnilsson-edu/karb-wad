@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { WadCommand } from './command';
-import { WadCommandTransformer } from './transformers/transformer';
+import { Transformer } from '../../transformers/transformer';
 import { WadCommandArgument } from './command-argument';
 import { stringify } from 'node:querystring';
 import { Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { CanvasClickEvent } from '../../rendering/canvas-click.event';
 })
 export class WadCommandService {
   private _commands = new Map<string, WadCommand>();
-  private _transformers = new Map<string, WadCommandTransformer<any>>();
+  private _transformers = new Map<string, Transformer<any>>();
 
   readonly commands = this._commands;
   readonly transformers = this._transformers;
@@ -31,8 +31,8 @@ export class WadCommandService {
     this._commands.set(command.name, command);
   }
 
-  registerTransformer<T>(type: string, transformer: Object) {
-    this._transformers.set(type, transformer as WadCommandTransformer<T>);
+  registerTransformer<T>(type: string, transformer: Transformer<T>) {
+    this._transformers.set(type, transformer);
   }
 
   transformArgument<T>(arg: WadCommandArgument<T>, input: string) {
@@ -52,7 +52,7 @@ export class WadCommandService {
       throw new Error(`Unable to instantiate transformer: ${type}`);
     }
 
-    const output = transformer!.to(input);
+    const output = transformer!.transform(input);
 
     return output;
   }
@@ -115,7 +115,7 @@ export class WadCommandService {
 
     const command = this._commands.get(name);
 
-    if (command === undefined) {
+    if (!command) {
       throw new Error(`Command is undefined.`);
     }
 

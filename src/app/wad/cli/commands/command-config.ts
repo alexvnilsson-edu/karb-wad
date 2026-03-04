@@ -3,8 +3,8 @@ import { WadCommand } from "./command";
 import { WadCommandService } from "./command.service";
 import { circleCommandExecutor } from "./executors/circle.executor";
 import { helpCommandExecutor } from "./executors/help.executor";
-import { WadCoordinatesTransformer } from "./transformers/coordinates.transformer";
-import { WadNumberTransformer } from "./transformers/number.transformer";
+import { CoordinatesTransformer } from "../../transformers/coordinates.transformer";
+import { NumberTransformer } from "../../transformers/number.transformer";
 import { WadCommandExecutorResult } from "./command-executor-result";
 import { RectangleWadModel } from "app/wad/elements/rectangle";
 import { TriangleWadModel } from "app/wad/elements/triangle";
@@ -36,11 +36,11 @@ export function configureCommands(commandService: WadCommandService, elementServ
   function registerCommandTransformers() {
     commandService.registerTransformer(
       "coordinates",
-      new WadCoordinatesTransformer()
+      new CoordinatesTransformer()
     );
     commandService.registerTransformer(
       "number",
-      new WadNumberTransformer()
+      new NumberTransformer()
     );
   },
 
