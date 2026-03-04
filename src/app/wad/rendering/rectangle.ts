@@ -1,4 +1,4 @@
-import { Component, computed } from "@angular/core";
+import { Component, computed, linkedSignal } from "@angular/core";
 import { WadElement } from "./element";
 import { RectangleWadModel } from "../elements/rectangle";
 import { createCoordinate } from "./coordinate";
@@ -7,12 +7,12 @@ import { createCoordinate } from "./coordinate";
     selector: `[wad-rectangle]`,
     template: ``,
     host: {
-        "[attr.points]": "coordinates()"
+        "[attr.points]": "coordinates$()"
     },
     standalone: false
 })
 export class RectangleWadElement extends WadElement<RectangleWadModel> {
-    coordinates = computed(() => {
+    coordinates$ = linkedSignal(() => {
         const element = this.getElement();
         if (this.getElement()) {
             return element.getCoordinates().map(coord => this.rendering.translateCoordinate(coord));

@@ -1,4 +1,4 @@
-import { Component, computed, inject } from "@angular/core";
+import { Component, computed, inject, linkedSignal } from "@angular/core";
 import { WadElement } from "./element";
 import { TriangleWadModel } from "../elements/triangle";
 import { createCoordinate } from "./coordinate";
@@ -7,12 +7,12 @@ import { createCoordinate } from "./coordinate";
     selector: "[wad-triangle]",
     template: ``,
     host: {
-        "[attr.points]": "points()"
+        "[attr.points]": "points$()"
     },
     standalone: false,
 })
 export class TriangleWadElement extends WadElement<TriangleWadModel> {
-    coordinates = computed(() => {
+    coordinates$ = linkedSignal(() => {
         if (!this.getElement()) {
             return [createCoordinate(0, 0), createCoordinate(0, 0), createCoordinate(0, 0)]
         }
@@ -23,12 +23,12 @@ export class TriangleWadElement extends WadElement<TriangleWadModel> {
         return [a, b, c];
     });
 
-    points = computed(() => {
-        if (!this.coordinates()) {
+    points$ = computed(() => {
+        if (!this.coordinates$()) {
             return "";
         }
 
-        const coords = this.coordinates().map(coord => coord.join(" "));
-        return coords.join(" ")
-    })
+        const coords = this.coordinates$().map(coord => coord.join(" "));
+        return coords.join(" ");
+    });
 }
