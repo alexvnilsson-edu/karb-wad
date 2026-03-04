@@ -68,6 +68,9 @@
                     @case ("circle") {
                         <circle wad-circle [element]="element" (elementClick)="elementClick($event)"></circle>
                     }
+                    @case ("line") {
+                        <line wad-line [element]="element" (elementClick)="elementClick($event)"></line>
+                    }
                 }
             }
         </svg>

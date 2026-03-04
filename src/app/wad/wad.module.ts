@@ -5,6 +5,7 @@ import { WadElement } from "./rendering/element";
 import { CircleleWadElement } from "./rendering/circle";
 import { RectangleWadElement } from "./rendering/rectangle";
 import { TriangleWadElement } from "./rendering/triangle";
+import { LineWadElement } from "./rendering/line";
 
 import { LineWadSystemElement } from "./rendering/system/line";
 import { TextWadSystemElement } from "./rendering/system/text";
@@ -20,6 +21,10 @@ const ELEMENTS = [
     CircleleWadElement,
     RectangleWadElement,
     TriangleWadElement,
+    LineWadElement
+];
+
+const SYSTEM_ELEMENTS = [
     LineWadSystemElement,
     TextWadSystemElement
 ];
@@ -28,12 +33,13 @@ const ELEMENTS = [
     imports: [FormsModule],
     declarations: [
         CommandInput,
-        ELEMENTS
+        ELEMENTS,
+        SYSTEM_ELEMENTS
     ],
     providers: [
         ElementStorageService,
         RenderService
     ],
-    exports: [ CommandInput, ELEMENTS ]
+    exports: [ CommandInput, ELEMENTS, SYSTEM_ELEMENTS ]
 })
 export class WadModule { }
