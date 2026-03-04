@@ -24,7 +24,7 @@ import { RenderViewCanvas } from "./render-view-canvas/render-view-canvas";
 export class RenderViewComponent {
     private elementRef = inject(ElementRef);
 
-    private elementStorage = inject(ElementStorageService);
+    elementStorage = inject(ElementStorageService);
     renderService = inject(RenderService);
 
     readonly elements = linkedSignal(() => this.elementStorage.elements());
