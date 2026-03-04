@@ -1,15 +1,15 @@
 import { CircleWadModel } from "app/wad/elements/circle";
 import { WadCommand } from "./command";
 import { WadCommandService } from "./command.service";
-import { circleCommandExecutor } from "./executors/circle.executor";
-import { helpCommandExecutor } from "./executors/help.executor";
-import { CoordinatesTransformer } from "../../transformers/coordinates.transformer";
-import { NumberTransformer } from "../../transformers/number.transformer";
+import { CoordinatesTransformer } from "../transformers/coordinates.transformer";
+import { NumberTransformer } from "../transformers/number.transformer";
 import { WadCommandExecutorResult } from "./command-executor-result";
 import { RectangleWadModel } from "app/wad/elements/rectangle";
 import { TriangleWadModel } from "app/wad/elements/triangle";
 import { ElementStorageService } from "app/wad/elements/element-storage.service";
 import { LineWadModel } from "app/wad/elements/line";
+import { CoordinatesArgumentType } from "./argument-types/coordinate.argument-type";
+import { NumberArgumentType } from "./argument-types/number.argument-type";
 
 interface CommandConfig {
   name: string;
@@ -17,19 +17,6 @@ interface CommandConfig {
   executor: Function;
 }
 type CommandConfigCollection = Array<CommandConfig>;
-
-export const commandConfig: CommandConfigCollection = [
-  {
-    name: "help",
-    alias: ["h"],
-    executor: helpCommandExecutor
-  },
-  {
-    name: "circle",
-    alias: ["c", "circel", "cirkel"],
-    executor: circleCommandExecutor
-  }
-]
 
 export function configureCommands(commandService: WadCommandService, elementService: ElementStorageService) {
   const registrationFunctions = [
@@ -46,8 +33,8 @@ export function configureCommands(commandService: WadCommandService, elementServ
 
   function registerCircleCommand() {
     const command = new WadCommand("circle", new Set(["circ", "circel", "cirkel"]));
-    command.registerArgument("origin", "100..100", "coordinates");
-    command.registerArgument("radius", "100", "number");
+    command.registerArgument("origin", new CoordinatesArgumentType());
+    command.registerArgument("radius", new NumberArgumentType());
     command.executor = (command) => {
       try {
         const origin = command.arguments.get("origin");
@@ -77,8 +64,8 @@ export function configureCommands(commandService: WadCommandService, elementServ
 
   function registerLineCommand() {
     const command = new WadCommand("line", new Set(["l", "li", "linje"]));
-    command.registerArgument("start", "100..100", "coordinates");
-    command.registerArgument("end", "100..100", "coordinates");
+    command.registerArgument("start", new CoordinatesArgumentType());
+    command.registerArgument("end", new CoordinatesArgumentType());
     command.executor = (command) => {
       try {
         const [startX, startY] = command.arguments.get("start")?.value;
@@ -96,10 +83,10 @@ export function configureCommands(commandService: WadCommandService, elementServ
 
   function registerRectangleCommand() {
     const command = new WadCommand("rectangle", new Set(["rect", "rectangel", "rektangel"]));
-    command.registerArgument("a", "100..100", "coordinates");
-    command.registerArgument("b", "100..100", "coordinates");
-    command.registerArgument("c", "100..100", "coordinates");
-    command.registerArgument("d", "100..100", "coordinates");
+    command.registerArgument("a", new CoordinatesArgumentType());
+    command.registerArgument("b", new CoordinatesArgumentType());
+    command.registerArgument("c", new CoordinatesArgumentType());
+    command.registerArgument("d", new CoordinatesArgumentType());
     command.executor = (command) => {
       try {
         const [a, b, c, d] = [
@@ -122,9 +109,9 @@ export function configureCommands(commandService: WadCommandService, elementServ
 
   function registerTriangleCommand() {
     const command = new WadCommand("triangle", new Set(["tri", "triangel", "trekant"]));
-    command.registerArgument("a", "10..10", "coordinates");
-    command.registerArgument("b", "20..10", "coordinates");
-    command.registerArgument("c", "20..20", "coordinates");
+    command.registerArgument("a", new CoordinatesArgumentType());
+    command.registerArgument("b", new CoordinatesArgumentType());
+    command.registerArgument("c", new CoordinatesArgumentType());
     command.executor = (command) => {
       try {
         const a = command.arguments.get("a")?.value;

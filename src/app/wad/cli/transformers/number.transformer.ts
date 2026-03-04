@@ -5,6 +5,10 @@ export class NumberTransformer extends Transformer<number> {
     super("number");
   }
 
+  static create() {
+    return new NumberTransformer();
+  }
+
   override transform(value: string) {
     return Number.parseFloat(value);
   }

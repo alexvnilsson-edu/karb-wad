@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { WadCommand } from './command';
-import { Transformer } from '../../transformers/transformer';
+import { Transformer } from '../transformers/transformer';
 import { WadCommandArgument } from './command-argument';
 import { stringify } from 'node:querystring';
 import { Subject } from 'rxjs';
@@ -33,28 +33,6 @@ export class WadCommandService {
 
   registerTransformer<T>(type: string, transformer: Transformer<T>) {
     this._transformers.set(type, transformer);
-  }
-
-  transformArgument<T>(arg: WadCommandArgument<T>, input: string) {
-    const type = arg.transformer;
-
-    if (!type) {
-      return arg.value;
-    }
-
-    if (!this._transformers.has(type)) {
-      throw new Error(`Transformer not found: ${type}`);
-    }
-
-    const transformer = this._transformers.get(type);
-
-    if (!transformer) {
-      throw new Error(`Unable to instantiate transformer: ${type}`);
-    }
-
-    const output = transformer!.transform(input);
-
-    return output;
   }
 
   initiate(name: string) {
@@ -90,20 +68,15 @@ export class WadCommandService {
     const commandArgs = Array.from(command.arguments.values());
     if (argsPostName.length !== command.arguments.size) {
       const argSyntax = Array.from(command.arguments.values()).map(a => {
-        const [name, example] = [a.name, a.example];
-        return `<${name} (example: ${example})>`;
+        const [name, help] = [a.name, a.type.help];
+        return `<${name} (example: ${help})>`;
       }).join(" ");
       throw new Error(`Syntax error. Expected: ${commandName} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];
       const arg = commandArgs[argIndex];
-      if (arg.transformer) {
-        const value = this.transformArgument<any>(arg, input);
-        arg.value = value;
-      } else {
-        arg.value = input;
-      }
+      arg.value = input;
     }
     return command;
   }

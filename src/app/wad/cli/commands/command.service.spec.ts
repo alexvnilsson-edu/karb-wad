@@ -1,8 +1,10 @@
 import { signal } from "@angular/core";
 import { WadCommandService } from "./command.service";
 import { WadCommand } from "./command";
-import { CoordinatesTransformer } from "../../transformers/coordinates.transformer";
+import { CoordinatesTransformer } from "../transformers/coordinates.transformer";
 import { createCoordinate } from "../../rendering/coordinate";
+import { WadCommandExecutorResult } from "./command-executor-result";
+import { CoordinatesArgumentType } from "./argument-types/coordinate.argument-type";
 
 describe("CommandService", () => {
     let service: WadCommandService;
@@ -18,7 +20,7 @@ describe("CommandService", () => {
         let x = 1;
         command.executor = (command) => {
             x++;
-            return true;
+            return new WadCommandExecutorResult(true);
         }
         service.registerCommand(command);
         service.execute(name);
@@ -49,7 +51,7 @@ describe("CommandService", () => {
     it("should interpret string to command", () => {
         const input = "test 25..50";
         const command = new WadCommand("test", new Set(["t"]));
-        command.registerArgument("origin", "coordinates");
+        command.registerArgument("origin", new CoordinatesArgumentType());
         service.registerCommand(command);
         const found = service.interpret(input);
         expect(found).not.toBeUndefined();

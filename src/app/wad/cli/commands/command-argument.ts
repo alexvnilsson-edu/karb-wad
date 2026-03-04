@@ -1,35 +1,27 @@
 import { Coordinate } from "app/wad/rendering/coordinate";
-import { Transformer } from "../../transformers/transformer";
+import { Transformer } from "../transformers/transformer";
+import { ArgumentType } from "./argument-types/argument-type";
 
 export class WadCommandArgument<T> {
     name!: string;
-    transformer?: string;
-    example!: string;
+    type!: ArgumentType<T>;
 
-    private _value!: T;
+    private _value!: string;
 
-    constructor(name: string, example: string, transformer?: string) {
+    constructor(name: string, type: ArgumentType<T>) {
         this.name = name;
-        this.example = example;
-        if (transformer) {
-          this.transformer = transformer;
-        }
+        this.type = type;
+    }
+
+    get raw(): string {
+      return this._value;
     }
 
     get value(): T {
-        // if (this.transformer) {
-        //     return this.transformer.to(this._value as string);
-        // }
-
-        return this._value;
+        return this.type.transformer.transform(this._value);
     }
 
-    set value(value: T) {
-        // if (this.transformer) {
-        //     this._value = this.transformer.from(value as T);
-        // } else {
-        //     this._value = value;
-        // }
+    set value(value: string) {
         this._value = value;
     }
 

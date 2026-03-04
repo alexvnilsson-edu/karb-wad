@@ -1,14 +1,16 @@
-import { Transformer } from "app/wad/transformers/transformer";
+import { Transformer } from "app/wad/cli/transformers/transformer";
 
 export abstract class ArgumentType<T> {
   type!: string;
-  transformer!: Transformer<T>;
+  abstract transformer: Transformer<T>;
+  abstract help: string;
 
   /**
-   *
+   * Construct ArgumentType class.
    */
-  constructor(type: string, transformer: Transformer<T>) {
+  constructor(type: string) {
     this.type = type;
-    this.transformer = transformer;
   }
+
+  abstract transform(value: string): T;
 }
