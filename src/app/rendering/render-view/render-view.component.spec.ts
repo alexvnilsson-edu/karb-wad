@@ -2,10 +2,15 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { RenderViewComponent } from "./render-view.component";
 import { RectangleWadModel } from "app/wad/elements/rectangle";
 import { createCoordinate } from "app/wad/rendering/coordinate";
+import { ElementStorageService } from "app/wad/elements/element-storage.service";
+import { RenderService } from "app/wad/rendering/render.service";
 
 describe("RenderView", () => {
     let component: RenderViewComponent;
     let fixture: ComponentFixture<RenderViewComponent>;
+
+    let renderService: RenderService;
+    let elementService: ElementStorageService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -14,6 +19,8 @@ describe("RenderView", () => {
 
         fixture = TestBed.createComponent(RenderViewComponent);
         component = fixture.componentInstance;
+        component.renderService = TestBed.inject(RenderService);
+        component.elementStorage = TestBed.inject(ElementStorageService);
         await fixture.whenStable();
     });
 
