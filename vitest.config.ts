@@ -2,10 +2,18 @@
 
 import path from 'path';
 import { defineConfig } from 'vitest/config';
+import { playwright } from "@vitest/browser-playwright";
 
 export default defineConfig({
   test: {
-    globals: true
+    globals: true,
+    browser: {
+      provider: playwright(),
+      enabled: true,
+      instances: [
+        { browser: "chromium" }
+      ]
+    }
   },
   resolve: {
     alias: {
