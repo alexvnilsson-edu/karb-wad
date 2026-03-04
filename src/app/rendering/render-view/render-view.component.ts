@@ -29,7 +29,7 @@ export class RenderViewComponent {
 
     readonly elements = linkedSignal(() => this.elementStorage.elements());
 
-    readonly allElements = linkedSignal(() => 
+    readonly allElements = linkedSignal(() =>
         Array.from(this.elements().entries())
     );
 
@@ -90,5 +90,13 @@ export class RenderViewComponent {
                 this.renderService.setOrigin(coords);
             }
         }
+    }
+
+    click(event: MouseEvent) {
+        const [x, y] = [
+            event.offsetX,
+            this.renderService.translateCoordinateY(event.offsetY)
+        ];
+        this.renderService.canvasClick(x, y);
     }
 }

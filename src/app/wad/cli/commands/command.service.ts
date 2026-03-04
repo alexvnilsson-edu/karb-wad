@@ -3,6 +3,8 @@ import { WadCommand } from './command';
 import { WadCommandTransformer } from './transformers/transformer';
 import { WadCommandArgument } from './command-argument';
 import { stringify } from 'node:querystring';
+import { Subject } from 'rxjs';
+import { CanvasClickEvent } from '../../rendering/canvas-click.event';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +16,9 @@ export class WadCommandService {
   readonly commands = this._commands;
   readonly transformers = this._transformers;
 
-  isPrompting$ = signal(false);
-  currentCommand$ = signal<WadCommand | undefined>(undefined);
+  canvasClick = new Subject<CanvasClickEvent>();
 
-  constructor() { 
+  constructor() {
 
   }
 
@@ -55,7 +56,7 @@ export class WadCommandService {
 
     return output;
   }
-  
+
   initiate(name: string) {
 
   }
@@ -116,5 +117,4 @@ export class WadCommandService {
 
     command!.execute();
   }
-
 }

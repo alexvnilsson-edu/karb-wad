@@ -1,8 +1,14 @@
-import { ElementRef, inject, Injectable, linkedSignal, Signal, signal } from "@angular/core";
+import { ElementRef, inject, Injectable, linkedSignal, output, Signal, signal } from "@angular/core";
 import { Coordinate, createCoordinate } from "./coordinate";
+import { CanvasClickEvent } from "./canvas-click.event";
+import { EventEmitter } from "stream";
+import { Subject } from "rxjs";
+import { WadCommandService } from "../cli/commands/command.service";
 
 @Injectable({ providedIn: "root" })
 export class RenderService {
+    private commandService = inject(WadCommandService);
+
     private _coord = signal(createCoordinate(0, 0));
     private _origin = signal(createCoordinate(0, 0));
 
@@ -16,6 +22,10 @@ export class RenderService {
 
     readonly height = this._height.asReadonly();
     readonly area = this._area.asReadonly();
+
+    canvasClick(x: number, y: number) {
+        this.commandService.canvasClick.next(new CanvasClickEvent(x, y));
+    }
 
     translateCoordinate(coordinate: Coordinate, target: "canvasian" | "cartesian" = "canvasian"): Coordinate {
         const [x, y] = coordinate;
