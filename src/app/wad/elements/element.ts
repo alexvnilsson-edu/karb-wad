@@ -1,5 +1,5 @@
 import { Coordinate } from '../rendering/coordinate';
-import * as shortUuid from 'short-uuid';
+import { nanoid } from 'nanoid';
 
 export class WadModel {
   id!: string;
@@ -21,6 +21,6 @@ export class WadModel {
   }
 
   private generateId(): string {
-    return shortUuid.generate();
+    return nanoid();
   }
 }
