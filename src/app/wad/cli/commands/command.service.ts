@@ -1,4 +1,4 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Injectable, linkedSignal, signal, WritableSignal } from '@angular/core';
 import { WadCommand } from './command';
 import { Transformer } from '../transformers/transformer';
 import { WadCommandArgument } from './command-argument';

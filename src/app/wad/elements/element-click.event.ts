@@ -1,4 +1,4 @@
-import { WadModel } from './element';
+import { WadModel } from './model';
 
 export interface WadElementClickEvent {
   element: WadModel;

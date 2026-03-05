@@ -8,7 +8,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { WadModel } from '../elements/element';
+import { WadModel } from '../elements/model';
 import { RenderService } from './render.service';
 import { ElementService } from '../elements/element.service';
 import { WadElementClickEvent } from '../elements/element-click.event';

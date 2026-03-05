@@ -1,4 +1,4 @@
-import { afterNextRender, Component, ElementRef, inject, linkedSignal } from '@angular/core';
+import { afterEveryRender, afterNextRender, Component, ElementRef, inject, linkedSignal, SimpleChanges } from '@angular/core';
 import { ElementService } from '../../wad/elements/element.service';
 import { RenderService } from '../../wad/rendering/render.service';
 import { WadModule } from '../../wad/wad.module';
@@ -7,6 +7,8 @@ import { createCoordinate } from '../../wad/rendering/coordinate';
 import { RenderViewSidebarComponent } from './render-view-sidebar/render-view-sidebar.component';
 import { WadElementClickEvent } from '../../wad/elements/element-click.event';
 import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
+import { WadElement } from 'app/wad/rendering/element';
+import { RectangleWadElement } from 'app/wad/rendering/rectangle';
 
 @Component({
   selector: 'app-render-view',
@@ -31,6 +33,14 @@ export class RenderViewComponent {
 
   private isMouseDown = false;
 
+  private measureStart?: number;
+
+  ngOnChanges(changes: SimpleChanges<RectangleWadElement>) {
+    console.debug("ngOnChanges");
+    this.measureStart = Date.now();
+
+  }
+
   elementClick(event: WadElementClickEvent) {
     console.debug(`Element clicked: ${event.element.id}`, event);
     this.elementStorage.focus(event.element);
@@ -42,6 +52,13 @@ export class RenderViewComponent {
       this.renderService.setArea(canvas.clientWidth, canvas.clientHeight);
       this.renderService.setHeight(canvas.clientHeight);
     });
+
+    // afterEveryRender(() => {
+    //   if (this.measureStart) {
+    //     const elapsed = Date.now() - this.measureStart;
+    //     console.debug(`render time: ${elapsed} ms`);
+    //   }
+    // });
   }
 
   protected getCanvas(): HTMLCanvasElement {

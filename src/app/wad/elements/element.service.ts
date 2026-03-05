@@ -7,13 +7,11 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { WadModel } from './element';
+import { WadModel } from './model';
 import { filter, from, map } from 'rxjs';
 
 type WadModelMap = Map<string, WadModel>;
-interface WadModelCollection {
-  [key: string]: WadModel;
-}
+type WadModelCollection = Record<string, WadModel>;
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +27,7 @@ export class ElementService {
       return [];
     }
 
-    const ids: Array<string> = [];
+    const ids: string[] = [];
 
     for (const element of this._elements().values()) {
       if (element.isFocused) {

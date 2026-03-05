@@ -1,5 +1,5 @@
 import { Coordinate, createCoordinate } from '../rendering/coordinate';
-import { WadModel } from './element';
+import { WadModel } from './model';
 
 export class RectangleWadModel extends WadModel {
   a!: Coordinate;
