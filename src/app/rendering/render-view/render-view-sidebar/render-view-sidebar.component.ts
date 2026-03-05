@@ -1,12 +1,12 @@
 import { Component, computed, inject, linkedSignal } from '@angular/core';
-import { ElementStorageService } from '../../../wad/elements/element-storage.service';
+import { ElementService } from '../../../wad/elements/element.service';
 
 @Component({
   selector: 'app-render-view-sidebar',
   templateUrl: './render-view-sidebar.component.html',
 })
 export class RenderViewSidebarComponent {
-  elementService = inject(ElementStorageService);
+  elementService = inject(ElementService);
 
   elements = linkedSignal(() => this.elementService.elements());
 }

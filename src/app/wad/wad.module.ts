@@ -12,7 +12,7 @@ import { TextWadSystemElement } from './rendering/system/text';
 
 import { CommandInput } from './cli/command-input/command-input';
 
-import { ElementStorageService } from './elements/element-storage.service';
+import { ElementService } from './elements/element.service';
 import { RenderService } from './rendering/render.service';
 import { FormsModule } from '@angular/forms';
 
@@ -29,7 +29,7 @@ const SYSTEM_ELEMENTS = [LineWadSystemElement, TextWadSystemElement];
 @NgModule({
   imports: [FormsModule],
   declarations: [CommandInput, ELEMENTS, SYSTEM_ELEMENTS],
-  providers: [ElementStorageService, RenderService],
+  providers: [ElementService, RenderService],
   exports: [CommandInput, ELEMENTS, SYSTEM_ELEMENTS],
 })
 export class WadModule {}

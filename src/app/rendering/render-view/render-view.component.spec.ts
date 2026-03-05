@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RenderViewComponent } from './render-view.component';
 import { RectangleWadModel } from 'app/wad/elements/rectangle';
 import { createCoordinate } from 'app/wad/rendering/coordinate';
-import { ElementStorageService } from 'app/wad/elements/element-storage.service';
+import { ElementService } from 'app/wad/elements/element-storage.service';
 import { RenderService } from 'app/wad/rendering/render.service';
 import { WadModule } from 'app/wad/wad.module';
 import { CommandInput } from 'app/wad/cli/command-input/command-input';
@@ -12,19 +12,19 @@ describe('RenderView', () => {
   let fixture: ComponentFixture<RenderViewComponent>;
 
   let renderService: RenderService;
-  let elementService: ElementStorageService;
+  let elementService: ElementService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RenderViewComponent, WadModule],
-      providers: [RenderService, ElementStorageService],
+      providers: [RenderService, ElementService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RenderViewComponent);
 
     component = fixture.componentInstance;
     component.renderService = TestBed.inject(RenderService);
-    component.elementStorage = TestBed.inject(ElementStorageService);
+    component.elementStorage = TestBed.inject(ElementService);
     await fixture.whenStable();
   });
 

@@ -3,7 +3,7 @@ import { WadModule } from './wad/wad.module';
 import { RenderViewComponent } from './rendering/render-view/render-view.component';
 import { configureCommands } from './wad/cli/commands/command-config';
 import { WadCommandService } from './wad/cli/commands/command.service';
-import { ElementStorageService } from './wad/elements/element-storage.service';
+import { ElementService } from './wad/elements/element.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import { ElementStorageService } from './wad/elements/element-storage.service';
 })
 export class App {
   private commandService = inject(WadCommandService);
-  private elementService = inject(ElementStorageService);
+  private elementService = inject(ElementService);
 
   constructor() {
     configureCommands(this.commandService, this.elementService);

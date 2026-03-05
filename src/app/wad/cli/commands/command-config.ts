@@ -6,7 +6,7 @@ import { NumberTransformer } from '../transformers/number.transformer';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { RectangleWadModel } from 'app/wad/elements/rectangle';
 import { TriangleWadModel } from 'app/wad/elements/triangle';
-import { ElementStorageService } from 'app/wad/elements/element-storage.service';
+import { ElementService } from 'app/wad/elements/element.service';
 import { LineWadModel } from 'app/wad/elements/line';
 import { CoordinatesArgumentType } from './argument-types/coordinate.argument-type';
 import { NumberArgumentType } from './argument-types/number.argument-type';
@@ -20,7 +20,7 @@ type CommandConfigCollection = Array<CommandConfig>;
 
 export function configureCommands(
   commandService: WadCommandService,
-  elementService: ElementStorageService,
+  elementService: ElementService,
 ) {
   const registrationFunctions = [
     function registerCommandTransformers() {

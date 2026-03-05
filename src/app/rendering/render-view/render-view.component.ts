@@ -1,5 +1,5 @@
 import { afterNextRender, Component, ElementRef, inject, linkedSignal } from '@angular/core';
-import { ElementStorageService } from '../../wad/elements/element-storage.service';
+import { ElementService } from '../../wad/elements/element.service';
 import { RenderService } from '../../wad/rendering/render.service';
 import { WadModule } from '../../wad/wad.module';
 import { RenderViewStatusComponent } from './render-view-status/render-view-status.component';
@@ -19,7 +19,7 @@ import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);
 
-  elementStorage = inject(ElementStorageService);
+  elementStorage = inject(ElementService);
   renderService = inject(RenderService);
 
   readonly elements = linkedSignal(() => this.elementStorage.elements());

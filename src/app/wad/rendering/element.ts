@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { WadModel } from '../elements/element';
 import { RenderService } from './render.service';
-import { ElementStorageService } from '../elements/element-storage.service';
+import { ElementService } from '../elements/element.service';
 import { WadElementClickEvent } from '../elements/element-click.event';
 
 @Component({

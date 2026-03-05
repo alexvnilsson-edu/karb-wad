@@ -18,7 +18,7 @@ interface WadModelCollection {
 @Injectable({
   providedIn: 'root',
 })
-export class ElementStorageService {
+export class ElementService {
   private _elements = signal<WadModelMap>(new Map());
   readonly elements = this._elements.asReadonly();
 
