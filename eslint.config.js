@@ -15,7 +15,7 @@ module.exports = defineConfig([
       angular.configs.tsRecommended,
     ],
     plugins: {
-      "unused-imports": unusedImports,
+      'unused-imports': unusedImports,
     },
     processor: angular.processInlineTemplates,
     rules: {
@@ -35,11 +35,22 @@ module.exports = defineConfig([
           style: 'kebab-case',
         },
       ],
+      'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
     },
   },
   {
     files: ['**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {},
-  }
+  },
 ]);
