@@ -8,7 +8,8 @@
     "build:github-pages": "ng build --prod --base-href 'https://alexvnilsson.github.io/wad'",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:wad": "node dist/wad/server/server.mjs"
+    "serve:ssr:wad": "node dist/wad/server/server.mjs",
+    "lint": "ng lint"
   },
   "prettier": {
     "printWidth": 100,
@@ -47,12 +48,16 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "@vitest/browser-playwright": "^4.0.18",
+    "angular-eslint": "21.2.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
     "jsdom": "^27.1.0",
     "playwright": "^1.58.2",
     "postcss": "^8.5.3",
     "prettier": "3.8.1",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
+    "typescript-eslint": "8.50.1",
     "vitest": "^4.0.8"
   }
 }
