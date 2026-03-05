@@ -1,12 +1,9 @@
 export class WadCommandExecutorResult {
-    success!: boolean;
-    message?: string;
+  success!: boolean;
+  message?: string;
 
-    constructor(
-        success: boolean,
-        message?: string
-    ) {
-        this.success = success;
-        this.message = message;
-    }
+  constructor(success: boolean, message?: string) {
+    this.success = success;
+    this.message = message;
+  }
 }

@@ -2,7 +2,7 @@
 
 import path from 'path';
 import { defineConfig } from 'vitest/config';
-import { playwright } from "@vitest/browser-playwright";
+import { playwright } from '@vitest/browser-playwright';
 
 export default defineConfig({
   test: {
@@ -10,14 +10,12 @@ export default defineConfig({
     browser: {
       provider: playwright(),
       enabled: true,
-      instances: [
-        { browser: "chromium" }
-      ]
-    }
+      instances: [{ browser: 'chromium' }],
+    },
   },
   resolve: {
     alias: {
-      "app": path.resolve(__dirname, "src/app")
-    }
-  }
+      app: path.resolve(__dirname, 'src/app'),
+    },
+  },
 });

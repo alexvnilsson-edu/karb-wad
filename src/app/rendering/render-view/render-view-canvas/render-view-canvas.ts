@@ -4,12 +4,12 @@ import { Coordinate } from '../../../wad/rendering/coordinate';
 @Component({
   selector: 'svg[render-view-canvas]',
   imports: [],
-  template: `<ng-content/>`,
+  template: `<ng-content />`,
   host: {
-    "[attr.viewBox]": "viewBox$()",
-    "[attr.width]": "width$()",
-    "[attr.height]": "height$()"
-  }
+    '[attr.viewBox]': 'viewBox$()',
+    '[attr.width]': 'width$()',
+    '[attr.height]': 'height$()',
+  },
 })
 export class RenderViewCanvas {
   origin = input<Coordinate>(new Float32Array([0, 0]));
@@ -18,7 +18,5 @@ export class RenderViewCanvas {
   width$ = computed(() => this.area()[0]);
   height$ = computed(() => this.area()[1]);
 
-  viewBox$ = computed(() => 
-    [this.origin().join(" "), this.area().join(" ")].join(" ")
-  );
+  viewBox$ = computed(() => [this.origin().join(' '), this.area().join(' ')].join(' '));
 }

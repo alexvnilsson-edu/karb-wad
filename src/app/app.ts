@@ -9,7 +9,7 @@ import { ElementStorageService } from './wad/elements/element-storage.service';
   selector: 'app-root',
   imports: [WadModule, RenderViewComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   private commandService = inject(WadCommandService);

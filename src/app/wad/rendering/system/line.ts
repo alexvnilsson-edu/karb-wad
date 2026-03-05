@@ -4,15 +4,15 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: '[wad-system-line]',
   template: ``,
   host: {
-    "[attr.x1]": "x1()",
-    "[attr.y1]": "y1()",
-    "[attr.x2]": "x2()",
-    "[attr.y2]": "y2()",
-    "[attr.length]": "length()"
+    '[attr.x1]': 'x1()',
+    '[attr.y1]': 'y1()',
+    '[attr.x2]': 'x2()',
+    '[attr.y2]': 'y2()',
+    '[attr.length]': 'length()',
   },
-  standalone: false
+  standalone: false,
 })
-export class LineWadSystemElement { 
+export class LineWadSystemElement {
   x1 = input.required<number>();
   y1 = input.required<number>();
 

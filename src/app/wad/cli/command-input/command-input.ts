@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, HostBinding, inject, model, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  HostBinding,
+  inject,
+  model,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { WadCommandService } from '../commands/command.service';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
 import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
@@ -6,13 +16,13 @@ import { Coordinate } from '../../rendering/coordinate';
 
 @Component({
   selector: 'wad-command-input',
-  templateUrl: "./command-input.html",
+  templateUrl: './command-input.html',
   styleUrl: './command-input.css',
   standalone: false,
   host: {
-    "[class.active]": "inFocus$()",
-    "[class.error]": "error$()"
-  }
+    '[class.active]': 'inFocus$()',
+    '[class.error]': 'error$()',
+  },
 })
 export class CommandInput {
   commandService = inject(WadCommandService);
@@ -23,18 +33,16 @@ export class CommandInput {
 
   error$ = signal(false);
   showResult$ = signal(false);
-  message$ = signal("");
+  message$ = signal('');
 
-  isInputting = () => this.command !== "";
+  isInputting = () => this.command !== '';
 
-  commandInput = viewChild<ElementRef<HTMLInputElement>>("commandInput");
+  commandInput = viewChild<ElementRef<HTMLInputElement>>('commandInput');
 
-  command = "";
+  command = '';
 
   constructor() {
-    this.commandService.canvasClick.subscribe(event =>
-      this.canvasClick(event)
-    );
+    this.commandService.canvasClick.subscribe((event) => this.canvasClick(event));
   }
 
   canvasClick(event: CanvasClickEvent) {
@@ -79,7 +87,7 @@ export class CommandInput {
   }
 
   protected addCoordinate(coordinate: Coordinate) {
-    const padLeft = this.command.endsWith(" ") ? "" : " ";
+    const padLeft = this.command.endsWith(' ') ? '' : ' ';
     const coordinateString = this.coordinatesTransformer.toString(coordinate);
     const commandAddition = padLeft + coordinateString;
     this.command += commandAddition;
@@ -96,10 +104,10 @@ export class CommandInput {
   protected reset() {
     this.error$.set(false);
     this.showResult$.set(false);
-    this.message$.set("");
+    this.message$.set('');
   }
 
   protected resetCommand() {
-    this.command = "";
+    this.command = '';
   }
 }

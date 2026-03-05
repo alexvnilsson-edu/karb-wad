@@ -1,7 +1,7 @@
 export class WadCommandResult {
-    success!: boolean;
+  success!: boolean;
 
-    constructor(success: boolean) {
-        this.success = success;
-    }
+  constructor(success: boolean) {
+    this.success = success;
+  }
 }

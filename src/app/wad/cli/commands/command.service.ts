@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { CanvasClickEvent } from '../../rendering/canvas-click.event';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WadCommandService {
   private _commands = new Map<string, WadCommand>();
@@ -17,9 +17,7 @@ export class WadCommandService {
 
   canvasClick = new Subject<CanvasClickEvent>();
 
-  constructor() {
-
-  }
+  constructor() {}
 
   register(name: string, args: any[]) {
     const command = new WadCommand(name);
@@ -34,9 +32,7 @@ export class WadCommandService {
     this._transformers.set(type, transformer);
   }
 
-  initiate(name: string) {
-
-  }
+  initiate(name: string) {}
 
   find(query: string): WadCommand | undefined {
     if (this._commands.has(query)) {
@@ -53,7 +49,7 @@ export class WadCommandService {
   }
 
   interpret(input: string): WadCommand {
-    const args = input.split(" ");
+    const args = input.split(' ');
     if (args.length === 0) {
       throw new Error(`Invalid command argument length: 0`);
     }
@@ -66,10 +62,12 @@ export class WadCommandService {
     const commandArgNames = Array.from(command.arguments.keys());
     const commandArgs = Array.from(command.arguments.values());
     if (argsPostName.length !== command.arguments.size) {
-      const argSyntax = Array.from(command.arguments.values()).map(a => {
-        const [name, help] = [a.name, a.type.help];
-        return `<${name} (example: ${help})>`;
-      }).join(" ");
+      const argSyntax = Array.from(command.arguments.values())
+        .map((a) => {
+          const [name, help] = [a.name, a.type.help];
+          return `<${name} (example: ${help})>`;
+        })
+        .join(' ');
       throw new Error(`Syntax error. Expected: ${commandName} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {

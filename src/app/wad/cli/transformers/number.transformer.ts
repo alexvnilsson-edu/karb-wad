@@ -1,8 +1,8 @@
-import { Transformer } from "./transformer";
+import { Transformer } from './transformer';
 
 export class NumberTransformer extends Transformer<number> {
   constructor() {
-    super("number");
+    super('number');
   }
 
   static create() {

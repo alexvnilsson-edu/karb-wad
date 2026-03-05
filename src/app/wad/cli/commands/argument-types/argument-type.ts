@@ -1,4 +1,4 @@
-import { Transformer } from "app/wad/cli/transformers/transformer";
+import { Transformer } from 'app/wad/cli/transformers/transformer';
 
 export abstract class ArgumentType<T> {
   type!: string;

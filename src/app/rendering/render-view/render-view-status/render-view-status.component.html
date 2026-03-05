@@ -1,14 +1,16 @@
-<div class="grid grid-cols-6 bg-gray-800 font-mono text-white p-2 gap-2 border-t-1 border-t-gray-600 divide-gray-600 divide-x-1 divide-dashed">
-    <div aria-label="Mouse Coordinate" class="px-2">
-        <span>{{ coord()[0] }}</span>
-        <span>, </span>
-        <span>{{ coord()[1] }}</span>
-    </div>
+<div
+  class="grid grid-cols-6 bg-gray-800 font-mono text-white p-2 gap-2 border-t-1 border-t-gray-600 divide-gray-600 divide-x-1 divide-dashed"
+>
+  <div aria-label="Mouse Coordinate" class="px-2">
+    <span>{{ coord()[0] }}</span>
+    <span>, </span>
+    <span>{{ coord()[1] }}</span>
+  </div>
 
-    <div aria-label="Origo Coordinate">
-        <label>Origo: </label>
-        <span>{{ origin()[0] }}</span>
-        <span>, </span>
-        <span>{{ origin()[1] }}</span>
-    </div>
+  <div aria-label="Origo Coordinate">
+    <label>Origo: </label>
+    <span>{{ origin()[0] }}</span>
+    <span>, </span>
+    <span>{{ origin()[1] }}</span>
+  </div>
 </div>

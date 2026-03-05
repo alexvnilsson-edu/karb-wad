@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { WadElement } from './element';
 import { LineWadModel } from '../elements/line';
 import { RenderService } from './render.service';
@@ -7,13 +15,13 @@ import { RenderService } from './render.service';
   selector: '[wad-line]',
   template: ``,
   host: {
-    "[attr.x1]": "x1$()",
-    "[attr.y1]": "y1$()",
-    "[attr.x2]": "x2$()",
-    "[attr.y2]": "y2$()",
-    "[attr.length]": "length$()"
+    '[attr.x1]': 'x1$()',
+    '[attr.y1]': 'y1$()',
+    '[attr.x2]': 'x2$()',
+    '[attr.y2]': 'y2$()',
+    '[attr.length]': 'length$()',
   },
-  standalone: false
+  standalone: false,
 })
 export class LineWadElement extends WadElement<LineWadModel> {
   x1$ = linkedSignal(() => this.getElement()?.start[0] ?? 0);
@@ -25,6 +33,6 @@ export class LineWadElement extends WadElement<LineWadModel> {
   length$ = linkedSignal(() => {
     const dx = this.x2$() - this.x1$();
     const dy = this.y2$() - this.y1$();
-    return Math.sqrt((dx ** 2) + (dy ** 2));
+    return Math.sqrt(dx ** 2 + dy ** 2);
   });
 }
