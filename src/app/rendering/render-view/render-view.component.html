@@ -80,26 +80,26 @@
 
       @for (entry of elements(); track entry[1].id) {
         @let model = entry[1];
-        @switch (element.type.toLowerCase()) {
+        @switch (model.type.toLowerCase()) {
           @case ('rectangle') {
             <polygon
               wad-rectangle
-              [model]="model"
+              [elementModel]="model"
               (elementClick)="elementClick($event)"
             ></polygon>
           }
           @case ('triangle') {
             <polygon
               wad-triangle
-              [model]="model"
+              [elementModel]="model"
               (elementClick)="elementClick($event)"
             ></polygon>
           }
           @case ('circle') {
-            <circle wad-circle [model]="model" (elementClick)="elementClick($event)"></circle>
+            <circle wad-circle [elementModel]="model" (elementClick)="elementClick($event)"></circle>
           }
           @case ('line') {
-            <line wad-line [model]="model" (elementClick)="elementClick($event)"></line>
+            <line wad-line [elementModel]="model" (elementClick)="elementClick($event)"></line>
           }
         }
       }
