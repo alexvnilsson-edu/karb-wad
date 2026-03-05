@@ -1,18 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  HostBinding,
-  inject,
-  model,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { WadCommandService } from '../commands/command.service';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
+import { Coordinate } from '../../rendering/coordinate.type';
+import { WadCommandService } from '../commands/command.service';
 import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
-import { Coordinate } from '../../rendering/coordinate';
 
 @Component({
   selector: 'wad-command-input',

@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+/* eslint-disable @angular-eslint/prefer-standalone */
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: '[wad-system-line]',

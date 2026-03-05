@@ -1,4 +1,4 @@
-import { Coordinate, createCoordinate } from './coordinate';
+import { Coordinate, createCoordinate } from './coordinate.type';
 import { WadModel } from './model';
 
 export class LineWadModel extends WadModel {

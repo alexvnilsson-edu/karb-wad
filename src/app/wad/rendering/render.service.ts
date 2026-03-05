@@ -1,7 +1,7 @@
-import { inject, Injectable, linkedSignal, output, Signal, signal } from '@angular/core';
-import { Coordinate, createCoordinate } from './coordinate';
-import { CanvasClickEvent } from './canvas-click.event';
+import { inject, Injectable, linkedSignal, signal } from '@angular/core';
 import { WadCommandService } from '../cli/commands/command.service';
+import { CanvasClickEvent } from './canvas-click.event';
+import { Coordinate, createCoordinate } from './coordinate.type';
 
 @Injectable({ providedIn: 'root' })
 export class RenderService {
@@ -52,7 +52,7 @@ export class RenderService {
     return createCoordinate(x, y);
   }
 
-  setCoord(coord: Coordinate, canvasian: boolean = true) {
+  setCoord(coord: Coordinate, canvasian = true) {
     this._coord.set(canvasian ? this.translateCoordinate(coord) : coord);
   }
 

@@ -1,10 +1,9 @@
-import { signal } from '@angular/core';
-import { WadCommandService } from './command.service';
-import { WadCommand } from './command';
+import { createCoordinate } from '../../rendering/coordinate.type';
 import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
-import { createCoordinate } from '../../rendering/coordinate';
-import { WadCommandExecutorResult } from './command-executor-result';
 import { CoordinatesArgumentType } from './argument-types/coordinate.argument-type';
+import { WadCommand } from './command';
+import { WadCommandExecutorResult } from './command-executor-result';
+import { WadCommandService } from './command.service';
 
 describe('CommandService', () => {
   let service: WadCommandService;

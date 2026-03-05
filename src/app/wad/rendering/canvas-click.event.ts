@@ -1,4 +1,4 @@
-import { Coordinate, createCoordinate } from './coordinate';
+import { Coordinate, createCoordinate } from './coordinate.type';
 
 export class CanvasClickEvent {
   coordinates!: Coordinate;

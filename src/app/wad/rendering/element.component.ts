@@ -1,17 +1,10 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  computed,
-  inject,
-  input,
-  linkedSignal,
-  output,
-  signal,
-} from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+/* eslint-disable @angular-eslint/prefer-standalone */
+
+import { ChangeDetectorRef, Component, inject, input, linkedSignal, output } from '@angular/core';
+import { WadElementClickEvent } from './element-click.event';
 import { WadModel } from './model';
 import { RenderService } from './render.service';
-import { ElementService } from './element.service';
-import { WadElementClickEvent } from './element-click.event';
 
 @Component({
   selector: '[wad-base]',
@@ -20,37 +13,33 @@ import { WadElementClickEvent } from './element-click.event';
     fill: 'none',
     '[attr.stroke-width]': 'strokeWidth$()',
     '[attr.stroke]': 'stroke$()',
-    '(click)': 'click($event)',
+    '(click)': 'click()',
   },
   standalone: false,
 })
-export class WadElement<TElement extends WadModel> {
+export class WadElement<TModel extends WadModel> {
   protected changeDetection = inject(ChangeDetectorRef);
   protected rendering = inject(RenderService);
 
-  element = input.required<WadModel>();
+  model = input.required<TModel>();
 
   elementClick = output<WadElementClickEvent>();
 
-  isFocused$ = linkedSignal(() => this.element()?.isFocused ?? false);
+  isFocused$ = linkedSignal(() => this.model()?.isFocused ?? false);
 
   strokeWidth$ = linkedSignal(() => 2);
 
   stroke$ = linkedSignal(() => (this.isFocused$() ? 'rgb(255, 255, 255)' : 'rgb(200, 200, 200)'));
 
-  protected click(event: MouseEvent) {
-    console.debug(`Element ${this.element()?.id || 'unknown id'} was clicked.`);
+  protected click() {
+    console.debug(`Element ${this.model()?.id || 'unknown id'} was clicked.`);
 
-    if (this.element()) {
-      const eventData: WadElementClickEvent = { element: this.element()! };
+    if (this.model()) {
+      const eventData: WadElementClickEvent = { element: this.model()! };
       console.debug(`Emitting event elementClick with data: `, eventData);
       this.elementClick.emit(eventData);
     }
 
     this.changeDetection.markForCheck();
-  }
-
-  protected getElement(): TElement {
-    return this.element() as TElement;
   }
 }

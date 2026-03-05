@@ -1,7 +1,6 @@
-import { signal } from '@angular/core';
-import { RenderService } from './render.service';
-import { createCoordinate } from './coordinate';
 import { TestBed } from '@angular/core/testing';
+import { createCoordinate } from './coordinate.type';
+import { RenderService } from './render.service';
 
 describe('RenderService', () => {
   let service: RenderService;

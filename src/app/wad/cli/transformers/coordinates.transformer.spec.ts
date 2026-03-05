@@ -1,4 +1,4 @@
-import { createCoordinate } from '../../rendering/coordinate';
+import { createCoordinate } from '../../rendering/coordinate.type';
 import { CoordinatesTransformer } from './coordinates.transformer';
 
 describe('WadCoordinatesTransformer', () => {

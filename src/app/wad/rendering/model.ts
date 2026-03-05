@@ -1,11 +1,10 @@
-import { Coordinate } from './coordinate';
 import { nanoid } from 'nanoid';
 
 export class WadModel {
   id!: string;
   type!: string;
 
-  isFocused: boolean = false;
+  isFocused = false;
 
   constructor(type: string) {
     this.id = this.generateId();

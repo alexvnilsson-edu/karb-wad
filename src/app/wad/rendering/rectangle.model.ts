@@ -1,4 +1,4 @@
-import { Coordinate, createCoordinate } from './coordinate';
+import { Coordinate } from './coordinate.type';
 import { WadModel } from './model';
 
 export class RectangleWadModel extends WadModel {
@@ -15,7 +15,7 @@ export class RectangleWadModel extends WadModel {
     this.d = d;
   }
 
-  getCoordinates(): Array<Coordinate> {
+  getCoordinates(): Coordinate[] {
     return [this.a, this.b, this.c, this.d];
   }
 }

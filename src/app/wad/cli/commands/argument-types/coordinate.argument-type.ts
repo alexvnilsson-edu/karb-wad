@@ -1,7 +1,6 @@
-import { Coordinate } from 'app/wad/rendering/coordinate';
 import { CoordinatesTransformer } from 'app/wad/cli/transformers/coordinates.transformer';
+import { Coordinate } from 'app/wad/rendering/coordinate.type';
 import { ArgumentType } from './argument-type';
-import { Transformer } from '../../transformers/transformer';
 
 export class CoordinatesArgumentType extends ArgumentType<Coordinate> {
   override transformer = new CoordinatesTransformer();

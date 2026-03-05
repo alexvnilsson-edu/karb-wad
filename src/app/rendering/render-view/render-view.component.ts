@@ -6,8 +6,8 @@ import {
   linkedSignal,
   SimpleChanges,
 } from '@angular/core';
-import { RectangleWadElement } from 'app/wad/rendering/rectangle';
-import { createCoordinate } from '../../wad/rendering/coordinate';
+import { RectangleWadElement } from 'app/wad/rendering/rectangle.component';
+import { createCoordinate } from '../../wad/rendering/coordinate.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { ElementService } from '../../wad/rendering/element.service';
 import { RenderService } from '../../wad/rendering/render.service';

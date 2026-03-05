@@ -1,20 +1,20 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import { WadElement } from './rendering/element';
+import { WadElement } from './rendering/element.component';
 
-import { CircleleWadElement } from './rendering/circle';
-import { RectangleWadElement } from './rendering/rectangle';
-import { TriangleWadElement } from './rendering/triangle';
-import { LineWadElement } from './rendering/line';
+import { CircleleWadElement } from './rendering/circle.component';
+import { LineWadElement } from './rendering/line.component';
+import { RectangleWadElement } from './rendering/rectangle.component';
+import { TriangleWadElement } from './rendering/triangle.component';
 
 import { LineWadSystemElement } from './rendering/system/line';
 import { TextWadSystemElement } from './rendering/system/text';
 
 import { CommandInput } from './cli/command-input/command-input';
 
+import { FormsModule } from '@angular/forms';
 import { ElementService } from './rendering/element.service';
 import { RenderService } from './rendering/render.service';
-import { FormsModule } from '@angular/forms';
 
 const ELEMENTS = [
   WadElement,

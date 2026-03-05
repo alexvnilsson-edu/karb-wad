@@ -1,3 +1,5 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="flex-1 flex flex-row items-stretch">
   <div id="renderViewContainer" class="flex-4 bg-black flex items-stretch">
     <svg
@@ -77,27 +79,27 @@
       </text>
 
       @for (entry of elements(); track entry[1].id) {
-        @let element = entry[1];
+        @let model = entry[1];
         @switch (element.type.toLowerCase()) {
           @case ('rectangle') {
             <polygon
               wad-rectangle
-              [element]="element"
+              [model]="model"
               (elementClick)="elementClick($event)"
             ></polygon>
           }
           @case ('triangle') {
             <polygon
               wad-triangle
-              [element]="element"
+              [model]="model"
               (elementClick)="elementClick($event)"
             ></polygon>
           }
           @case ('circle') {
-            <circle wad-circle [element]="element" (elementClick)="elementClick($event)"></circle>
+            <circle wad-circle [model]="model" (elementClick)="elementClick($event)"></circle>
           }
           @case ('line') {
-            <line wad-line [element]="element" (elementClick)="elementClick($event)"></line>
+            <line wad-line [model]="model" (elementClick)="elementClick($event)"></line>
           }
         }
       }

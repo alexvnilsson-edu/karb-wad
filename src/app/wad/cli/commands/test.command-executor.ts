@@ -1,8 +1,8 @@
+import { createCoordinate } from 'app/wad/rendering/coordinate.type';
 import { ElementService } from 'app/wad/rendering/element.service';
+import { RectangleWadModel } from 'app/wad/rendering/rectangle.model';
 import { WadCommand } from './command';
 import { WadCommandExecutorResult } from './command-executor-result';
-import { createCoordinate } from 'app/wad/rendering/coordinate';
-import { RectangleWadModel } from 'app/wad/rendering/rectangle.model';
 
 export function testCommandExecutor(command: WadCommand, elementService: ElementService) {
   const rounds = 10;

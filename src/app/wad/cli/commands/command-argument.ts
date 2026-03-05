@@ -1,5 +1,3 @@
-import { Coordinate } from 'app/wad/rendering/coordinate';
-import { Transformer } from '../transformers/transformer';
 import { ArgumentType } from './argument-types/argument-type';
 
 export class WadCommandArgument<T> {

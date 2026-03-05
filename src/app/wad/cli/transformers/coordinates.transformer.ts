@@ -1,16 +1,8 @@
-import { Coordinate, createCoordinate } from '../../rendering/coordinate';
+import { Coordinate, createCoordinate } from '../../rendering/coordinate.type';
 import { Transformer } from './transformer';
 
 export class CoordinatesTransformer extends Transformer<Coordinate> {
   private separator = '..';
-
-  constructor() {
-    super('coordinates');
-  }
-
-  static create() {
-    return new CoordinatesTransformer();
-  }
 
   override transform(value: string): Coordinate {
     if (!value.includes(this.separator)) {

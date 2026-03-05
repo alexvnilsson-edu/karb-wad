@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { Coordinate } from '../../../wad/rendering/coordinate';
+import { Component, computed, input } from '@angular/core';
+import { Coordinate } from '../../../wad/rendering/coordinate.type';
 
 @Component({
   selector: 'svg[render-view-canvas]',
