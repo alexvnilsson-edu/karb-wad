@@ -21,7 +21,9 @@ export class WadElement<TModel extends WadModel> {
   protected changeDetection = inject(ChangeDetectorRef);
   protected rendering = inject(RenderService);
 
-  model = input.required<TModel>();
+  elementModel = input.required<WadModel>();
+
+  model = linkedSignal<TModel>(() => this.elementModel() as TModel);
 
   elementClick = output<WadElementClickEvent>();
 
