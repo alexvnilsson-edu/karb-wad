@@ -10,13 +10,7 @@ import { ElementService } from 'app/wad/elements/element.service';
 import { LineWadModel } from 'app/wad/elements/line';
 import { CoordinatesArgumentType } from './argument-types/coordinate.argument-type';
 import { NumberArgumentType } from './argument-types/number.argument-type';
-
-interface CommandConfig {
-  name: string;
-  alias: Array<string>;
-  executor: Function;
-}
-type CommandConfigCollection = Array<CommandConfig>;
+import { testCommandExecutor } from './test.command-executor';
 
 export function configureCommands(
   commandService: WadCommandService,
@@ -50,7 +44,7 @@ export function configureCommands(
 
     function registerHelpCommand() {
       const command = new WadCommand('help', new Set(['h', 'hjälp']));
-      command.executor = (command) => {
+      command.executor = () => {
         const commands = Array.from(commandService.commands.keys()).filter(
           (c) => c.toLowerCase() !== 'help',
         );
@@ -67,8 +61,8 @@ export function configureCommands(
       command.registerArgument('end', new CoordinatesArgumentType());
       command.executor = (command) => {
         try {
-          const [startX, startY] = command.arguments.get('start')?.value;
-          const [endX, endY] = command.arguments.get('end')?.value;
+          const [startX, startY] = command.arguments.get('start')?.value ?? [undefined, undefined];
+          const [endX, endY] = command.arguments.get('end')?.value ?? [undefined, undefined];
           const element = new LineWadModel(startX, startY, endX, endY);
           elementService.add(element);
 
@@ -105,6 +99,12 @@ export function configureCommands(
       commandService.registerCommand(command);
     },
 
+    function registerTestCommand() {
+      const command = new WadCommand('test');
+      command.executor = () => testCommandExecutor(command, elementService);
+      commandService.registerCommand(command);
+    },
+
     function registerTriangleCommand() {
       const command = new WadCommand('triangle', new Set(['tri', 'triangel', 'trekant']));
       command.registerArgument('a', new CoordinatesArgumentType());
@@ -127,7 +127,5 @@ export function configureCommands(
     },
   ];
 
-  for (const registrationFunction of registrationFunctions) {
-    registrationFunction();
-  }
+  registrationFunctions.forEach(func => func());
 }
