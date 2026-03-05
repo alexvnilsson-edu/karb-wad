@@ -8,10 +8,10 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { WadModel } from '../elements/model';
+import { WadModel } from './model';
 import { RenderService } from './render.service';
-import { ElementService } from '../elements/element.service';
-import { WadElementClickEvent } from '../elements/element-click.event';
+import { ElementService } from './element.service';
+import { WadElementClickEvent } from './element-click.event';
 
 @Component({
   selector: '[wad-base]',

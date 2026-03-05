@@ -3,7 +3,7 @@ import { WadModule } from './wad/wad.module';
 import { RenderViewComponent } from './rendering/render-view/render-view.component';
 import { configureCommands } from './wad/cli/commands/command-config';
 import { WadCommandService } from './wad/cli/commands/command.service';
-import { ElementService } from './wad/elements/element.service';
+import { ElementService } from './wad/rendering/element.service';
 
 @Component({
   selector: 'app-root',

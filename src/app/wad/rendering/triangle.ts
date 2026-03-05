@@ -1,6 +1,6 @@
 import { Component, computed, inject, linkedSignal } from '@angular/core';
 import { WadElement } from './element';
-import { TriangleWadModel } from '../elements/triangle';
+import { TriangleWadModel } from './triangle.model';
 import { createCoordinate } from './coordinate';
 
 @Component({

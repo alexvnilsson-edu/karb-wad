@@ -1,14 +1,20 @@
-import { afterEveryRender, afterNextRender, Component, ElementRef, inject, linkedSignal, SimpleChanges } from '@angular/core';
-import { ElementService } from '../../wad/elements/element.service';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  inject,
+  linkedSignal,
+  SimpleChanges,
+} from '@angular/core';
+import { RectangleWadElement } from 'app/wad/rendering/rectangle';
+import { createCoordinate } from '../../wad/rendering/coordinate';
+import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
+import { ElementService } from '../../wad/rendering/element.service';
 import { RenderService } from '../../wad/rendering/render.service';
 import { WadModule } from '../../wad/wad.module';
-import { RenderViewStatusComponent } from './render-view-status/render-view-status.component';
-import { createCoordinate } from '../../wad/rendering/coordinate';
-import { RenderViewSidebarComponent } from './render-view-sidebar/render-view-sidebar.component';
-import { WadElementClickEvent } from '../../wad/elements/element-click.event';
 import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
-import { WadElement } from 'app/wad/rendering/element';
-import { RectangleWadElement } from 'app/wad/rendering/rectangle';
+import { RenderViewSidebarComponent } from './render-view-sidebar/render-view-sidebar.component';
+import { RenderViewStatusComponent } from './render-view-status/render-view-status.component';
 
 @Component({
   selector: 'app-render-view',
@@ -36,9 +42,8 @@ export class RenderViewComponent {
   private measureStart?: number;
 
   ngOnChanges(changes: SimpleChanges<RectangleWadElement>) {
-    console.debug("ngOnChanges");
+    console.debug('ngOnChanges');
     this.measureStart = Date.now();
-
   }
 
   elementClick(event: WadElementClickEvent) {

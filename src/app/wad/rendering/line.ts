@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { WadElement } from './element';
-import { LineWadModel } from '../elements/line';
+import { LineWadModel } from './line.model';
 import { RenderService } from './render.service';
 
 @Component({

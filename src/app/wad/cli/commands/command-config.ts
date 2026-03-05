@@ -1,15 +1,15 @@
-import { CircleWadModel } from 'app/wad/elements/circle';
-import { WadCommand } from './command';
-import { WadCommandService } from './command.service';
+import { CircleWadModel } from 'app/wad/rendering/circle.model';
+import { ElementService } from 'app/wad/rendering/element.service';
+import { LineWadModel } from 'app/wad/rendering/line.model';
+import { RectangleWadModel } from 'app/wad/rendering/rectangle.model';
+import { TriangleWadModel } from 'app/wad/rendering/triangle.model';
 import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
 import { NumberTransformer } from '../transformers/number.transformer';
-import { WadCommandExecutorResult } from './command-executor-result';
-import { RectangleWadModel } from 'app/wad/elements/rectangle';
-import { TriangleWadModel } from 'app/wad/elements/triangle';
-import { ElementService } from 'app/wad/elements/element.service';
-import { LineWadModel } from 'app/wad/elements/line';
 import { CoordinatesArgumentType } from './argument-types/coordinate.argument-type';
 import { NumberArgumentType } from './argument-types/number.argument-type';
+import { WadCommand } from './command';
+import { WadCommandExecutorResult } from './command-executor-result';
+import { WadCommandService } from './command.service';
 import { testCommandExecutor } from './test.command-executor';
 
 export function configureCommands(
@@ -127,5 +127,5 @@ export function configureCommands(
     },
   ];
 
-  registrationFunctions.forEach(func => func());
+  registrationFunctions.forEach((func) => func());
 }

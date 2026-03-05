@@ -1,7 +1,4 @@
-import { inject, signal, WritableSignal } from '@angular/core';
-import { Coordinate, createCoordinate } from '../rendering/coordinate';
 import { WadModel } from './model';
-import { RenderService } from '../rendering/render.service';
 
 export class CircleWadModel extends WadModel {
   x!: number;

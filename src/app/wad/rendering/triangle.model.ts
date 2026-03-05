@@ -1,4 +1,4 @@
-import { Coordinate, createCoordinate } from '../rendering/coordinate';
+import { Coordinate } from './coordinate';
 import { WadModel } from './model';
 
 export class TriangleWadModel extends WadModel {
@@ -13,7 +13,7 @@ export class TriangleWadModel extends WadModel {
     this.c = c;
   }
 
-  getCoordinates(): Array<Coordinate> {
+  getCoordinates(): Coordinate[] {
     return [this.a, this.b, this.c];
   }
 }

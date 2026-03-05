@@ -12,7 +12,7 @@ import { TextWadSystemElement } from './rendering/system/text';
 
 import { CommandInput } from './cli/command-input/command-input';
 
-import { ElementService } from './elements/element.service';
+import { ElementService } from './rendering/element.service';
 import { RenderService } from './rendering/render.service';
 import { FormsModule } from '@angular/forms';
 

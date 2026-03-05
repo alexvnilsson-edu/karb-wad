@@ -1,4 +1,4 @@
-import { Coordinate } from '../rendering/coordinate';
+import { Coordinate } from './coordinate';
 import { nanoid } from 'nanoid';
 
 export class WadModel {

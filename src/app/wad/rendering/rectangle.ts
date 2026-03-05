@@ -1,6 +1,6 @@
 import { Component, computed, linkedSignal } from '@angular/core';
 import { WadElement } from './element';
-import { RectangleWadModel } from '../elements/rectangle';
+import { RectangleWadModel } from './rectangle.model';
 import { createCoordinate } from './coordinate';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, computed, Inject, inject, linkedSignal } from '@angular/core';
 import { WadElement } from './element';
-import { CircleWadModel } from '../elements/circle';
+import { CircleWadModel } from './circle.model';
 import { createCoordinate } from './coordinate';
 import { RenderService } from './render.service';
 
