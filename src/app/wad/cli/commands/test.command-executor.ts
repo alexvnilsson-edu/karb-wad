@@ -1,10 +1,11 @@
+import { CircleWadModel } from 'app/wad/rendering/circle.model';
 import { createCoordinate } from 'app/wad/rendering/coordinate.type';
 import { ElementService } from 'app/wad/rendering/element.service';
 import { RectangleWadModel } from 'app/wad/rendering/rectangle.model';
 import { WadCommand } from './command';
 import { WadCommandExecutorResult } from './command-executor-result';
 
-export function testCommandExecutor(command: WadCommand, elementService: ElementService) {
+export function testRectanglesCommandExecutor(command: WadCommand, elementService: ElementService) {
   const rounds = 10;
   const results: number[] = [];
 
@@ -28,6 +29,29 @@ export function testCommandExecutor(command: WadCommand, elementService: Element
           createCoordinate(x + length, y),
         ),
       );
+    }
+  }
+
+  return new WadCommandExecutorResult(true, '');
+}
+
+export function testCirclesCommandExecutor(command: WadCommand, elementService: ElementService) {
+  const rounds = 10;
+  const results: number[] = [];
+
+  for (const [_id, element] of elementService.elements()) {
+    elementService.remove(element);
+  }
+
+  const start = Date.now();
+  const squareRoot = 48;
+  const length = 10;
+  for (let row = 1; row <= squareRoot; row++) {
+    const x = 10 + 10 * row;
+    for (let col = 1; col <= squareRoot; col++) {
+      const y = 10 + 10 * col;
+
+      elementService.add(new CircleWadModel(x, y, 5));
     }
   }
 

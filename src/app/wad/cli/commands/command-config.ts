@@ -10,7 +10,7 @@ import { NumberArgumentType } from './argument-types/number.argument-type';
 import { WadCommand } from './command';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { WadCommandService } from './command.service';
-import { testCommandExecutor } from './test.command-executor';
+import { testCirclesCommandExecutor, testRectanglesCommandExecutor } from './test.command-executor';
 
 export function configureCommands(
   commandService: WadCommandService,
@@ -100,8 +100,14 @@ export function configureCommands(
     },
 
     function registerTestCommand() {
-      const command = new WadCommand('test');
-      command.executor = () => testCommandExecutor(command, elementService);
+      const command = new WadCommand('test-rectangles');
+      command.executor = () => testRectanglesCommandExecutor(command, elementService);
+      commandService.registerCommand(command);
+    },
+
+    function registerTestCirclesCommand() {
+      const command = new WadCommand('test-circles');
+      command.executor = () => testCirclesCommandExecutor(command, elementService);
       commandService.registerCommand(command);
     },
 
