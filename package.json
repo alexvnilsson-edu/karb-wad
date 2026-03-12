@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:github-pages": "ng build --configuration production --base-href 'https://alexvnilsson-edu.github.io/karb-wad'",
+    "deploy:github-pages": "ng deploy --base-href=/karb-wad",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:wad": "node dist/wad/server/server.mjs",
