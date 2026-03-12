@@ -5,7 +5,6 @@ import { ElementService } from '../../wad/rendering/element.service';
 import { RenderService } from '../../wad/rendering/render.service';
 import { WadModule } from '../../wad/wad.module';
 import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
-import { RenderViewSidebarComponent } from './render-view-sidebar/render-view-sidebar.component';
 import { RenderViewStatusComponent } from './render-view-status/render-view-status.component';
 
 @Component({
@@ -14,7 +13,7 @@ import { RenderViewStatusComponent } from './render-view-status/render-view-stat
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [WadModule, RenderViewCanvas, RenderViewStatusComponent, RenderViewSidebarComponent],
+  imports: [WadModule, RenderViewCanvas, RenderViewStatusComponent],
 })
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);
