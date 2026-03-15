@@ -12,6 +12,8 @@ export class RenderService {
 
   private _height = signal(0);
 
+  private _scale = signal(1.0);
+
   private _area = signal([0, 0]);
 
   readonly actualCoord = this._coord.asReadonly();
@@ -19,6 +21,7 @@ export class RenderService {
   readonly origin = this._origin.asReadonly();
 
   readonly height = this._height.asReadonly();
+  readonly scale = this._scale.asReadonly();
   readonly area = this._area.asReadonly();
 
   canvasClick(x: number, y: number) {
@@ -73,7 +76,11 @@ export class RenderService {
   }
 
   setHeight(height: number) {
-    this._height.update((h) => (h = height));
+    this._height.set(height);
+  }
+
+  setScale(scale: number) {
+    this._scale.set(scale);
   }
 
   setArea(width: number, height: number) {
