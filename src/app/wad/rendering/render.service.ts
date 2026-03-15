@@ -1,4 +1,6 @@
-import { Injectable, linkedSignal, signal } from '@angular/core';
+import { inject, Injectable, linkedSignal, signal } from '@angular/core';
+import { WadCommandService } from '../cli/commands/command.service';
+import { CanvasClickEvent } from './canvas-click.event';
 import { Coordinates, createCoordinates } from './coordinate.type';
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +14,8 @@ export class WadRenderService {
 
   private _area = signal([0, 0]);
 
+  commandService = inject(WadCommandService);
+
   readonly actualCoord = this._coord.asReadonly();
   readonly coord = linkedSignal(() => this.getCoord());
   readonly origin = this._origin.asReadonly();
@@ -22,7 +26,7 @@ export class WadRenderService {
 
   canvasClick(x: number, y: number) {
     const [offsetX, offsetY] = this.computeOffsetCoords(x, y);
-    // this.commandService.canvasClick.next(new CanvasClickEvent(offsetX, offsetY));
+    this.commandService.canvasClick.next(new CanvasClickEvent(offsetX, offsetY));
   }
 
   translateCoordinate(
