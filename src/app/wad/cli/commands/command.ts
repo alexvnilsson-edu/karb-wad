@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 import { WadCommandArgument } from './command-argument';
 import { WadCommandResult } from './command-result';
 import { WadCommandExecutor } from './command-executor.type';
@@ -14,7 +13,7 @@ export class WadCommand {
 
   result!: WadCommandResult;
 
-  constructor(name: string, alias: Set<string> = new Set()) {
+  constructor(name: string, alias = new Set<string>()) {
     this.name = name;
     this.alias = alias;
   }

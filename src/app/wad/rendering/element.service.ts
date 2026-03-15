@@ -1,14 +1,9 @@
 import {
-  computed,
-  effect,
   Injectable,
   linkedSignal,
-  Signal,
   signal,
-  WritableSignal,
 } from '@angular/core';
 import { WadModel } from './model';
-import { filter, from, map } from 'rxjs';
 
 type WadModelMap = Map<string, WadModel>;
 type WadModelCollection = Record<string, WadModel>;

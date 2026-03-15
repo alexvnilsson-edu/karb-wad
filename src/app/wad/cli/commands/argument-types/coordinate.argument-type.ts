@@ -4,7 +4,7 @@ import { ArgumentType } from './argument-type';
 
 export class CoordinatesArgumentType extends ArgumentType<Coordinate> {
   override transformer = new CoordinatesTransformer();
-  override help: string = 'n..n (example: 100..20)';
+  override help = 'n..n (example: 100..20)';
 
   constructor() {
     super('coordinates');

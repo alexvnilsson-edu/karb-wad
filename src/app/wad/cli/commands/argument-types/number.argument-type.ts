@@ -4,7 +4,7 @@ import { ArgumentType } from './argument-type';
 
 export class NumberArgumentType extends ArgumentType<number> {
   override transformer: Transformer<number> = new NumberTransformer();
-  override help: string = 'n (example: 1.56)';
+  override help = 'n (example: 1.56)';
 
   constructor() {
     super('number');

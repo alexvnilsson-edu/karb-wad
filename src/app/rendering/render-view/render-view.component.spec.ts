@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RenderViewComponent } from './render-view.component';
 import { RectangleWadModel } from 'app/wad/elements/rectangle';
 import { createCoordinate } from 'app/wad/rendering/coordinate';
 import { ElementService } from 'app/wad/elements/element.service';

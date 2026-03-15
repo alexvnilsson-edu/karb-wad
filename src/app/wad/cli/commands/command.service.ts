@@ -1,7 +1,6 @@
-import { Injectable, linkedSignal, signal, WritableSignal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { WadCommand } from './command';
 import { Transformer } from '../transformers/transformer';
-import { WadCommandArgument } from './command-argument';
 import { Subject } from 'rxjs';
 import { CanvasClickEvent } from '../../rendering/canvas-click.event';
 
