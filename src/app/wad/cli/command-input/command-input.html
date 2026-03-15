@@ -14,6 +14,24 @@
       }
     }
 
+    @if (commandPreview$()) {
+      @let command = commandPreview$();
+      <p class="p-1 mb-2 text-gray-200">
+        <span>Usage:&nbsp;</span>
+        <strong>{{ command!.name }}</strong>
+        <span>&nbsp;</span>
+        @for (entry of command!.arguments; track entry[0]) {
+          @let argument = entry[1];
+          <span
+            >&lt;{{ argument.description }}: {{ argument.type.description }} ({{
+              argument.type.example
+            }})&gt;</span
+          >
+          <span>&nbsp;</span>
+        }
+      </p>
+    }
+
     <input
       #commandInput
       type="text"
@@ -21,8 +39,8 @@
       [attr.placeholder]="inputPlaceholder$()"
       spellcheck="false"
       [(ngModel)]="command"
-      (keyup.enter)="enter()"
-      (input)="input()"
+      (keyup.enter)="onEnterKeyup()"
+      (input)="onInput()"
       (focus)="onFocus($event)"
       (blur)="onBlur($event)"
     />

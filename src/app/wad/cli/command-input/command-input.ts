@@ -1,6 +1,14 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/prefer-standalone */
-import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  linkedSignal,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
 import { Coordinate } from '../../rendering/coordinate.type';
 import { WadCommandService } from '../commands/command.service';
@@ -27,7 +35,7 @@ export class CommandInput {
   showResult$ = signal(false);
   message$ = signal('');
 
-  isInputting = () => this.command !== '';
+  isInputting = () => this.command.length > 0;
 
   inputPlaceholder$ = computed(() =>
     this.inFocus$() ? 'Type help for a list of commands' : `Press [Enter] to focus command window`,
@@ -36,6 +44,15 @@ export class CommandInput {
   commandInput = viewChild<ElementRef<HTMLInputElement>>('commandInput');
 
   command = '';
+
+  commandPreviewName$ = signal('');
+  commandPreview$ = linkedSignal(() => {
+    if (this.commandPreviewName$()) {
+      return this.commandService.find(this.commandPreviewName$());
+    }
+
+    return undefined;
+  });
 
   constructor() {
     this.commandService.canvasClick.subscribe((event) => this.canvasClick(event));
@@ -51,7 +68,26 @@ export class CommandInput {
     }
   }
 
-  enter() {
+  onInput() {
+    this.reset();
+
+    if (this.command.length > 0) {
+      const args = this.command.split(' ');
+      if (args.length > 1) {
+        const commandName = args[0];
+        const command = this.commandService.find(commandName);
+        if (command) {
+          this.commandPreviewName$.set(commandName);
+        } else {
+          this.commandPreviewName$.set('');
+        }
+      } else {
+        this.commandPreviewName$.set('');
+      }
+    }
+  }
+
+  onEnterKeyup() {
     try {
       const command = this.commandService.interpret(this.command);
       const result = command.execute();
@@ -105,5 +141,6 @@ export class CommandInput {
 
   protected resetCommand() {
     this.command = '';
+    this.commandPreviewName$.set('');
   }
 }
