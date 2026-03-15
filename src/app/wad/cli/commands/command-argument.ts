@@ -2,12 +2,14 @@ import { ArgumentType } from './argument-types/argument-type';
 
 export class WadCommandArgument<T> {
   name!: string;
+  description!: string;
   type!: ArgumentType<T>;
 
   private _value!: string;
 
-  constructor(name: string, type: ArgumentType<T>) {
+  constructor(name: string, description: string, type: ArgumentType<T>) {
     this.name = name;
+    this.description = description;
     this.type = type;
   }
 

@@ -1,0 +1,6 @@
+<div>
+  @for (entry of log$(); track entry[0]) {
+    @let message = entry[1];
+    <p>{{ message }}</p>
+  }
+</div>

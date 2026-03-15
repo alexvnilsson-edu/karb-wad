@@ -1,24 +1,26 @@
-import { Injectable } from '@angular/core';
-import { WadCommand } from './command';
-import { Transformer } from '../transformers/transformer';
+import { Injectable, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CanvasClickEvent } from '../../rendering/canvas-click.event';
+import { Transformer } from '../transformers/transformer';
+import { WadCommand } from './command';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WadCommandService {
   private _commands = new Map<string, WadCommand>();
-  private _transformers = new Map<string, Transformer<any>>();
+  private _transformers = new Map<string, Transformer<unknown>>();
+
+  private _log = signal<string[]>([]);
 
   readonly commands = this._commands;
   readonly transformers = this._transformers;
 
+  readonly log = this._log.asReadonly();
+
   canvasClick = new Subject<CanvasClickEvent>();
 
-  constructor() {}
-
-  register(name: string, args: any[]) {
+  register(name: string, args: unknown[]) {
     const command = new WadCommand(name);
     this._commands.set(name, command);
   }
@@ -63,8 +65,13 @@ export class WadCommandService {
     if (argsPostName.length !== command.arguments.size) {
       const argSyntax = Array.from(command.arguments.values())
         .map((a) => {
-          const [name, help] = [a.name, a.type.help];
-          return `<${name} (example: ${help})>`;
+          const [name, description, typeDescription, typeExample] = [
+            a.name,
+            a.description,
+            a.type.description,
+            a.type.example,
+          ];
+          return `${name} <${description}: ${typeDescription} (${typeExample}]>`;
         })
         .join(' ');
       throw new Error(`Syntax error. Expected: ${commandName} ${argSyntax}`);
@@ -89,5 +96,12 @@ export class WadCommandService {
     }
 
     command!.execute();
+  }
+
+  writeLog(message: string) {
+    this._log.update((log) => {
+      log.push(message);
+      return log;
+    });
   }
 }

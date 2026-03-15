@@ -3,7 +3,8 @@ import { Transformer } from 'app/wad/cli/transformers/transformer';
 export abstract class ArgumentType<T> {
   type!: string;
   abstract transformer: Transformer<T>;
-  abstract help: string;
+  abstract description: string;
+  abstract example: string;
 
   /**
    * Construct ArgumentType class.
