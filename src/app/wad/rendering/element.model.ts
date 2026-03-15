@@ -1,6 +1,8 @@
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 const ELEMENT_MODEL_ID_SIZE = 8;
+const ELEMENT_MODEL_ID_ALPHABET = 'abcdef0123456789';
+const ELEMENT_MODEL_ID_GENERATOR = customAlphabet(ELEMENT_MODEL_ID_ALPHABET, ELEMENT_MODEL_ID_SIZE);
 
 export class WadElementModel {
   id!: string;
@@ -22,6 +24,6 @@ export class WadElementModel {
   }
 
   private generateId(): string {
-    return nanoid(ELEMENT_MODEL_ID_SIZE);
+    return ELEMENT_MODEL_ID_GENERATOR(ELEMENT_MODEL_ID_SIZE);
   }
 }
