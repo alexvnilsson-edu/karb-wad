@@ -1,4 +1,12 @@
-import { afterNextRender, Component, ElementRef, inject, linkedSignal } from '@angular/core';
+import { NgClass } from '@angular/common';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  inject,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { ElementsContainer } from 'app/wad/rendering/elements.container';
 import { createCoordinate } from '../../wad/rendering/coordinate.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
@@ -14,7 +22,7 @@ import { RenderViewStatusComponent } from './render-view-status/render-view-stat
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [WadModule, RenderViewCanvas, RenderViewStatusComponent, ElementsContainer],
+  imports: [WadModule, RenderViewCanvas, RenderViewStatusComponent, ElementsContainer, NgClass],
 })
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);
@@ -29,7 +37,13 @@ export class RenderViewComponent {
   readonly origin$ = linkedSignal(() => this.renderService.origin());
   readonly area$ = linkedSignal(() => this.renderService.area());
 
-  private isMouseDown = false;
+  readonly scale$ = linkedSignal(() => this.renderService.scale() / 100);
+
+  private _isPointerDown = signal(false);
+  private _isPanning = signal(false);
+
+  readonly isMouseDown = this._isPointerDown.asReadonly();
+  readonly isPanning = this._isPanning.asReadonly();
 
   elementClick(event: WadElementClickEvent) {
     console.debug(`Element clicked: ${event.element.id}`, event);
@@ -60,26 +74,39 @@ export class RenderViewComponent {
     return container;
   }
 
-  mousedown(event: MouseEvent) {
-    this.isMouseDown = true;
+  pointerdown() {
+    this._isPointerDown.set(true);
   }
 
-  mouseup(event: MouseEvent) {
-    this.isMouseDown = false;
+  pointerup() {
+    this._isPointerDown.set(false);
+    this._isPanning.set(false);
   }
 
-  mousemove(event: MouseEvent) {
+  pointermove(event: PointerEvent) {
     this.renderService.setCoord(createCoordinate(event.offsetX, event.offsetY));
 
-    if (this.isMouseDown) {
+    if (this.isMouseDown()) {
+      this._isPanning.set(true);
+    }
+
+    if (this.isPanning()) {
+      const scale = this.renderService.scale() / 100;
       const [originX, originY] = this.renderService.origin();
-      const [x, y] = createCoordinate(event.movementX, event.movementY);
+      const [x, y] = createCoordinate(event.movementX, event.movementY).map((c) => c / scale);
 
       if (x !== 0 || y !== 0) {
         const coords = createCoordinate(originX - x, originY - y);
         this.renderService.setOrigin(coords);
       }
     }
+  }
+
+  wheel(event: WheelEvent) {
+    const deltaY = event.deltaY;
+    const scale = this.renderService.scale();
+    const newScale = scale + deltaY;
+    this.renderService.setScale(newScale);
   }
 
   click(event: MouseEvent) {

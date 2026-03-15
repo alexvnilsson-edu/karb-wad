@@ -1,18 +1,21 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="flex-1 flex flex-row items-stretch">
-  <div id="renderViewContainer" class="flex-4 bg-black flex items-stretch">
+  <div id="renderViewContainer" class="flex-4 bg-black flex items-stretch overflow-hidden">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       render-view-canvas
-      class="flex-1 h-full cursor-crosshair"
+      class="flex-1 h-full"
+      [ngClass]="isPanning() ? 'cursor-grab' : 'cursor-crosshair'"
       id="renderView"
       [origin]="origin$()"
       [area]="area$()"
-      (mousemove)="mousemove($event)"
-      (mousedown)="mousedown($event)"
-      (mouseup)="mouseup($event)"
+      (pointermove)="pointermove($event)"
+      (pointerdown)="pointerdown()"
+      (pointerup)="pointerup()"
+      (wheel)="wheel($event)"
       (click)="click($event)"
+      [attr.transform]="`scale(${this.scale$()}, ${this.scale$()})`"
     >
       <defs>
         @let gridSize = 10;

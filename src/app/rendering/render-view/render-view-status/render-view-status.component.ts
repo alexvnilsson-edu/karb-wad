@@ -7,21 +7,17 @@ import { RenderService } from '../../../wad/rendering/render.service';
   templateUrl: './render-view-status.component.html',
 })
 export class RenderViewStatusComponent {
-  private rendering = inject(RenderService);
+  private renderService = inject(RenderService);
 
-  coord = linkedSignal(() => {
-    if (!this.rendering.coord()) {
-      return createCoordinate(0, 0);
-    }
-
-    return this.rendering.coord();
+  coord$ = linkedSignal(() => {
+    const coord = this.renderService.coord() ?? createCoordinate(0, 0);
+    return [coord[0].toFixed(1), coord[1].toFixed(1)];
   });
 
-  origin = linkedSignal(() => {
-    if (!this.rendering.origin()) {
-      return createCoordinate(0, 0);
-    }
+  scale$ = linkedSignal(() => `${this.renderService.scale().toFixed(0)}%`);
 
-    return this.rendering.origin();
+  origin$ = linkedSignal(() => {
+    const origin = this.renderService.origin() ?? createCoordinate(0, 0);
+    return [origin[0].toFixed(1), origin[1].toFixed(1)];
   });
 }

@@ -2,15 +2,20 @@
   class="grid grid-cols-4 bg-gray-800 font-mono text-white p-2 gap-2 border-t-1 border-t-gray-600 divide-gray-600 divide-x-1 divide-dashed"
 >
   <div aria-label="Mouse Coordinates" class="px-2">
-    <span>{{ coord()[0] }}</span>
+    <span>{{ coord$()[0] }}</span>
     <span>, </span>
-    <span>{{ coord()[1] }}</span>
+    <span>{{ coord$()[1] }}</span>
+  </div>
+
+  <div aria-label="Mouse Coordinates" class="px-2">
+    <span>Scale: </span>
+    <span>{{ scale$() }}</span>
   </div>
 
   <div aria-label="Origo Coordinates">
     <span>Origo: </span>
-    <span>{{ origin()[0] }}</span>
+    <span>{{ origin$()[0] }}</span>
     <span>, </span>
-    <span>{{ origin()[1] }}</span>
+    <span>{{ origin$()[1] }}</span>
   </div>
 </div>

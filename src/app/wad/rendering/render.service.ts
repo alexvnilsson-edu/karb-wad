@@ -12,7 +12,7 @@ export class RenderService {
 
   private _height = signal(0);
 
-  private _scale = signal(1.0);
+  private _scale = signal(100);
 
   private _area = signal([0, 0]);
 
