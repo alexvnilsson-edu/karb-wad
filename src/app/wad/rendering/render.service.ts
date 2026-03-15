@@ -80,6 +80,9 @@ export class WadRenderService {
   }
 
   setScale(scale: number) {
+    if (scale < 100) {
+      scale = 100;
+    }
     this._scale.set(scale);
   }
 

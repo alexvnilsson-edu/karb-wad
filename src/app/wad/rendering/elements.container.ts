@@ -3,9 +3,7 @@ import { WadRenderService } from './render.service';
 
 @Directive({
   selector: '[appWadElements]',
-  host: {
-    '[attr.transform]': 'transform$()',
-  },
+  host: {},
 })
 export class ElementsContainer {
   private renderService = inject(WadRenderService);

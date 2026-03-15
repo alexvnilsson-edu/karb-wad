@@ -103,9 +103,12 @@ export class RenderViewComponent {
   }
 
   wheel(event: WheelEvent) {
-    const deltaY = event.deltaY;
+    // Revert deltaY and
+    // determine max delta of -5 <= deltaY <= 5.
+    const deltaY = -event.deltaY > 0 ? 5 : -5;
     const scale = this.renderService.scale();
     const newScale = scale + deltaY;
+    console.debug(`[wheel] delta y: ${deltaY}, old scale: ${scale}, new scale: ${newScale}`);
     this.renderService.setScale(newScale);
   }
 
