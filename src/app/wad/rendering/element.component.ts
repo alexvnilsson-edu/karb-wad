@@ -29,7 +29,7 @@ export class WadElementComponent<TModel extends WadElementModel> {
 
   isFocused$ = linkedSignal(() => this.model()?.isFocused ?? false);
 
-  strokeWidth$ = linkedSignal(() => 2);
+  strokeWidth$ = linkedSignal(() => 1);
 
   stroke$ = linkedSignal(() => (this.isFocused$() ? 'rgb(255, 255, 255)' : 'rgb(200, 200, 200)'));
 
