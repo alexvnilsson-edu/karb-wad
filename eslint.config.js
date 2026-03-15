@@ -4,6 +4,7 @@ const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const unusedImports = require('eslint-plugin-unused-imports');
+const tsdoc = require("eslint-plugin-tsdoc");
 
 module.exports = defineConfig([
   {
@@ -16,6 +17,7 @@ module.exports = defineConfig([
     ],
     plugins: {
       'unused-imports': unusedImports,
+      'tsdoc': tsdoc
     },
     processor: angular.processInlineTemplates,
     rules: {
