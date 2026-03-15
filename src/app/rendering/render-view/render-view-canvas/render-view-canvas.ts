@@ -1,4 +1,5 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input, linkedSignal } from '@angular/core';
+import { RenderService } from 'app/wad/rendering/render.service';
 import { Coordinate } from '../../../wad/rendering/coordinate.type';
 
 @Component({
@@ -7,16 +8,25 @@ import { Coordinate } from '../../../wad/rendering/coordinate.type';
   template: `<ng-content />`,
   host: {
     '[attr.viewBox]': 'viewBox$()',
-    '[attr.width]': 'width$()',
-    '[attr.height]': 'height$()',
+    // '[attr.width]': 'width$()',
+    // '[attr.height]': 'height$()',
   },
 })
 export class RenderViewCanvas {
+  private renderService = inject(RenderService);
+
   origin = input<Coordinate>(new Float32Array([0, 0]));
-  area = input<Array<number>>([0, 0]);
+  scale = linkedSignal(() => this.renderService.scale());
+  area = input<Array<number>>([100, 100]);
 
   width$ = computed(() => this.area()[0]);
   height$ = computed(() => this.area()[1]);
 
-  viewBox$ = computed(() => [this.origin().join(' '), this.area().join(' ')].join(' '));
+  viewBoxArea$ = computed(() => this.getViewBoxArea());
+  viewBox$ = computed(() => [this.origin().join(' '), this.viewBoxArea$().join(' ')].join(' '));
+
+  private getViewBoxArea() {
+    const scale = this.scale();
+    return this.area().map((s) => s * scale);
+  }
 }
