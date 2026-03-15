@@ -7,7 +7,6 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
-import { ElementsContainer } from 'app/wad/rendering/elements.container';
 import { createCoordinate } from '../../wad/rendering/coordinate.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { WadElementService } from '../../wad/rendering/element.service';
@@ -22,7 +21,7 @@ import { RenderViewStatusComponent } from './render-view-status/render-view-stat
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [WadModule, RenderViewCanvas, RenderViewStatusComponent, ElementsContainer, NgClass],
+  imports: [WadModule, RenderViewCanvas, RenderViewStatusComponent, NgClass],
 })
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);

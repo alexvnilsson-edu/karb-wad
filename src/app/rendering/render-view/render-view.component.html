@@ -77,41 +77,39 @@
         <text wad-system-text [x]="120" [y]="renderService.translateCoordinateY(0)">x</text>
       </g>
 
-      <g appWadElements>
-        @for (entry of elements(); track entry[1].id) {
-          @let model = entry[1];
-          @switch (model.type.toLowerCase()) {
-            @case ('rectangle') {
-              <polygon
-                wad-rectangle
-                [elementModel]="model"
-                (elementClick)="elementClick($event)"
-              ></polygon>
-            }
-            @case ('triangle') {
-              <polygon
-                wad-triangle
-                [elementModel]="model"
-                (elementClick)="elementClick($event)"
-              ></polygon>
-            }
-            @case ('circle') {
-              <circle
-                wad-circle
-                [elementModel]="model"
-                (elementClick)="elementClick($event)"
-              ></circle>
-            }
-            @case ('line') {
-              <polyline
-                wad-polyline
-                [elementModel]="model"
-                (elementClick)="elementClick($event)"
-              ></polyline>
-            }
+      @for (entry of elements(); track entry[1].id) {
+        @let model = entry[1];
+        @switch (model.type.toLowerCase()) {
+          @case ('rectangle') {
+            <polygon
+              wad-rectangle
+              [elementModel]="model"
+              (elementClick)="elementClick($event)"
+            ></polygon>
+          }
+          @case ('triangle') {
+            <polygon
+              wad-triangle
+              [elementModel]="model"
+              (elementClick)="elementClick($event)"
+            ></polygon>
+          }
+          @case ('circle') {
+            <circle
+              wad-circle
+              [elementModel]="model"
+              (elementClick)="elementClick($event)"
+            ></circle>
+          }
+          @case ('line') {
+            <polyline
+              wad-polyline
+              [elementModel]="model"
+              (elementClick)="elementClick($event)"
+            ></polyline>
           }
         }
-      </g>
+      }
     </svg>
   </div>
   <!-- <div class="flex-1 bg-gray-600 overflow-y-auto">

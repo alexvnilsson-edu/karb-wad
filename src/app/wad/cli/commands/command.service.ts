@@ -6,7 +6,7 @@ import { WadArgumentTransformer } from '../transformers/transformer';
 import { WadArgumentType } from './argument-types/argument-type';
 import { WadCommand } from './command';
 import { WadCommandArgument } from './command-argument';
-import { configureCommands, wadCommandTypes } from './command-config';
+import { wadCommandTypes } from './command-config';
 
 @Injectable({
   providedIn: 'root',
@@ -26,10 +26,6 @@ export class WadCommandService {
   readonly log = this._log.asReadonly();
 
   canvasClick = new Subject<CanvasClickEvent>();
-
-  constructor() {
-    configureCommands(this, this.elementService);
-  }
 
   register(name: string, alias: string[], args: WadCommandArgument<unknown>[]) {
     const command = new WadCommand(name, new Set(alias));
