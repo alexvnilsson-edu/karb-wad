@@ -18,13 +18,13 @@
       #commandInput
       type="text"
       class="flex-1 bg-gray-900 text-white text-lg p-1 px-2"
-      placeholder="Type help for list of commands"
+      [attr.placeholder]="inputPlaceholder$()"
       spellcheck="false"
       [(ngModel)]="command"
       (keyup.enter)="enter()"
       (input)="input()"
-      (focus)="focus($event)"
-      (blur)="blur($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
     />
   </div>
 </div>
