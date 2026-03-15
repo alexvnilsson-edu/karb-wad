@@ -106,10 +106,6 @@ export class CommandInput {
     }
   }
 
-  input() {
-    this.reset();
-  }
-
   setFocus() {
     if (this.commandInput() && this.commandInput()!.nativeElement) {
       this.commandInput()?.nativeElement.focus();
