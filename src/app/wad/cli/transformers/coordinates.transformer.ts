@@ -1,7 +1,7 @@
 import { Coordinate, createCoordinate } from '../../rendering/coordinate.type';
-import { Transformer } from './transformer';
+import { WadArgumentTransformer } from './transformer';
 
-export class CoordinatesTransformer extends Transformer<Coordinate> {
+export class WadArgumentCoordinatesTransformer extends WadArgumentTransformer<Coordinate> {
   private separator = '..';
 
   override transform(value: string): Coordinate {

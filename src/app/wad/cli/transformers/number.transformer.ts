@@ -1,6 +1,6 @@
-import { Transformer } from './transformer';
+import { WadArgumentTransformer } from './transformer';
 
-export class NumberTransformer extends Transformer<number> {
+export class WadArgumentNumberTransformer extends WadArgumentTransformer<number> {
   override transform(value: string) {
     return Number.parseFloat(value);
   }

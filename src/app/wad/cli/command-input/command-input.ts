@@ -1,8 +1,10 @@
+/* eslint-disable @angular-eslint/component-selector */
+/* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
 import { Coordinate } from '../../rendering/coordinate.type';
 import { WadCommandService } from '../commands/command.service';
-import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
+import { WadArgumentCoordinatesTransformer } from '../transformers/coordinates.transformer';
 
 @Component({
   selector: 'wad-command-input',
@@ -17,7 +19,7 @@ import { CoordinatesTransformer } from '../transformers/coordinates.transformer'
 export class CommandInput {
   commandService = inject(WadCommandService);
 
-  private coordinatesTransformer = new CoordinatesTransformer();
+  private coordinatesTransformer = new WadArgumentCoordinatesTransformer();
 
   inFocus$ = signal(false);
 

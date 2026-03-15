@@ -1,6 +1,6 @@
 import { createCoordinate } from '../../rendering/coordinate.type';
 import { CoordinatesTransformer } from '../transformers/coordinates.transformer';
-import { CoordinatesArgumentType } from './argument-types/coordinate.argument-type';
+import { WadCoordinatesArgumentType } from './argument-types/coordinate.argument-type';
 import { WadCommand } from './command';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { WadCommandService } from './command.service';
@@ -50,7 +50,7 @@ describe('CommandService', () => {
   it('should interpret string to command', () => {
     const input = 'test 25..50';
     const command = new WadCommand('test', new Set(['t']));
-    command.registerArgument('origin', new CoordinatesArgumentType());
+    command.registerArgument('origin', new WadCoordinatesArgumentType());
     service.registerCommand(command);
     const found = service.interpret(input);
     expect(found).not.toBeUndefined();

@@ -1,8 +1,8 @@
-import { Transformer } from 'app/wad/cli/transformers/transformer';
+import { WadArgumentTransformer } from 'app/wad/cli/transformers/transformer';
 
-export abstract class ArgumentType<T> {
+export abstract class WadArgumentType<T> {
   type!: string;
-  abstract transformer: Transformer<T>;
+  abstract transformer: WadArgumentTransformer<T>;
   abstract description: string;
   abstract example: string;
 

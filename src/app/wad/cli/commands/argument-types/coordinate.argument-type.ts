@@ -1,9 +1,9 @@
-import { CoordinatesTransformer } from 'app/wad/cli/transformers/coordinates.transformer';
+import { WadArgumentCoordinatesTransformer } from 'app/wad/cli/transformers/coordinates.transformer';
 import { Coordinate } from 'app/wad/rendering/coordinate.type';
-import { ArgumentType } from './argument-type';
+import { WadArgumentType } from './argument-type';
 
-export class CoordinatesArgumentType extends ArgumentType<Coordinate> {
-  override transformer = new CoordinatesTransformer();
+export class WadCoordinatesArgumentType extends WadArgumentType<Coordinate> {
+  override transformer = new WadArgumentCoordinatesTransformer();
   override description = 'x..y';
   override example = '56.6..25.5';
 

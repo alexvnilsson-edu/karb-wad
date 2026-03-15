@@ -1,15 +1,19 @@
 import { Injectable, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CanvasClickEvent } from '../../rendering/canvas-click.event';
-import { Transformer } from '../transformers/transformer';
+import { WadArgumentTransformer } from '../transformers/transformer';
+import { WadArgumentType } from './argument-types/argument-type';
 import { WadCommand } from './command';
+import { WadCommandArgument } from './command-argument';
+import { wadCommandTypes } from './command-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WadCommandService {
+  private _types = new Map<string, WadArgumentType<unknown>>();
   private _commands = new Map<string, WadCommand>();
-  private _transformers = new Map<string, Transformer<unknown>>();
+  private _transformers = new Map<string, WadArgumentTransformer<unknown>>();
 
   private _log = signal<string[]>([]);
 
@@ -20,8 +24,14 @@ export class WadCommandService {
 
   canvasClick = new Subject<CanvasClickEvent>();
 
-  register(name: string, args: unknown[]) {
-    const command = new WadCommand(name);
+  constructor() {}
+
+  register(name: string, alias: string[], args: WadCommandArgument<unknown>[]) {
+    const command = new WadCommand(name, new Set(alias));
+    for (const arg of args) {
+      command.arguments.set(arg.name, arg);
+    }
+
     this._commands.set(name, command);
   }
 
@@ -29,11 +39,9 @@ export class WadCommandService {
     this._commands.set(command.name, command);
   }
 
-  registerTransformer<T>(type: string, transformer: Transformer<T>) {
+  registerTransformer<T>(type: string, transformer: WadArgumentTransformer<T>) {
     this._transformers.set(type, transformer);
   }
-
-  initiate(name: string) {}
 
   find(query: string): WadCommand | undefined {
     if (this._commands.has(query)) {
@@ -103,5 +111,22 @@ export class WadCommandService {
       log.push(message);
       return log;
     });
+  }
+
+  getType(name: string) {
+    if (!this._types.has(name)) {
+      throw new Error(`Command type not found: ${name}`);
+    }
+
+    return this._types.get(name);
+  }
+
+  private _registerTypes() {
+    for (const [name, type] of wadCommandTypes) {
+      if (this._types.has(name)) {
+        throw new Error(`Command type already registered: ${name}.`);
+      }
+      this._types.set();
+    }
   }
 }

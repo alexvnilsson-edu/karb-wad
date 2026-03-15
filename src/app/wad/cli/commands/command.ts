@@ -1,4 +1,4 @@
-import { ArgumentType } from './argument-types/argument-type';
+import { WadArgumentType } from './argument-types/argument-type';
 import { WadCommandArgument } from './command-argument';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { WadCommandExecutor } from './command-executor.type';
@@ -18,7 +18,7 @@ export class WadCommand {
     this.alias = alias;
   }
 
-  registerArgument<T>(name: string, description: string, type: ArgumentType<T>) {
+  registerArgument<T>(name: string, description: string, type: WadArgumentType<T>) {
     const arg = new WadCommandArgument<T>(name, description, type);
     this.arguments.set(name, arg);
   }

@@ -1,9 +1,9 @@
-import { NumberTransformer } from '../../transformers/number.transformer';
-import { Transformer } from '../../transformers/transformer';
-import { ArgumentType } from './argument-type';
+import { WadArgumentNumberTransformer } from '../../transformers/number.transformer';
+import { WadArgumentTransformer } from '../../transformers/transformer';
+import { WadArgumentType } from './argument-type';
 
-export class NumberArgumentType extends ArgumentType<number> {
-  override transformer: Transformer<number> = new NumberTransformer();
+export class WadNumberArgumentType extends WadArgumentType<number> {
+  override transformer: WadArgumentTransformer<number> = new WadArgumentNumberTransformer();
   override description = 'number';
   override example = '1.56';
 
