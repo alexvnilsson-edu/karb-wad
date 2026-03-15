@@ -30,7 +30,7 @@ export function configureCommands(
 
     function registerCircleCommand() {
       const command = new WadCommand('circle', new Set(['c', 'circel', 'cirkel']));
-      command.registerArgument('origin', 'center coordinate', new WadCoordinatesArgumentType());
+      command.registerArgument('origin', 'center coordinates', new WadCoordinatesArgumentType());
       command.registerArgument('radius', 'radius', new WadNumberArgumentType());
       command.executor = (command) => {
         try {
@@ -63,8 +63,8 @@ export function configureCommands(
 
     function registerLineCommand() {
       const command = new WadCommand('line', new Set(['l', 'li', 'linje']));
-      command.registerArgument('start', 'starting coordinate', new WadCoordinatesArgumentType());
-      command.registerArgument('end', 'ending coordinate', new WadCoordinatesArgumentType());
+      command.registerArgument('start', 'starting coordinates', new WadCoordinatesArgumentType());
+      command.registerArgument('end', 'ending coordinates', new WadCoordinatesArgumentType());
       command.executor = (command) => {
         try {
           const [startX, startY] = command.arguments.get('start')?.value ?? [undefined, undefined];
