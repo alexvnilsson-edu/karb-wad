@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, computed, inject, input, linkedSignal } from '@angular/core';
 import { WadRenderService } from 'app/wad/rendering/render.service';
-import { Coordinate } from '../../../wad/rendering/coordinate.type';
+import { Coordinates } from '../../../wad/rendering/coordinate.type';
 
 @Component({
   selector: 'svg[render-view-canvas]',
@@ -16,7 +16,7 @@ import { Coordinate } from '../../../wad/rendering/coordinate.type';
 export class RenderViewCanvas {
   renderService = inject(WadRenderService);
 
-  origin = input<Coordinate>(new Float32Array([0, 0]));
+  origin = input<Coordinates>(new Float32Array([0, 0]));
   scale = linkedSignal(() => this.renderService.scale());
   area = input<number[]>([0, 0]);
 

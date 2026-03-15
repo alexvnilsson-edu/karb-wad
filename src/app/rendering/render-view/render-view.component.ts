@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { WadElementContainer } from 'app/wad/rendering/elements.container';
-import { createCoordinate } from '../../wad/rendering/coordinate.type';
+import { createCoordinates } from '../../wad/rendering/coordinate.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { WadElementService } from '../../wad/rendering/element.service';
 import { WadRenderService } from '../../wad/rendering/render.service';
@@ -84,7 +84,7 @@ export class RenderViewComponent {
   }
 
   pointermove(event: PointerEvent) {
-    this.renderService.setCoord(createCoordinate(event.offsetX, event.offsetY));
+    this.renderService.setCoord(createCoordinates(event.offsetX, event.offsetY));
 
     if (this.isMouseDown()) {
       this._isPanning.set(true);
@@ -93,10 +93,10 @@ export class RenderViewComponent {
     if (this.isPanning()) {
       const scale = this.renderService.scale() / 100;
       const [originX, originY] = this.renderService.origin();
-      const [x, y] = createCoordinate(event.movementX, event.movementY).map((c) => c / scale);
+      const [x, y] = createCoordinates(event.movementX, event.movementY).map((c) => c / scale);
 
       if (x !== 0 || y !== 0) {
-        const coords = createCoordinate(originX - x, originY - y);
+        const coords = createCoordinates(originX - x, originY - y);
         this.renderService.setOrigin(coords);
       }
     }

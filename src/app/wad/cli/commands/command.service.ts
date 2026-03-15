@@ -1,46 +1,62 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { WadElementService } from 'app/wad/rendering/element.service';
 import { Subject } from 'rxjs';
 import { CanvasClickEvent } from '../../rendering/canvas-click.event';
-import { WadArgumentTransformer } from '../transformers/transformer';
-import { WadArgumentType } from './argument-types/argument-type';
+import { WadCommandArgumentTransformer } from './arguments/transformers/transformer';
+import { WadCommandArgumentType } from './arguments/types/argument-type';
 import { WadCommand } from './command';
-import { WadCommandArgument } from './command-argument';
-import { wadCommandTypes } from './command-config';
+import { WadCommandExecutorResult } from './executors/command-executor-result';
+import { WadCommandLogService } from './logs/log.service';
+
+type WadCommandServiceRegistrationType =
+  | WadCommand
+  | WadCommandArgumentTransformer<unknown>
+  | WadCommandArgumentType<unknown>;
+type WadCommandServiceRegistrationTypes = 'command' | 'transformer' | 'type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WadCommandService {
-  private _types = new Map<string, WadArgumentType<unknown>>();
+  private _types = new Map<string, WadCommandArgumentType<unknown>>();
   private _commands = new Map<string, WadCommand>();
-  private _transformers = new Map<string, WadArgumentTransformer<unknown>>();
-
-  private _log = signal<string[]>([]);
+  private _transformers = new Map<string, WadCommandArgumentTransformer<unknown>>();
 
   protected elementService = inject(WadElementService);
+
+  logs = inject(WadCommandLogService);
 
   readonly commands = this._commands;
   readonly transformers = this._transformers;
 
-  readonly log = this._log.asReadonly();
-
   canvasClick = new Subject<CanvasClickEvent>();
 
-  register(name: string, alias: string[], args: WadCommandArgument<unknown>[]) {
-    const command = new WadCommand(name, new Set(alias));
-    for (const arg of args) {
-      command.arguments.set(arg.name, arg);
+  register(
+    type: WadCommandServiceRegistrationTypes = 'command',
+    obj: WadCommandServiceRegistrationType,
+  ) {
+    switch (type) {
+      case 'command':
+        this._commands.set((obj as WadCommand).name, obj as WadCommand);
+        break;
+      case 'transformer':
+        this._transformers.set(
+          (obj as WadCommandArgumentTransformer<unknown>).name,
+          obj as WadCommandArgumentTransformer<unknown>,
+        );
+        break;
+      case 'type':
+        this._types.set(
+          (obj as WadCommandArgumentType<unknown>).name,
+          obj as WadCommandArgumentType<unknown>,
+        );
+        break;
+      default:
+        throw new Error(`Type cannot be registered as a command part: ${type}`);
     }
-
-    this._commands.set(name, command);
   }
 
-  registerCommand(command: WadCommand) {
-    this._commands.set(command.name, command);
-  }
-
-  registerTransformer<T>(type: string, transformer: WadArgumentTransformer<T>) {
+  registerTransformer<T>(type: string, transformer: WadCommandArgumentTransformer<T>) {
     this._transformers.set(type, transformer);
   }
 
@@ -50,7 +66,7 @@ export class WadCommandService {
     }
 
     for (const command of this._commands.values()) {
-      if (command.alias.has(query)) {
+      if (command.aliases.has(query)) {
         return command;
       }
     }
@@ -69,7 +85,6 @@ export class WadCommandService {
       throw new Error(`Command not found: ${commandName}`);
     }
     const argsPostName = args.slice(1);
-    const commandArgNames = Array.from(command.arguments.keys());
     const commandArgs = Array.from(command.arguments.values());
     if (argsPostName.length !== command.arguments.size) {
       const argSyntax = Array.from(command.arguments.values())
@@ -93,7 +108,15 @@ export class WadCommandService {
     return command;
   }
 
-  execute(name: string) {
+  execute(command: WadCommand): WadCommandExecutorResult {
+    if (!command) {
+      throw new Error(`Command is undefined.`);
+    }
+
+    return command!.executor!.execute(command!);
+  }
+
+  executeByName(name: string): WadCommandExecutorResult {
     if (!this._commands.has(name)) {
       throw new Error(`Command not found: ${name}`);
     }
@@ -101,17 +124,10 @@ export class WadCommandService {
     const command = this._commands.get(name);
 
     if (!command) {
-      throw new Error(`Command is undefined.`);
+      throw new Error(`Error is undefined.`);
     }
 
-    command!.execute();
-  }
-
-  writeLog(message: string) {
-    this._log.update((log) => {
-      log.push(message);
-      return log;
-    });
+    return this.execute(command);
   }
 
   getType(name: string) {
@@ -122,12 +138,12 @@ export class WadCommandService {
     return this._types.get(name);
   }
 
-  private _registerTypes() {
-    for (const [name, type] of wadCommandTypes) {
-      if (this._types.has(name)) {
-        throw new Error(`Command type already registered: ${name}.`);
-      }
-      this._types.set(name, type);
-    }
-  }
+  // private _registerTypes() {
+  //   for (const [name, type] of wadCommandTypes) {
+  //     if (this._types.has(name)) {
+  //       throw new Error(`Command type already registered: ${name}.`);
+  //     }
+  //     this._types.set(name, type);
+  //   }
+  // }
 }

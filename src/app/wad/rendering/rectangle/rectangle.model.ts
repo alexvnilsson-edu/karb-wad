@@ -1,13 +1,13 @@
-import { Coordinate } from '../coordinate.type';
+import { Coordinates } from '../coordinate.type';
 import { WadElementModel } from '../element.model';
 
 export class RectangleWadElementModel extends WadElementModel {
-  a!: Coordinate;
-  b!: Coordinate;
-  c!: Coordinate;
-  d!: Coordinate;
+  a!: Coordinates;
+  b!: Coordinates;
+  c!: Coordinates;
+  d!: Coordinates;
 
-  constructor(a: Coordinate, b: Coordinate, c: Coordinate, d: Coordinate) {
+  constructor(a: Coordinates, b: Coordinates, c: Coordinates, d: Coordinates) {
     super('rectangle');
     this.a = a;
     this.b = b;
@@ -15,7 +15,7 @@ export class RectangleWadElementModel extends WadElementModel {
     this.d = d;
   }
 
-  getCoordinates(): Coordinate[] {
+  getCoordinates(): Coordinates[] {
     return [this.a, this.b, this.c, this.d];
   }
 }

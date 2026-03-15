@@ -74,6 +74,13 @@ export class WadElementService {
     });
   }
 
+  clear() {
+    this._elements.update((elements) => {
+      elements.clear();
+      return elements;
+    });
+  }
+
   focus(element: WadElementModel) {
     if (this.focused().length > 0) {
       this.focused().forEach((id) => {

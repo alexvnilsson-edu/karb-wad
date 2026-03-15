@@ -1,14 +1,10 @@
-import { inject, Injectable, linkedSignal, signal } from '@angular/core';
-import { WadCommandService } from '../cli/commands/command.service';
-import { CanvasClickEvent } from './canvas-click.event';
-import { Coordinate, createCoordinate } from './coordinate.type';
+import { Injectable, linkedSignal, signal } from '@angular/core';
+import { Coordinates, createCoordinates } from './coordinate.type';
 
 @Injectable({ providedIn: 'root' })
 export class WadRenderService {
-  private commandService = inject(WadCommandService);
-
-  private _coord = signal(createCoordinate(0, 0));
-  private _origin = signal(createCoordinate(0, 0));
+  private _coord = signal(createCoordinates(0, 0));
+  private _origin = signal(createCoordinates(0, 0));
 
   private _height = signal(0);
 
@@ -26,15 +22,15 @@ export class WadRenderService {
 
   canvasClick(x: number, y: number) {
     const [offsetX, offsetY] = this.computeOffsetCoords(x, y);
-    this.commandService.canvasClick.next(new CanvasClickEvent(offsetX, offsetY));
+    // this.commandService.canvasClick.next(new CanvasClickEvent(offsetX, offsetY));
   }
 
   translateCoordinate(
-    coordinate: Coordinate,
+    coordinate: Coordinates,
     target: 'canvasian' | 'cartesian' = 'canvasian',
-  ): Coordinate {
+  ): Coordinates {
     const [x, y] = coordinate;
-    return createCoordinate(x, this.translateCoordinateY(y));
+    return createCoordinates(x, this.translateCoordinateY(y));
   }
 
   translateCoordinateY(y: number, target: 'canvasian' | 'cartesian' = 'canvasian'): number {
@@ -48,14 +44,14 @@ export class WadRenderService {
     }
   }
 
-  computeOffsetCoords(insetX: number, insetY: number): Coordinate {
+  computeOffsetCoords(insetX: number, insetY: number): Coordinates {
     const [originX, originY] = this._origin();
     const x = insetX + originX;
     const y = insetY - originY;
-    return createCoordinate(x, y);
+    return createCoordinates(x, y);
   }
 
-  setCoord(coord: Coordinate, canvasian = true) {
+  setCoord(coord: Coordinates, canvasian = true) {
     this._coord.set(canvasian ? this.translateCoordinate(coord) : coord);
   }
 
@@ -68,10 +64,10 @@ export class WadRenderService {
     const [originX, originY] = this._origin();
     const x = realCoordX + originX;
     const y = realCoordY - originY;
-    return createCoordinate(x, y);
+    return createCoordinates(x, y);
   }
 
-  setOrigin(coord: Coordinate) {
+  setOrigin(coord: Coordinates) {
     this._origin.set(coord);
   }
 

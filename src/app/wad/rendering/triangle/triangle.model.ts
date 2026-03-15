@@ -1,19 +1,19 @@
-import { Coordinate } from '../coordinate.type';
+import { Coordinates } from '../coordinate.type';
 import { WadElementModel } from '../element.model';
 
 export class TriangleWadElementModel extends WadElementModel {
-  a!: Coordinate;
-  b!: Coordinate;
-  c!: Coordinate;
+  a!: Coordinates;
+  b!: Coordinates;
+  c!: Coordinates;
 
-  constructor(a: Coordinate, b: Coordinate, c: Coordinate) {
+  constructor(a: Coordinates, b: Coordinates, c: Coordinates) {
     super('triangle');
     this.a = a;
     this.b = b;
     this.c = c;
   }
 
-  getCoordinates(): Coordinate[] {
+  getCoordinates(): Coordinates[] {
     return [this.a, this.b, this.c];
   }
 }

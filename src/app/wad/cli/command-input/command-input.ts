@@ -10,9 +10,9 @@ import {
   viewChild,
 } from '@angular/core';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
-import { Coordinate } from '../../rendering/coordinate.type';
+import { Coordinates } from '../../rendering/coordinate.type';
+import { WadCoordinatesCommandArgumentTransformer } from '../commands/arguments/transformers';
 import { WadCommandService } from '../commands/command.service';
-import { WadArgumentCoordinatesTransformer } from '../transformers/coordinates.transformer';
 
 @Component({
   selector: 'wad-command-input',
@@ -24,10 +24,10 @@ import { WadArgumentCoordinatesTransformer } from '../transformers/coordinates.t
     '[class.error]': 'error$()',
   },
 })
-export class CommandInput {
+export class WadCommandInput {
   commandService = inject(WadCommandService);
 
-  private coordinatesTransformer = new WadArgumentCoordinatesTransformer();
+  private coordinatesTransformer = new WadCoordinatesCommandArgumentTransformer();
 
   inFocus$ = signal(false);
 
@@ -90,7 +90,7 @@ export class CommandInput {
   onEnterKeyup() {
     try {
       const command = this.commandService.interpret(this.command);
-      const result = command.execute();
+      const result = this.commandService.execute(command);
       if (result.success) {
         this.resetCommand();
         if (result.message) {
@@ -122,7 +122,7 @@ export class CommandInput {
     this.inFocus$.set(false);
   }
 
-  protected addCoordinate(coordinate: Coordinate) {
+  protected addCoordinate(coordinate: Coordinates) {
     const padLeft = this.command.endsWith(' ') ? '' : ' ';
     const coordinateString = this.coordinatesTransformer.toString(coordinate);
     const commandAddition = padLeft + coordinateString;

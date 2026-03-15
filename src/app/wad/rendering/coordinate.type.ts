@@ -1,5 +1,5 @@
-export type Coordinate = Float32Array;
+export type Coordinates = Float32Array;
 
-export function createCoordinate(x: number, y: number): Coordinate {
+export function createCoordinates(x: number, y: number): Coordinates {
   return new Float32Array([x, y]);
 }

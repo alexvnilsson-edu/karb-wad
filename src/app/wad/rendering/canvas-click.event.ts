@@ -1,8 +1,8 @@
-import { Coordinate, createCoordinate } from './coordinate.type';
+import { Coordinates, createCoordinates } from './coordinate.type';
 
 export class CanvasClickEvent {
-  coordinates!: Coordinate;
+  coordinates!: Coordinates;
   constructor(x: number, y: number) {
-    this.coordinates = createCoordinate(x, y);
+    this.coordinates = createCoordinates(x, y);
   }
 }

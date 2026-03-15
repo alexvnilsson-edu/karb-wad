@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, linkedSignal } from '@angular/core';
-import { createCoordinate } from '../coordinate.type';
+import { createCoordinates } from '../coordinate.type';
 import { WadElementComponent } from '../element.component';
 import { TriangleWadElementModel } from './triangle.model';
 
@@ -17,9 +17,9 @@ export class TriangleWadElementComponent extends WadElementComponent<TriangleWad
   coordinates$ = linkedSignal(() =>
     this.model()
       ? [
-          this.rendering.translateCoordinate(this.model()?.a ?? createCoordinate(0, 0)),
-          this.rendering.translateCoordinate(this.model()?.b ?? createCoordinate(0, 0)),
-          this.rendering.translateCoordinate(this.model()?.c ?? createCoordinate(0, 0)),
+          this.rendering.translateCoordinate(this.model()?.a ?? createCoordinates(0, 0)),
+          this.rendering.translateCoordinate(this.model()?.b ?? createCoordinates(0, 0)),
+          this.rendering.translateCoordinate(this.model()?.c ?? createCoordinates(0, 0)),
         ]
       : undefined,
   );

@@ -1,10 +1,11 @@
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, EnvironmentInjector, inject, viewChild } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RenderViewComponent } from './rendering/render-view/render-view.component';
-import { CommandInput } from './wad/cli/command-input/command-input';
-import { configureCommands } from './wad/cli/commands/command-config';
-import { WadCommandService } from './wad/cli/commands/command.service';
-import { WadElementService } from './wad/rendering/element.service';
+import { WadCommandInput } from './wad/cli/command-input/command-input';
+import {
+  configureCommands,
+  getCommandsForConfiguration,
+} from './wad/cli/commands/config/command-config';
 import { WadModule } from './wad/wad.module';
 
 @Component({
@@ -17,13 +18,11 @@ import { WadModule } from './wad/wad.module';
   },
 })
 export class App {
-  commandService = inject(WadCommandService);
-  elementService = inject(WadElementService);
-
-  commandInput = viewChild(CommandInput);
+  private environmentInjector = inject(EnvironmentInjector);
+  commandInput = viewChild(WadCommandInput);
 
   constructor() {
-    configureCommands(this.commandService, this.elementService);
+    configureCommands(getCommandsForConfiguration(), this.environmentInjector);
   }
 
   keyupEnter() {

@@ -1,13 +1,21 @@
-import { WadArgumentType } from './argument-types/argument-type';
+import { WadCommandArgumentType } from './types/argument-type';
 
 export class WadCommandArgument<T> {
   name!: string;
   description!: string;
-  type!: WadArgumentType<T>;
+  type!: WadCommandArgumentType<T>;
 
   private _value!: string;
 
-  constructor(name: string, description: string, type: WadArgumentType<T>) {
+  /**
+   * Creates an instance of WadCommandArgument.
+   *
+   * @constructor
+   * @param {string} name Command argument name.
+   * @param {string} description Short description of argument.
+   * @param {WadCommandArgumentType<T>} type Argument type.
+   */
+  constructor(name: string, description: string, type: WadCommandArgumentType<T>) {
     this.name = name;
     this.description = description;
     this.type = type;
