@@ -73,7 +73,12 @@ export const getCommandsForConfiguration = (): WadCommandConfig[] => [
     ],
     executor: inject(WadRectangleCommandExecutor),
   },
-  configureCommand('test', [], [], inject(WadTestCommandExecutor)),
+  configureCommand(
+    'test',
+    [],
+    [configureCommandArgument('n', 'number of elements (square root)', 'number')],
+    inject(WadTestCommandExecutor),
+  ),
   configureCommand('reset', [], [], inject(WadResetCommandExecutor)),
   configureCommand(
     'triangle',
