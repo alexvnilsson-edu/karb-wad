@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { createCoordinate } from './coordinate.type';
-import { RenderService } from './render.service';
+import { WadRenderService } from './render.service';
 
 describe('RenderService', () => {
-  let service: RenderService;
+  let service: WadRenderService;
 
   beforeEach(() => {
-    service = TestBed.inject(RenderService);
+    service = TestBed.inject(WadRenderService);
   });
 
   it('should get coordinate with offset', () => {

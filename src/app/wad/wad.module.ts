@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 
-import { WadElement } from './rendering/element.component';
+import { WadElementComponent } from './rendering/element.component';
 
-import { CircleleWadElement } from './rendering/circle.component';
-import { LineWadElement } from './rendering/line.component';
-import { PolylineWadElement } from './rendering/polyline.component';
-import { RectangleWadElement } from './rendering/rectangle.component';
-import { TriangleWadElement } from './rendering/triangle.component';
+import { LineWadElementComponent } from './rendering/line/line.component';
+import { PolylineWadElement } from './rendering/polyline/polyline.component';
+import { RectangleWadElementComponent } from './rendering/rectangle/rectangle.component';
+import { TriangleWadElementComponent } from './rendering/triangle/triangle.component';
 
 import { LineWadSystemElement } from './rendering/system/line';
 import { TextWadSystemElement } from './rendering/system/text';
@@ -14,16 +13,17 @@ import { TextWadSystemElement } from './rendering/system/text';
 import { CommandInput } from './cli/command-input/command-input';
 
 import { FormsModule } from '@angular/forms';
-import { ElementService } from './rendering/element.service';
-import { RenderService } from './rendering/render.service';
+import { CircleWadElementComponent } from './rendering/circle';
+import { WadElementService } from './rendering/element.service';
+import { WadRenderService } from './rendering/render.service';
 
 const ELEMENTS = [
-  WadElement,
-  CircleleWadElement,
+  WadElementComponent,
+  CircleWadElementComponent,
   PolylineWadElement,
-  RectangleWadElement,
-  TriangleWadElement,
-  LineWadElement,
+  RectangleWadElementComponent,
+  TriangleWadElementComponent,
+  LineWadElementComponent,
 ];
 
 const SYSTEM_ELEMENTS = [LineWadSystemElement, TextWadSystemElement];
@@ -31,7 +31,7 @@ const SYSTEM_ELEMENTS = [LineWadSystemElement, TextWadSystemElement];
 @NgModule({
   imports: [FormsModule],
   declarations: [CommandInput, ELEMENTS, SYSTEM_ELEMENTS],
-  providers: [ElementService, RenderService],
+  providers: [WadElementService, WadRenderService],
   exports: [CommandInput, ELEMENTS, SYSTEM_ELEMENTS],
 })
 export class WadModule {}

@@ -1,11 +1,11 @@
-import { CircleWadModel } from 'app/wad/rendering/circle.model';
 import { createCoordinate } from 'app/wad/rendering/coordinate.type';
-import { ElementService } from 'app/wad/rendering/element.service';
-import { RectangleWadModel } from 'app/wad/rendering/rectangle.model';
+import { WadElementModel } from 'app/wad/rendering/element.model';
+import { WadElementService } from 'app/wad/rendering/element.service';
+import { RectangleWadElementModel } from 'app/wad/rendering/rectangle/rectangle.model';
 import { WadCommand } from './command';
 import { WadCommandExecutorResult } from './command-executor-result';
 
-export function testCommandExecutor(command: WadCommand, elementService: ElementService) {
+export function testCommandExecutor(command: WadCommand, elementService: WadElementService) {
   const results: number[] = [];
 
   const squareRoot: number = command.arguments.get('n')?.value ?? 48;
@@ -23,7 +23,7 @@ export function testCommandExecutor(command: WadCommand, elementService: Element
       const y = 10 + 10 * col;
 
       elementService.add(
-        new RectangleWadModel(
+        new RectangleWadElementModel(
           createCoordinate(x, y),
           createCoordinate(x, y + length),
           createCoordinate(x + length, y + length),
@@ -33,12 +33,15 @@ export function testCommandExecutor(command: WadCommand, elementService: Element
     }
   }
 
-  oldElements.forEach((e) => elementService.add(e));
+  oldElements.forEach((e: WadElementModel) => elementService.add(e));
 
   return new WadCommandExecutorResult(true, '');
 }
 
-export function testRectanglesCommandExecutor(command: WadCommand, elementService: ElementService) {
+export function testRectanglesCommandExecutor(
+  command: WadCommand,
+  elementService: WadElementService,
+) {
   const results: number[] = [];
 
   const oldElements = elementService.elements();
@@ -63,7 +66,7 @@ export function testRectanglesCommandExecutor(command: WadCommand, elementServic
         const y = 10 + 10 * col;
 
         elementService.add(
-          new RectangleWadModel(
+          new RectangleWadElementModel(
             createCoordinate(x, y),
             createCoordinate(x, y + length),
             createCoordinate(x + length, y + length),
@@ -102,35 +105,8 @@ export function testRectanglesCommandExecutor(command: WadCommand, elementServic
   }
 
   setTimeout(() => {
-    oldElements.forEach((e) => elementService.add(e));
+    oldElements.forEach((e: WadElementModel) => elementService.add(e));
   }, totalDelay);
-
-  return new WadCommandExecutorResult(true, '');
-}
-
-export function testCirclesCommandExecutor(command: WadCommand, elementService: ElementService) {
-  const rounds = 10;
-  const results: number[] = [];
-
-  const oldElements = elementService.elements();
-
-  for (const [_id, element] of elementService.elements()) {
-    elementService.remove(element);
-  }
-
-  const start = Date.now();
-  const squareRoot = 48;
-  const length = 10;
-  for (let row = 1; row <= squareRoot; row++) {
-    const x = 10 + 10 * row;
-    for (let col = 1; col <= squareRoot; col++) {
-      const y = 10 + 10 * col;
-
-      elementService.add(new CircleWadModel(x, y, 5));
-    }
-  }
-
-  oldElements.forEach((e) => elementService.add(e));
 
   return new WadCommandExecutorResult(true, '');
 }

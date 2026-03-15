@@ -1,13 +1,13 @@
 import { Component, inject, linkedSignal } from '@angular/core';
 import { createCoordinate } from '../../../wad/rendering/coordinate.type';
-import { RenderService } from '../../../wad/rendering/render.service';
+import { WadRenderService } from '../../../wad/rendering/render.service';
 
 @Component({
   selector: 'app-render-view-status',
   templateUrl: './render-view-status.component.html',
 })
 export class RenderViewStatusComponent {
-  private renderService = inject(RenderService);
+  private renderService = inject(WadRenderService);
 
   coord$ = linkedSignal(() => {
     const coord = this.renderService.coord() ?? createCoordinate(0, 0);

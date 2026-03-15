@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { RenderService } from './render.service';
+import { WadRenderService } from './render.service';
 
 @Directive({
   selector: '[appWadElements]',
@@ -8,7 +8,7 @@ import { RenderService } from './render.service';
   },
 })
 export class ElementsContainer {
-  private renderService = inject(RenderService);
+  private renderService = inject(WadRenderService);
   transformMethod = input('translate');
 
   transform$ = computed(() => {

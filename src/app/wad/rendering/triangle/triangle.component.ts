@@ -1,9 +1,9 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, linkedSignal } from '@angular/core';
-import { createCoordinate } from './coordinate.type';
-import { WadElement } from './element.component';
-import { TriangleWadModel } from './triangle.model';
+import { createCoordinate } from '../coordinate.type';
+import { WadElementComponent } from '../element.component';
+import { TriangleWadElementModel } from './triangle.model';
 
 @Component({
   selector: '[wad-triangle]',
@@ -13,7 +13,7 @@ import { TriangleWadModel } from './triangle.model';
   },
   standalone: false,
 })
-export class TriangleWadElement extends WadElement<TriangleWadModel> {
+export class TriangleWadElementComponent extends WadElementComponent<TriangleWadElementModel> {
   coordinates$ = linkedSignal(() =>
     this.model()
       ? [

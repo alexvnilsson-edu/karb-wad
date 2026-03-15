@@ -1,11 +1,12 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { WadElementService } from 'app/wad/rendering/element.service';
 import { Subject } from 'rxjs';
 import { CanvasClickEvent } from '../../rendering/canvas-click.event';
 import { WadArgumentTransformer } from '../transformers/transformer';
 import { WadArgumentType } from './argument-types/argument-type';
 import { WadCommand } from './command';
 import { WadCommandArgument } from './command-argument';
-import { wadCommandTypes } from './command-config';
+import { configureCommands, wadCommandTypes } from './command-config';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,8 @@ export class WadCommandService {
 
   private _log = signal<string[]>([]);
 
+  protected elementService = inject(WadElementService);
+
   readonly commands = this._commands;
   readonly transformers = this._transformers;
 
@@ -24,7 +27,9 @@ export class WadCommandService {
 
   canvasClick = new Subject<CanvasClickEvent>();
 
-  constructor() {}
+  constructor() {
+    configureCommands(this, this.elementService);
+  }
 
   register(name: string, alias: string[], args: WadCommandArgument<unknown>[]) {
     const command = new WadCommand(name, new Set(alias));
@@ -126,7 +131,7 @@ export class WadCommandService {
       if (this._types.has(name)) {
         throw new Error(`Command type already registered: ${name}.`);
       }
-      this._types.set();
+      this._types.set(name, type);
     }
   }
 }

@@ -3,8 +3,8 @@
 
 import { ChangeDetectorRef, Component, inject, input, linkedSignal, output } from '@angular/core';
 import { WadElementClickEvent } from './element-click.event';
-import { WadModel } from './model';
-import { RenderService } from './render.service';
+import { WadElementModel } from './element.model';
+import { WadRenderService } from './render.service';
 
 @Component({
   selector: '[wad-base]',
@@ -17,11 +17,11 @@ import { RenderService } from './render.service';
   },
   standalone: false,
 })
-export class WadElement<TModel extends WadModel> {
+export class WadElementComponent<TModel extends WadElementModel> {
   protected changeDetection = inject(ChangeDetectorRef);
-  protected rendering = inject(RenderService);
+  protected rendering = inject(WadRenderService);
 
-  elementModel = input.required<WadModel>();
+  elementModel = input.required<WadElementModel>();
 
   model = linkedSignal<TModel>(() => this.elementModel() as TModel);
 

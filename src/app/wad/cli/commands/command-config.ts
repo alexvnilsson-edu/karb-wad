@@ -1,8 +1,8 @@
-import { CircleWadModel } from 'app/wad/rendering/circle.model';
-import { ElementService } from 'app/wad/rendering/element.service';
-import { LineWadModel } from 'app/wad/rendering/line.model';
-import { RectangleWadModel } from 'app/wad/rendering/rectangle.model';
-import { TriangleWadModel } from 'app/wad/rendering/triangle.model';
+import { CircleWadElementModel } from 'app/wad/rendering/circle/circle.model';
+import { WadElementService } from 'app/wad/rendering/element.service';
+import { LineWadElementModel } from 'app/wad/rendering/line/line.model';
+import { RectangleWadElementModel } from 'app/wad/rendering/rectangle/rectangle.model';
+import { TriangleWadElementModel } from 'app/wad/rendering/triangle/triangle.model';
 import { WadArgumentCoordinatesTransformer } from '../transformers/coordinates.transformer';
 import { WadArgumentNumberTransformer } from '../transformers/number.transformer';
 import { WadArgumentType } from './argument-types/argument-type';
@@ -20,7 +20,7 @@ export const wadCommandTypes = new Map<string, WadArgumentType<unknown>>([
 
 export function configureCommands(
   commandService: WadCommandService,
-  elementService: ElementService,
+  elementService: WadElementService,
 ) {
   const registrationFunctions = [
     function registerCommandTransformers() {
@@ -37,7 +37,7 @@ export function configureCommands(
           const origin = command.arguments.get('origin');
           const [x, y] = origin!.value;
           const radius = command.arguments.get('radius')?.value;
-          const element = new CircleWadModel(x, y, radius);
+          const element = new CircleWadElementModel(x, y, radius);
           elementService.add(element);
 
           return new WadCommandExecutorResult(true, `Circle #${element.id} was created.`);
@@ -69,7 +69,7 @@ export function configureCommands(
         try {
           const [startX, startY] = command.arguments.get('start')?.value ?? [undefined, undefined];
           const [endX, endY] = command.arguments.get('end')?.value ?? [undefined, undefined];
-          const element = new LineWadModel(startX, startY, endX, endY);
+          const element = new LineWadElementModel(startX, startY, endX, endY);
           elementService.add(element);
 
           return new WadCommandExecutorResult(true, `Line #${element.id} was created.`);
@@ -94,7 +94,7 @@ export function configureCommands(
             command.arguments.get('c')?.value,
             command.arguments.get('d')?.value,
           ];
-          const element = new RectangleWadModel(a, b, c, d);
+          const element = new RectangleWadElementModel(a, b, c, d);
           elementService.add(element);
 
           return new WadCommandExecutorResult(true, `Rectangle #${element.id} was created.`);
@@ -135,7 +135,7 @@ export function configureCommands(
           const a = command.arguments.get('a')?.value;
           const b = command.arguments.get('b')?.value;
           const c = command.arguments.get('c')?.value;
-          const element = new TriangleWadModel(a, b, c);
+          const element = new TriangleWadElementModel(a, b, c);
           elementService.add(element);
 
           return new WadCommandExecutorResult(true, `Triangle #${element.id} was created.`);

@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid';
 
-export class WadModel {
+const ELEMENT_MODEL_ID_SIZE = 8;
+
+export class WadElementModel {
   id!: string;
   type!: string;
 
@@ -20,6 +22,6 @@ export class WadModel {
   }
 
   private generateId(): string {
-    return nanoid();
+    return nanoid(ELEMENT_MODEL_ID_SIZE);
   }
 }

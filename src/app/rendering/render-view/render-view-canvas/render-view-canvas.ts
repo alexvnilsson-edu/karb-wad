@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, computed, inject, input, linkedSignal } from '@angular/core';
-import { RenderService } from 'app/wad/rendering/render.service';
+import { WadRenderService } from 'app/wad/rendering/render.service';
 import { Coordinate } from '../../../wad/rendering/coordinate.type';
 
 @Component({
@@ -14,7 +14,7 @@ import { Coordinate } from '../../../wad/rendering/coordinate.type';
   },
 })
 export class RenderViewCanvas {
-  renderService = inject(RenderService);
+  renderService = inject(WadRenderService);
 
   origin = input<Coordinate>(new Float32Array([0, 0]));
   scale = linkedSignal(() => this.renderService.scale());

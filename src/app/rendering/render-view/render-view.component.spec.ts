@@ -1,49 +1,45 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { WadModel } from 'app/wad/elements/element';
+import { ElementService } from 'app/wad/elements/element.service';
 import { RectangleWadModel } from 'app/wad/elements/rectangle';
 import { createCoordinate } from 'app/wad/rendering/coordinate';
-import { ElementService } from 'app/wad/elements/element.service';
-import { RenderService } from 'app/wad/rendering/render.service';
+import { WadRenderService } from 'app/wad/rendering/render.service';
 import { WadModule } from 'app/wad/wad.module';
-import { Component } from '@angular/core';
-import { WadModel } from 'app/wad/elements/element';
 
 @Component({
-  imports: [
-    WadModule
-  ],
+  imports: [WadModule],
   template: `<svg width="200" height="200" viewBox="0 0 200 200">
     @for (entry of elements; track entry[1].id) {
       @let element = entry[1];
       @switch (element.type) {
-        @case ("rectangle") {
+        @case ('rectangle') {
           <rect wad-rectangle [element]="element"></rect>
         }
       }
     }
-  </svg>`
+  </svg>`,
 })
 class RenderViewTestHost {
   elements: WadModel[] = [];
-
 }
-
 
 describe('RenderView', () => {
   let component: RenderViewTestHost;
   let fixture: ComponentFixture<RenderViewTestHost>;
 
-  let renderService: RenderService;
+  let renderService: WadRenderService;
   let elementService: ElementService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WadModule]
+      imports: [WadModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RenderViewTestHost);
 
     component = fixture.componentInstance;
-    renderService = TestBed.inject(RenderService);
+    renderService = TestBed.inject(WadRenderService);
     elementService = TestBed.inject(ElementService);
 
     renderService.setArea(200, 200);

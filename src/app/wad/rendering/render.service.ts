@@ -4,7 +4,7 @@ import { CanvasClickEvent } from './canvas-click.event';
 import { Coordinate, createCoordinate } from './coordinate.type';
 
 @Injectable({ providedIn: 'root' })
-export class RenderService {
+export class WadRenderService {
   private commandService = inject(WadCommandService);
 
   private _coord = signal(createCoordinate(0, 0));

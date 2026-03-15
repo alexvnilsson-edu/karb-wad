@@ -10,8 +10,8 @@ import {
 import { ElementsContainer } from 'app/wad/rendering/elements.container';
 import { createCoordinate } from '../../wad/rendering/coordinate.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
-import { ElementService } from '../../wad/rendering/element.service';
-import { RenderService } from '../../wad/rendering/render.service';
+import { WadElementService } from '../../wad/rendering/element.service';
+import { WadRenderService } from '../../wad/rendering/render.service';
 import { WadModule } from '../../wad/wad.module';
 import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
 import { RenderViewStatusComponent } from './render-view-status/render-view-status.component';
@@ -27,10 +27,10 @@ import { RenderViewStatusComponent } from './render-view-status/render-view-stat
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);
 
-  elementStorage = inject(ElementService);
-  renderService = inject(RenderService);
+  elementService = inject(WadElementService);
+  renderService = inject(WadRenderService);
 
-  readonly elements = linkedSignal(() => this.elementStorage.elements());
+  readonly elements = linkedSignal(() => this.elementService.elements());
 
   readonly allElements = linkedSignal(() => Array.from(this.elements().entries()));
 
@@ -47,7 +47,7 @@ export class RenderViewComponent {
 
   elementClick(event: WadElementClickEvent) {
     console.debug(`Element clicked: ${event.element.id}`, event);
-    this.elementStorage.focus(event.element);
+    this.elementService.focus(event.element);
   }
 
   constructor() {
