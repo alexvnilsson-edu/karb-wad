@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/prefer-standalone */
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
 import { Coordinate } from '../../rendering/coordinate.type';
 import { WadCommandService } from '../commands/command.service';
@@ -29,6 +29,10 @@ export class CommandInput {
 
   isInputting = () => this.command !== '';
 
+  inputPlaceholder$ = computed(() =>
+    this.inFocus$() ? 'Type help for a list of commands' : `Press [Enter] to focus command window`,
+  );
+
   commandInput = viewChild<ElementRef<HTMLInputElement>>('commandInput');
 
   command = '';
@@ -42,7 +46,7 @@ export class CommandInput {
       if (event && event.coordinates) {
         const coordinate = event.coordinates;
         this.addCoordinate(coordinate);
-        this.regainFocus();
+        this.setFocus();
       }
     }
   }
@@ -70,11 +74,19 @@ export class CommandInput {
     this.reset();
   }
 
-  focus(event: FocusEvent) {
+  setFocus() {
+    if (this.commandInput() && this.commandInput()!.nativeElement) {
+      this.commandInput()?.nativeElement.focus();
+    } else {
+      console.warn(`Unable to query command input element for focusing.`);
+    }
+  }
+
+  onFocus(_event: FocusEvent) {
     this.inFocus$.set(true);
   }
 
-  blur(event: FocusEvent) {
+  onBlur(_event: FocusEvent) {
     this.inFocus$.set(false);
   }
 
@@ -83,14 +95,6 @@ export class CommandInput {
     const coordinateString = this.coordinatesTransformer.toString(coordinate);
     const commandAddition = padLeft + coordinateString;
     this.command += commandAddition;
-  }
-
-  protected regainFocus() {
-    if (this.commandInput() && this.commandInput()!.nativeElement) {
-      this.commandInput()?.nativeElement.focus();
-    } else {
-      console.warn(`Unable to query command input element for focusing.`);
-    }
   }
 
   protected reset() {
