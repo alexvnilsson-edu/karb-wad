@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/prefer-standalone */
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, inject, linkedSignal, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
 import { WadCommandService } from '../commands/command.service';
 
 @Component({
@@ -14,5 +14,9 @@ export class WadCommandLog {
 
   lookBack$ = signal(10);
 
-  log$ = linkedSignal(() => this.commandService.logs.log$().slice(-this.lookBack$()).entries());
+  log$ = computed(() => this.commandService.logs.log$());
+
+  lastLogMessages$ = linkedSignal(() => this.log$().slice(-this.lookBack$()), {
+    debugName: 'wadCommandLogLast',
+  });
 }

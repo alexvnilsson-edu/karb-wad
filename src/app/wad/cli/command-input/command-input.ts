@@ -6,6 +6,7 @@ import {
   ElementRef,
   inject,
   linkedSignal,
+  OnInit,
   signal,
   viewChild,
 } from '@angular/core';
@@ -24,7 +25,7 @@ import { WadCommandService } from '../commands/command.service';
     '[class.error]': 'error$()',
   },
 })
-export class WadCommandInput {
+export class WadCommandInput implements OnInit {
   commandService = inject(WadCommandService);
 
   private coordinatesTransformer = new WadCoordinatesCommandArgumentTransformer();
@@ -56,6 +57,10 @@ export class WadCommandInput {
 
   constructor() {
     this.commandService.canvasClick.subscribe((event) => this.canvasClick(event));
+  }
+
+  ngOnInit() {
+    this.commandService.logs.info(`Type help for commands`);
   }
 
   canvasClick(event: CanvasClickEvent) {
