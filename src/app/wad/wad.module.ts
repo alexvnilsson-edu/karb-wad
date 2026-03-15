@@ -4,6 +4,7 @@ import { WadElement } from './rendering/element.component';
 
 import { CircleleWadElement } from './rendering/circle.component';
 import { LineWadElement } from './rendering/line.component';
+import { PolylineWadElement } from './rendering/polyline.component';
 import { RectangleWadElement } from './rendering/rectangle.component';
 import { TriangleWadElement } from './rendering/triangle.component';
 
@@ -19,6 +20,7 @@ import { RenderService } from './rendering/render.service';
 const ELEMENTS = [
   WadElement,
   CircleleWadElement,
+  PolylineWadElement,
   RectangleWadElement,
   TriangleWadElement,
   LineWadElement,

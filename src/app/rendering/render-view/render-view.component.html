@@ -99,7 +99,11 @@
             <circle wad-circle [elementModel]="model" (elementClick)="elementClick($event)"></circle>
           }
           @case ('line') {
-            <line wad-line [elementModel]="model" (elementClick)="elementClick($event)"></line>
+              <polyline
+                wad-polyline
+                [elementModel]="model"
+                (elementClick)="elementClick($event)"
+              ></polyline>
           }
         }
       }
