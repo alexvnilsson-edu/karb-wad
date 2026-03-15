@@ -2,10 +2,10 @@ import { computed, Directive, inject, input } from '@angular/core';
 import { WadRenderService } from './render.service';
 
 @Directive({
-  selector: '[appWadElements]',
+  selector: '[appWadElementContainer]',
   host: {},
 })
-export class ElementsContainer {
+export class WadElementContainer {
   private renderService = inject(WadRenderService);
   transformMethod = input('translate');
 
