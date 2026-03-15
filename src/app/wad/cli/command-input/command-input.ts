@@ -9,7 +9,7 @@ import { WadArgumentCoordinatesTransformer } from '../transformers/coordinates.t
 @Component({
   selector: 'wad-command-input',
   templateUrl: './command-input.html',
-  styleUrl: './command-input.css',
+  styleUrl: './command-input.scss',
   standalone: false,
   host: {
     '[class.active]': 'inFocus$()',

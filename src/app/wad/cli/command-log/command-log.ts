@@ -5,7 +5,7 @@ import { WadCommandService } from '../commands/command.service';
   selector: 'app-command-log',
   imports: [],
   templateUrl: './command-log.html',
-  styleUrl: './command-log.css',
+  styleUrl: './command-log.scss',
 })
 export class CommandLog {
   commandService = inject(WadCommandService);

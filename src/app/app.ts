@@ -6,6 +6,6 @@ import { WadModule } from './wad/wad.module';
   selector: 'app-root',
   imports: [WadModule, RenderViewComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrl: './app.scss',
 })
 export class App {}
