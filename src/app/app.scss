@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.toolbar-overrides((
+    container-background-color: rgb(16, 24, 40),
+    container-text-color: red,
+  ));
+}
