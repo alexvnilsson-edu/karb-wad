@@ -24,6 +24,8 @@ export class WadCommandLog {
     },
   );
 
+  messages = computed(() => this.logService.log$());
+
   getMessageLevelClass(message: WadCommandLogMessage) {
     return {
       debug: message.level === WadCommandLogMessageLevel.DEBUG,

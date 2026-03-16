@@ -1,6 +1,6 @@
 import { wadElementModelIdGenerator } from './model-id-generator';
 
-export class WadBaseElementModel {
+export class WadElementModel {
   id!: string;
   type!: string;
 

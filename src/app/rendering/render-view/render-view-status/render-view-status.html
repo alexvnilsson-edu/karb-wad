@@ -2,16 +2,15 @@
   class="grid grid-cols-4 bg-gray-800 font-mono text-white p-2 gap-2 border-t-1 border-t-gray-600 divide-gray-600 divide-x-1 divide-dashed"
 >
   <div aria-label="Mouse Coordinates" class="px-2">
-    <span>{{ coords()[0] | DecimalPipe }}</span>
+    @if (coords()) {
+      <span>{{ coords()[0] }}</span>
+    }
   </div>
 
   <div aria-label="Mouse Coordinates" class="px-2">
     <span>Scale: </span>
-    <span>{{ scale$() }}</span>
-  </div>
-
-  <div aria-label="Origo Coordinates">
-    <span>Origo: </span>
-    <span>{{ origin$() }}</span>
+    @if (scale()) {
+      <span>{{ scale() | percent }}</span>
+    }
   </div>
 </div>

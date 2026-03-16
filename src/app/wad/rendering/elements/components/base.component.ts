@@ -1,9 +1,9 @@
 /* eslint-disable @angular-eslint/component-selector */
 
 import { ChangeDetectorRef, Component, inject, input, linkedSignal, output } from '@angular/core';
-import { WadElementClickEvent } from '../../element-click.event';
 import { WadRenderService } from '../../render.service';
-import { WadBaseElementModel } from '../models/model';
+import { WadElementActivateEvent } from '../element-activate.event';
+import { WadElementModel } from '../models/model';
 
 @Component({
   selector: '[app-wad-base]',
@@ -18,15 +18,15 @@ import { WadBaseElementModel } from '../models/model';
     // '(pointerup)': 'onPointerUp($event)',
   },
 })
-export class WadBaseElementComponent<TModel extends WadBaseElementModel> {
+export class WadBaseElementComponent<TModel extends WadElementModel> {
   protected changeDetection = inject(ChangeDetectorRef);
   protected rendering = inject(WadRenderService);
 
-  elementModel = input.required<WadBaseElementModel>();
+  elementModel = input.required<WadElementModel>();
 
   model = linkedSignal<TModel>(() => this.elementModel() as TModel);
 
-  elementClick = output<WadElementClickEvent>();
+  elementClick = output<WadElementActivateEvent>();
 
   isFocused$ = linkedSignal(() => this.model()?.isFocused ?? false);
 
@@ -38,7 +38,7 @@ export class WadBaseElementComponent<TModel extends WadBaseElementModel> {
     console.debug(`Element ${this.model()?.id || 'unknown id'} was clicked.`);
 
     if (this.model()) {
-      const eventData: WadElementClickEvent = { element: this.model()! };
+      const eventData: WadElementActivateEvent = { element: this.model()! };
       console.debug(`Emitting event elementClick with data: `, eventData);
       this.elementClick.emit(eventData);
     }

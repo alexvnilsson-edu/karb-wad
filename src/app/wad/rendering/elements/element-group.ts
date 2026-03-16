@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { WadRenderService } from './render.service';
+import { WadRenderService } from '../render.service';
 
 @Directive({
   selector: '[appWadElementGroup]',

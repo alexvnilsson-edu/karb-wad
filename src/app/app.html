@@ -2,8 +2,8 @@
   <nav aria-label="Global" class="mx-auto flex items-center justify-between p-4 lg:px-6">
     <div class="flex lg:flex-1">
       <a href="#" class="-m-1.5 p-1.5">
-        <h1 class="sr-only">Web-aided design</h1>
-        <img src="wad-logo.png" alt="wad-logo" class="size-8" />
+        <h1 class="sr-only">Web-aided design (<abbr>WAD</abbr>)</h1>
+        <img src="wad-logo.png" alt="wad-logo" class="size-12" />
       </a>
     </div>
   </nav>
@@ -16,5 +16,5 @@
 
 <main id="main" class="main flex-1 flex flex-col">
   <app-render-view></app-render-view>
-  <wad-command-input #commandInput></wad-command-input>
+  <app-wad-command-input #wadCommandInput />
 </main>

@@ -1,7 +1,7 @@
 import { Coordinates } from '../../coordinates.type';
-import { WadBaseElementModel } from './model';
+import { WadElementModel } from './model';
 
-export class WadPolylineElementModel extends WadBaseElementModel {
+export class WadPolylineElementModel extends WadElementModel {
   points: Coordinates[] = [];
   constructor(points: Coordinates[]) {
     super('polyline');
