@@ -2,10 +2,7 @@ import { Component, EnvironmentInjector, inject, viewChild } from '@angular/core
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RenderView } from './rendering/render-view/render-view';
 import { WadCommandInput } from './wad/cli/command-input/command-input';
-import {
-  configureCommands,
-  getCommandsForConfiguration,
-} from './wad/cli/commands/config/command-config';
+import { configureCommands, getCommandsForConfiguration } from './wad/cli/commands/command-config';
 
 @Component({
   selector: 'app-root',

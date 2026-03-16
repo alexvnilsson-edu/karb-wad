@@ -28,15 +28,15 @@ export class WadTriangleCommandExecutor extends WadCommandExecutor {
       const element = new WadTriangleElementModel(a, b, c);
       this.elementService.add(element);
 
-      this.logService.info(`Created triangle (#${element.id})`);
-      return new WadCommandExecutorResult(true, `Rectangle #${element.id} was created.`);
+      this.logService.info($localize`Created triangle (#${element.id})`);
+      return new WadCommandExecutorResult(true, $localize`Rectangle #${element.id} was created.`);
     } catch (ex) {
       this.logService.error(
-        `Unable to create triangle with arguments: ${Array.from(command.arguments.values())
+        $localize`Unable to create triangle with arguments: ${Array.from(command.arguments.values())
           .map((arg) => [arg.name, arg.value].join('='))
           .join(' ')}`,
       );
-      return new WadCommandExecutorResult(false, `Error creating rectangle: ${ex}`);
+      return new WadCommandExecutorResult(false, $localize`Error creating rectangle: ${ex}`);
     }
   }
 }

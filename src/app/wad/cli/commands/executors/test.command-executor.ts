@@ -22,10 +22,10 @@ export class WadTestCommandExecutor extends WadCommandExecutor {
     const squareRoot: number = (command.arguments.get('n')?.value as number) ?? 48;
 
     this.logService.debug(
-      `[${WadTestCommandExecutor.ExecutorName}] number of elements: ${squareRoot ** 2}`,
+      $localize`[${WadTestCommandExecutor.ExecutorName}] number of elements: ${squareRoot ** 2}`,
     );
 
-    this.logService.debug(`Clearing elements...`);
+    this.logService.debug($localize`Clearing elements...`);
 
     for (const [_id, element] of this.elementService.elements()) {
       this.elementService.remove(element);

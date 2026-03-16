@@ -1,8 +1,8 @@
-import { WadCommandArgumentType } from '../arguments/types/argument-type';
-import { WadCoordinatesArgumentType } from '../arguments/types/coordinates.argument-type';
-import { WadCommandArgumentTypeNotFoundError } from '../arguments/types/errors';
-import { WadNumberArgumentType } from '../arguments/types/number.argument-type';
-import { WadCommandArgumentTypes } from '../command.type';
+import { WadCommandArgumentType } from './arguments/types/argument-type';
+import { WadCoordinatesArgumentType } from './arguments/types/coordinates.argument-type';
+import { WadCommandArgumentTypeNotFoundError } from './arguments/types/errors';
+import { WadNumberArgumentType } from './arguments/types/number.argument-type';
+import { WadCommandArgumentTypes } from './command.type';
 
 export interface WadCommandArgumentConfig {
   name: string;

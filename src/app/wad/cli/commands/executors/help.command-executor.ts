@@ -22,7 +22,8 @@ export class WadHelpCommandExecutor extends WadCommandExecutor {
     const commands = Array.from(this.commandService.commands.keys()).filter(
       (c) => c.toLowerCase() !== 'help',
     );
-    const helpMessage = `Commands: ${commands.join(', ')}`;
+    const helpMessagePrefix = $localize`Commands`;
+    const helpMessage = `${helpMessagePrefix}: ${commands.join(', ')}`;
     this.logService.info(helpMessage);
 
     return new WadCommandExecutorResult(true, helpMessage);

@@ -1,22 +1,22 @@
 import { EnvironmentInjector, inject, runInInjectionContext } from '@angular/core';
-import { WadCommandArgument } from '../arguments/command-argument';
-import { WadCommand } from '../command';
-import { WadCommandService } from '../command.service';
+import { WadCommandArgument } from './arguments/command-argument';
+import { WadCommand } from './command';
+import {
+  configureCommandArgument,
+  getCommandArgumentType,
+  WadCommandArgumentConfig,
+} from './command-argument-config';
+import { WadCommandService } from './command.service';
 import {
   WadCircleCommandExecutor,
   WadLineCommandExecutor,
   WadRectangleCommandExecutor,
   WadResetCommandExecutor,
   WadTriangleCommandExecutor,
-} from '../executors';
-import { WadCommandExecutor } from '../executors/command-executor.type';
-import { WadHelpCommandExecutor } from '../executors/help.command-executor';
-import { WadTestCommandExecutor } from '../executors/test.command-executor';
-import {
-  configureCommandArgument,
-  getCommandArgumentType,
-  WadCommandArgumentConfig,
-} from './command-argument-config';
+} from './executors';
+import { WadCommandExecutor } from './executors/command-executor.type';
+import { WadHelpCommandExecutor } from './executors/help.command-executor';
+import { WadTestCommandExecutor } from './executors/test.command-executor';
 
 export interface WadCommandConfig {
   name: string;
@@ -42,8 +42,8 @@ export const getCommandsForConfiguration = (): WadCommandConfig[] => [
     name: 'circle',
     aliases: ['c', 'circel', 'cirkel'],
     arguments: [
-      configureCommandArgument('origin', 'coordinates to center of circle', 'coordinate'),
-      configureCommandArgument('radius', 'radius of circle', 'number'),
+      configureCommandArgument('origin', $localize`coordinates to center of circle`, 'coordinate'),
+      configureCommandArgument('radius', $localize`radius of circle`, 'number'),
     ],
     executor: inject(WadCircleCommandExecutor),
   },
@@ -57,8 +57,8 @@ export const getCommandsForConfiguration = (): WadCommandConfig[] => [
     name: 'line',
     aliases: ['l'],
     arguments: [
-      configureCommandArgument('start', 'coordinates to start of line', 'coordinate'),
-      configureCommandArgument('end', 'coordinates to end of line', 'coordinate'),
+      configureCommandArgument('start', $localize`coordinates to start of line`, 'coordinate'),
+      configureCommandArgument('end', $localize`coordinates to end of line`, 'coordinate'),
     ],
     executor: inject(WadLineCommandExecutor),
   },
@@ -66,17 +66,17 @@ export const getCommandsForConfiguration = (): WadCommandConfig[] => [
     name: 'rectangle',
     aliases: ['r', 'rect', 'rectangel', 'rektangel'],
     arguments: [
-      configureCommandArgument('a', 'coordinates of first corner', 'coordinate'),
-      configureCommandArgument('b', 'coordinates of second corner', 'coordinate'),
-      configureCommandArgument('c', 'coordinates of third corner', 'coordinate'),
-      configureCommandArgument('d', 'coordinates of fourth corner', 'coordinate'),
+      configureCommandArgument('a', $localize`coordinates of first corner`, 'coordinate'),
+      configureCommandArgument('b', $localize`coordinates of second corner`, 'coordinate'),
+      configureCommandArgument('c', $localize`coordinates of third corner`, 'coordinate'),
+      configureCommandArgument('d', $localize`coordinates of fourth corner`, 'coordinate'),
     ],
     executor: inject(WadRectangleCommandExecutor),
   },
   configureCommand(
     'test',
     [],
-    [configureCommandArgument('n', 'number of elements (square root)', 'number')],
+    [configureCommandArgument('n', $localize`number of elements (square root)`, 'number')],
     inject(WadTestCommandExecutor),
   ),
   configureCommand('reset', [], [], inject(WadResetCommandExecutor)),
@@ -84,9 +84,9 @@ export const getCommandsForConfiguration = (): WadCommandConfig[] => [
     'triangle',
     ['t', 'triangel'],
     [
-      configureCommandArgument('a', 'coordinates of first corner', 'coordinate'),
-      configureCommandArgument('b', 'coordinates of second corner', 'coordinate'),
-      configureCommandArgument('c', 'coordinates of third corner', 'coordinate'),
+      configureCommandArgument('a', $localize`coordinates of first corner`, 'coordinate'),
+      configureCommandArgument('b', $localize`coordinates of second corner`, 'coordinate'),
+      configureCommandArgument('c', $localize`coordinates of third corner`, 'coordinate'),
     ],
     inject(WadTriangleCommandExecutor),
   ),

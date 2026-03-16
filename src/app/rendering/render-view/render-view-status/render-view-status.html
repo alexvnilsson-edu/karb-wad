@@ -1,14 +1,14 @@
 <div
   class="grid grid-cols-4 bg-gray-800 font-mono text-white p-2 gap-2 border-t-1 border-t-gray-600 divide-gray-600 divide-x-1 divide-dashed"
 >
-  <div aria-label="Mouse Coordinates" class="px-2">
+  <div i18n-aria-label aria-label="Mouse Coordinates" class="px-2">
     @if (coords()) {
       <span>{{ coords()[0] }}</span>
     }
   </div>
 
-  <div aria-label="Mouse Coordinates" class="px-2">
-    <span>Scale: </span>
+  <div i18n-aria-label aria-label="Scale" class="px-2">
+    <span i18n>Scale:</span>
     @if (scale()) {
       <span>{{ scale() | percent }}</span>
     }

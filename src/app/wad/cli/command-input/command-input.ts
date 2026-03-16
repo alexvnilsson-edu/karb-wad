@@ -39,8 +39,8 @@ export class WadCommandInput implements OnInit {
 
   inputPlaceholder$ = computed(() =>
     this.isActive$()
-      ? 'Type command then [Enter] or [Escape] to hide'
-      : `Press [Enter] to activate`,
+      ? $localize`Enter command or press [Escape] to close`
+      : $localize`Press [Enter] to open`,
   );
 
   commandInputElement = viewChild<ElementRef<HTMLInputElement>>('wadCommandInput');
