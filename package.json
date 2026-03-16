@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "i18n:extract": "ng extract-i18n --output-path src/locales",
     "deploy:github-pages": "ng deploy --base-href=/karb-wad/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
