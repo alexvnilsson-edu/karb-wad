@@ -1,7 +1,7 @@
 import { inject, Injectable, linkedSignal, signal } from '@angular/core';
 import { WadCommandService } from '../cli/commands/command.service';
 import { CanvasClickEvent } from './canvas-click.event';
-import { Coordinates, createCoordinates } from './coordinate.type';
+import { Coordinates, createCoordinates } from './coordinates.type';
 
 @Injectable({ providedIn: 'root' })
 export class WadRenderService {

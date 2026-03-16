@@ -1,5 +1,5 @@
-import { WadElementModel } from './element.model';
+import { WadBaseElementModel } from './elements/models/model';
 
 export interface WadElementClickEvent {
-  element: WadElementModel;
+  element: WadBaseElementModel;
 }

@@ -1,14 +1,14 @@
 import { Injectable, linkedSignal, signal } from '@angular/core';
-import { WadElementModel } from './element.model';
+import { WadBaseElementModel } from './elements/models/model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WadElementService {
-  private _elements = signal<Map<string, WadElementModel>>(new Map());
+  private _elements = signal<Map<string, WadBaseElementModel>>(new Map());
   readonly elements = this._elements.asReadonly();
 
-  private _focusedElement = signal<WadElementModel | undefined>(undefined);
+  private _focusedElement = signal<WadBaseElementModel | undefined>(undefined);
   readonly focusedElement = this._focusedElement.asReadonly();
 
   /** IDs of focused elements. */
@@ -29,7 +29,7 @@ export class WadElementService {
     return ids;
   });
 
-  add(element: WadElementModel) {
+  add(element: WadBaseElementModel) {
     const id = element.id;
 
     if (element.id == undefined) {
@@ -46,7 +46,7 @@ export class WadElementService {
     });
   }
 
-  update(id: string, element: WadElementModel) {
+  update(id: string, element: WadBaseElementModel) {
     if (!this._elements().has(id)) {
       throw new Error(`Element does not exists in element map.`);
     }
@@ -57,7 +57,7 @@ export class WadElementService {
     });
   }
 
-  remove(element: WadElementModel) {
+  remove(element: WadBaseElementModel) {
     const id = element.id;
 
     if (id === undefined) {
@@ -81,7 +81,7 @@ export class WadElementService {
     });
   }
 
-  focus(element: WadElementModel) {
+  focus(element: WadBaseElementModel) {
     if (this.focused().length > 0) {
       this.focused().forEach((id) => {
         if (this._elements().has(element.id)) {

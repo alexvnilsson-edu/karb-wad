@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { createCoordinates } from './coordinate.type';
+import { createCoordinates } from './coordinates.type';
 import { WadRenderService } from './render.service';
 
-describe('RenderService', () => {
+describe('WadRenderService', () => {
   let service: WadRenderService;
 
   beforeEach(() => {
