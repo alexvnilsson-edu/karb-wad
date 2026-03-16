@@ -20,7 +20,12 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en"
+        "sourceLocale": "en-US",
+        "locales": {
+          "sv": {
+            "translation": "src/locales/messages.sv.xlf"
+          }
+        }
       },
       "architect": {
         "build": {
@@ -33,6 +38,9 @@
                 "glob": "**/*",
                 "input": "public"
               }
+            ],
+            "localize": [
+              "sv"
             ],
             "styles": [
               "src/material-theme.scss",
