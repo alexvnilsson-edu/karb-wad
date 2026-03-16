@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, computed, inject, input, linkedSignal } from '@angular/core';
 import { WadRenderService } from 'app/wad/rendering/render.service';
-import { Coordinates } from '../../../wad/rendering/coordinate.type';
+import { Coordinates } from '../../wad/rendering/coordinate.type';
 
 @Component({
   selector: 'svg[render-view-canvas]',

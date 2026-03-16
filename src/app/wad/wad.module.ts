@@ -12,9 +12,10 @@ import { LineWadSystemElement } from './rendering/system/line';
 import { TextWadSystemElement } from './rendering/system/text';
 
 import { WadCommandInput } from './cli/command-input/command-input';
-import { WadCommandLog } from './cli/command-log/command-log';
+import { WadCommandLog } from './cli/commands/logs/command-log/command-log';
 
-import { WadCommandLogMessageComponent } from './cli/command-log/command-log-message';
+import { NgClass } from '@angular/common';
+import { WadCommandLogMessageComponent } from './cli/commands/logs/command-log/command-log-message';
 import { CircleWadElementComponent } from './rendering/circle';
 import { WadElementService } from './rendering/element.service';
 import { WadRenderService } from './rendering/render.service';
@@ -33,7 +34,7 @@ const ELEMENT_DECLARATIONS = [
 const COMMAND_DECLARATIONS = [WadCommandInput, WadCommandLog, WadCommandLogMessageComponent];
 
 @NgModule({
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass],
   declarations: [COMMAND_DECLARATIONS, ELEMENT_DECLARATIONS],
   providers: [WadElementService, WadRenderService],
   exports: [COMMAND_DECLARATIONS, ELEMENT_DECLARATIONS],

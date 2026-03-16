@@ -13,8 +13,8 @@ import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { WadElementService } from '../../wad/rendering/element.service';
 import { WadRenderService } from '../../wad/rendering/render.service';
 import { WadModule } from '../../wad/wad.module';
-import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
-import { RenderViewStatusComponent } from './render-view-status/render-view-status.component';
+import { RenderStatusComponent } from '../render-status/render-status.component';
+import { RenderViewCanvas } from './render-view-canvas.component';
 
 @Component({
   selector: 'app-render-view',
@@ -22,7 +22,7 @@ import { RenderViewStatusComponent } from './render-view-status/render-view-stat
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [WadModule, RenderViewCanvas, WadElementContainer, RenderViewStatusComponent, NgClass],
+  imports: [WadModule, RenderViewCanvas, WadElementContainer, RenderStatusComponent, NgClass],
 })
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);

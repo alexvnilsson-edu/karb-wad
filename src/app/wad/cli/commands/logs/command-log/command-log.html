@@ -1,0 +1,3 @@
+@for (message of lastLogMessages$(); track message.id) {
+  <p [ngClass]="getMessageLevelClass(message)">{{ message.message }}</p>
+}

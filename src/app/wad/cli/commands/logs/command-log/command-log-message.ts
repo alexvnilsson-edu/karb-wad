@@ -1,11 +1,11 @@
 /* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, computed, input } from '@angular/core';
-import { WadCommandLogMessage } from '../commands/logs/command-log-message';
-import { WadCommandLogMessageLevel } from '../commands/logs/command-log-message-levels';
+import { WadCommandLogMessage } from '../command-log-message';
+import { WadCommandLogMessageLevel } from '../command-log-message-levels';
 
 @Component({
   selector: 'app-wad-command-log-message',
-  template: `{{ time$() }}&nbsp;&nbsp;{{ message$() }}`,
+  template: `{{ message$() }}`,
   styles: `
     :host {
       flex: 1;

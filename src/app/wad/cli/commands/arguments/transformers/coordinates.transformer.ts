@@ -2,9 +2,11 @@ import { Coordinates, createCoordinates } from '../../../../rendering/coordinate
 import { WadCommandArgumentTransformer } from './transformer';
 
 export class WadCoordinatesCommandArgumentTransformer extends WadCommandArgumentTransformer<Coordinates> {
+  static CoordinateSeparator = '..';
+
   override name = 'coordinates';
 
-  private separator = '..';
+  private separator = WadCoordinatesCommandArgumentTransformer.CoordinateSeparator;
 
   override transform(value: string): Coordinates {
     if (!value.includes(this.separator)) {

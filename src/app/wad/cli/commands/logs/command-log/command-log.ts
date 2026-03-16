@@ -1,7 +1,9 @@
 /* eslint-disable @angular-eslint/prefer-standalone */
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, computed, inject, signal } from '@angular/core';
-import { WadCommandLogService } from '../commands/logs/command-log.service';
+import { WadCommandLogMessage } from '../command-log-message';
+import { WadCommandLogMessageLevel } from '../command-log-message-levels';
+import { WadCommandLogService } from '../command-log.service';
 
 @Component({
   selector: 'wad-command-log',
@@ -22,4 +24,13 @@ export class WadCommandLog {
       debugName: 'wadCommandLogLast',
     },
   );
+
+  getMessageLevelClass(message: WadCommandLogMessage) {
+    return {
+      debug: message.level === WadCommandLogMessageLevel.DEBUG,
+      info: message.level === WadCommandLogMessageLevel.INFO,
+      warning: message.level === WadCommandLogMessageLevel.WARNING,
+      error: message.level === WadCommandLogMessageLevel.ERROR,
+    };
+  }
 }
