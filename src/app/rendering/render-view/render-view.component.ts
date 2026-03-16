@@ -34,6 +34,8 @@ export class RenderViewComponent {
 
   canvasViewChild = contentChild<ElementRef<HTMLElement>>('renderViewCanvas');
 
+  private _canvasResizeObserver!: ResizeObserver;
+
   readonly elements = computed(() => this.elementService.elements());
   readonly allElements = computed(() => Array.from(this.elements()));
 
@@ -62,12 +64,29 @@ export class RenderViewComponent {
     afterNextRender(() => {
       const canvas = this.getCanvas();
       canvas.addEventListener('resize', (e) => this.onCanvasResize(e));
-      const dimensions = this.getCanvasDimensions();
-      if (dimensions) {
-        this.renderService.setArea(dimensions[0], dimensions[1]);
-        this.renderService.setHeight(dimensions[1]);
-      }
+      this._registerResizeObserver();
+      this.setRenderArea();
     });
+  }
+
+  private _registerResizeObserver() {
+    if (!this._canvasResizeObserver) {
+      this._canvasResizeObserver = new ResizeObserver((entries) => {
+        console.debug(`${this._registerResizeObserver.name}`, entries);
+        this.setRenderArea();
+      });
+    }
+
+    this._canvasResizeObserver.observe(this.getCanvas());
+    this._canvasResizeObserver.observe(this.getCanvasContainer());
+  }
+
+  private setRenderArea() {
+    const dimensions = this.getCanvasDimensions();
+    if (dimensions) {
+      this.renderService.setArea(dimensions[0], dimensions[1]);
+      this.renderService.setHeight(dimensions[1]);
+    }
   }
 
   private getCanvasDimensions() {
@@ -76,7 +95,9 @@ export class RenderViewComponent {
     return [canvas.clientWidth, canvas.clientHeight];
   }
 
-  private onCanvasResize(event: Event) {}
+  private onCanvasResize(_event: Event) {
+    this.setRenderArea();
+  }
 
   protected getCanvas(): HTMLElement {
     const canvas = this.elementRef.nativeElement.querySelector('svg#renderViewCanvas');
