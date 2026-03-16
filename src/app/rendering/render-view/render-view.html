@@ -72,28 +72,28 @@
               <polygon
                 wad-rectangle
                 [elementModel]="model"
-                (elementClick)="elementClick($event)"
+                (elementClick)="onElementClick($event)"
               ></polygon>
             }
             @case ('triangle') {
               <polygon
                 wad-triangle
                 [elementModel]="model"
-                (elementClick)="elementClick($event)"
+                (elementClick)="onElementClick($event)"
               ></polygon>
             }
             @case ('circle') {
               <circle
                 wad-circle
                 [elementModel]="model"
-                (elementClick)="elementClick($event)"
+                (elementClick)="onElementClick($event)"
               ></circle>
             }
             @case ('line') {
               <polyline
                 wad-polyline
                 [elementModel]="model"
-                (elementClick)="elementClick($event)"
+                (elementClick)="onElementClick($event)"
               ></polyline>
             }
           }
@@ -103,4 +103,4 @@
   </div>
 </div>
 
-<app-render-status></app-render-status>
+<app-render-view-status />

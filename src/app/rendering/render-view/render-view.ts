@@ -10,23 +10,22 @@ import {
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { WadElementGroup } from 'app/wad/rendering/element-group';
-import { createCoordinates } from '../../wad/rendering/coordinate.type';
+import { createCoordinates } from '../../wad/rendering/coordinates.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { WadElementService } from '../../wad/rendering/element.service';
 import { WadRenderService } from '../../wad/rendering/render.service';
-import { WadModule } from '../../wad/wad.module';
-import { RenderStatusComponent } from '../render-status/render-status.component';
-import { RenderViewCanvas } from './render-view-canvas.component';
+import { RenderViewCanvas } from '../render-view-canvas/render-view-canvas';
+import { RenderViewStatus } from '../render-view-status/render-view-status';
 
 @Component({
   selector: 'app-render-view',
-  templateUrl: './render-view.component.html',
+  templateUrl: './render-view.html',
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [WadModule, RenderViewCanvas, WadElementGroup, RenderStatusComponent, NgClass],
+  imports: [RenderViewCanvas, WadElementGroup, RenderViewStatus, NgClass],
 })
-export class RenderViewComponent {
+export class RenderView {
   private elementRef = inject(ElementRef);
 
   elementService = inject(WadElementService);
@@ -49,7 +48,7 @@ export class RenderViewComponent {
   readonly isMouseDown = this._isPointerDown.asReadonly();
   readonly isPanning = this._isPanning.asReadonly();
 
-  elementClick(event: WadElementClickEvent) {
+  onElementClick(event: WadElementClickEvent) {
     console.debug(`Element clicked: ${event.element.id}`, event);
     this.elementService.focus(event.element);
   }

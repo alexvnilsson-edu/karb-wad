@@ -1,12 +1,9 @@
-/* eslint-disable @angular-eslint/component-selector */
-import { Component, computed, inject, input, linkedSignal } from '@angular/core';
+import { computed, Directive, inject, input, linkedSignal } from '@angular/core';
 import { WadRenderService } from 'app/wad/rendering/render.service';
-import { Coordinates } from '../../wad/rendering/coordinate.type';
+import { Coordinates } from '../../wad/rendering/coordinates.type';
 
-@Component({
-  selector: 'svg[render-view-canvas]',
-  imports: [],
-  template: `<ng-content />`,
+@Directive({
+  selector: '[appRenderViewCanvas]',
   host: {
     '[attr.viewBox]': 'viewBox$()',
     '[attr.width]': 'width$()',
