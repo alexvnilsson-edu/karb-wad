@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { WadElementService } from 'app/wad/rendering/element.service';
 import { WadCommand } from '../command';
 import { WadCommandService } from '../command.service';
-import { WadCommandLogService } from '../logs/log.service';
+import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { WadCommandExecutor } from './command-executor.type';
 

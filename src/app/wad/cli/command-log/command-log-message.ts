@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, computed, input } from '@angular/core';
-import { WadCommandLogMessage } from '../commands/logs/log-message';
-import { WadCommandLogMessageLevel } from '../commands/logs/log-message-levels';
+import { WadCommandLogMessage } from '../commands/logs/command-log-message';
+import { WadCommandLogMessageLevel } from '../commands/logs/command-log-message-levels';
 
 @Component({
   selector: 'app-wad-command-log-message',

@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { WadCommandLogMessage } from './log-message';
-import { WadCommandLogMessageLevel } from './log-message-levels';
+import { WadCommandLogMessage } from './command-log-message';
+import { WadCommandLogMessageLevel } from './command-log-message-levels';
 
 @Injectable({
   providedIn: 'root',

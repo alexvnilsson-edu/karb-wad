@@ -6,7 +6,7 @@ import { WadCommandArgumentTransformer } from './arguments/transformers/transfor
 import { WadCommandArgumentType } from './arguments/types/argument-type';
 import { WadCommand } from './command';
 import { WadCommandExecutorResult } from './executors/command-executor-result';
-import { WadCommandLogService } from './logs/log.service';
+import { WadCommandLogService } from './logs/command-log.service';
 
 type WadCommandServiceRegistrationType =
   | WadCommand

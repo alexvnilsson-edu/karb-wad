@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid';
-import { WadCommandLogMessageLevel } from './log-message-levels';
+import { WadCommandLogMessageLevel } from './command-log-message-levels';
 
 const WAD_LOG_ID_ALPHABET = 'abcd1234';
 const WAD_LOG_ID_ALPHABET_SIZE = 4;

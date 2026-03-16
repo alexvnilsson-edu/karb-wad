@@ -3,7 +3,7 @@ import { Coordinates } from 'app/wad/rendering/coordinate.type';
 import { WadElementService } from 'app/wad/rendering/element.service';
 import { TriangleWadElementModel } from 'app/wad/rendering/triangle';
 import { WadCommand } from '../command';
-import { WadCommandLogService } from '../logs/log.service';
+import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { WadCommandExecutor } from './command-executor.type';
 

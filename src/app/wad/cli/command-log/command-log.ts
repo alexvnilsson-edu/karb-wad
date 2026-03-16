@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/prefer-standalone */
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, computed, inject, signal } from '@angular/core';
-import { WadCommandLogService } from '../commands/logs/log.service';
+import { WadCommandLogService } from '../commands/logs/command-log.service';
 
 @Component({
   selector: 'wad-command-log',
