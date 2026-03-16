@@ -93,7 +93,7 @@ export class WadCommandService {
           return `<${name} [${description}: ${typeDescription}]>`;
         })
         .join(' ');
-      this.logs.error(`Unexpected syntax. ${command.name} ${argSyntax}`);
+      this.logs.error($localize`Unexpected syntax. ${command.name} ${argSyntax}`);
       throw new Error(`Syntax error. Expected: ${command.name} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
