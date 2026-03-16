@@ -1,4 +1,4 @@
-import { Coordinates } from 'app/wad/rendering/coordinate.type';
+import { Coordinates } from 'app/wad/rendering/coordinates.type';
 import { WadCoordinatesCommandArgumentTransformer } from '../transformers/coordinates.transformer';
 import { WadCommandArgumentType } from './argument-type';
 

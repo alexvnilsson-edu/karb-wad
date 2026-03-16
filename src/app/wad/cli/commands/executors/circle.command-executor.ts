@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { CircleWadElementModel } from 'app/wad/rendering/circle';
-import { Coordinates } from 'app/wad/rendering/coordinate.type';
+import { Coordinates } from 'app/wad/rendering/coordinates.type';
 import { WadElementService } from 'app/wad/rendering/element.service';
+import { WadCircleElementModel } from 'app/wad/rendering/elements/models';
 import { WadCommand } from '../command';
 import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
@@ -24,7 +24,7 @@ export class WadCircleCommandExecutor extends WadCommandExecutor {
         command.arguments.get('origin')?.value as Coordinates,
         command.arguments.get('radius')?.value as number,
       ];
-      const element = new CircleWadElementModel(x, y, radius);
+      const element = new WadCircleElementModel(x, y, radius);
       this.elementService.add(element);
 
       this.logService.info(`Created triangle (#${element.id})`);

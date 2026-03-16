@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { createCoordinates } from 'app/wad/rendering/coordinate.type';
+import { createCoordinates } from 'app/wad/rendering/coordinates.type';
 import { WadElementService } from 'app/wad/rendering/element.service';
-import { RectangleWadElementModel } from 'app/wad/rendering/rectangle/rectangle.model';
+import { WadRectangleElementModel } from 'app/wad/rendering/elements/models';
 import { WadCommand } from '../command';
 import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
@@ -25,6 +25,8 @@ export class WadTestCommandExecutor extends WadCommandExecutor {
       `[${WadTestCommandExecutor.ExecutorName}] number of elements: ${squareRoot ** 2}`,
     );
 
+    this.logService.debug(`Clearing elements...`);
+
     for (const [_id, element] of this.elementService.elements()) {
       this.elementService.remove(element);
     }
@@ -36,7 +38,7 @@ export class WadTestCommandExecutor extends WadCommandExecutor {
         const y = 10 + 10 * col;
 
         this.elementService.add(
-          new RectangleWadElementModel(
+          new WadRectangleElementModel(
             createCoordinates(x, y),
             createCoordinates(x, y + length),
             createCoordinates(x + length, y + length),

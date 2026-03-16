@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Coordinates } from 'app/wad/rendering/coordinate.type';
+import { Coordinates } from 'app/wad/rendering/coordinates.type';
 import { WadElementService } from 'app/wad/rendering/element.service';
-import { RectangleWadElementModel } from 'app/wad/rendering/rectangle';
+import { WadRectangleElementModel } from 'app/wad/rendering/elements/models';
 import { WadCommand } from '../command';
 import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
@@ -26,7 +26,7 @@ export class WadRectangleCommandExecutor extends WadCommandExecutor {
         command.arguments.get('c')?.value as Coordinates,
         command.arguments.get('d')?.value as Coordinates,
       ];
-      const element = new RectangleWadElementModel(a, b, c, d);
+      const element = new WadRectangleElementModel(a, b, c, d);
       this.elementService.add(element);
 
       this.logService.info(`Created rectangle (#${element.id})`);

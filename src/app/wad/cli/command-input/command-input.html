@@ -3,11 +3,11 @@
     class="flex flex-col justify-stretch items-stretch flex-1 p-1 px-2 bg-gray-900 border-gray-600 border-2 rounded-lg font-mono text-white"
   >
     @if (isActive$()) {
-      <wad-command-log />
+      <app-wad-command-log />
     }
 
     <input
-      #commandInput
+      #wadCommandInput
       type="text"
       class="command-input-text p-1"
       [attr.placeholder]="inputPlaceholder$()"

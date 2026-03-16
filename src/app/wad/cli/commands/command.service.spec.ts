@@ -1,5 +1,5 @@
 import { WadElementService } from 'app/wad/rendering/element.service';
-import { createCoordinates } from '../../rendering/coordinate.type';
+import { createCoordinates } from '../../rendering/coordinates.type';
 import { WadArgumentCoordinatesTransformer } from './arguments/transformers';
 import { WadCoordinatesArgumentType } from './arguments/types/coordinates.argument-type';
 import { WadCommand } from './command';

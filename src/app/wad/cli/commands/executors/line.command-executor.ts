@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Coordinates } from 'app/wad/rendering/coordinate.type';
+import { Coordinates } from 'app/wad/rendering/coordinates.type';
 import { WadElementService } from 'app/wad/rendering/element.service';
-import { LineWadElementModel } from 'app/wad/rendering/line';
+import { WadLineElementModel } from 'app/wad/rendering/elements/models';
 import { WadCommand } from '../command';
 import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
@@ -24,7 +24,7 @@ export class WadLineCommandExecutor extends WadCommandExecutor {
         command.arguments.get('start')?.value as Coordinates,
         command.arguments.get('end')?.value as Coordinates,
       ];
-      const element = new LineWadElementModel(startX, startY, endX, endY);
+      const element = new WadLineElementModel(startX, startY, endX, endY);
       this.elementService.add(element);
 
       this.logService.info(`Created line (#${element.id})`);

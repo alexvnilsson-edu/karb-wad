@@ -1,4 +1,4 @@
-import { Coordinates, createCoordinates } from '../../../../rendering/coordinate.type';
+import { Coordinates, createCoordinates } from '../../../../rendering/coordinates.type';
 import { WadCommandArgumentTransformer } from './transformer';
 
 export class WadCoordinatesCommandArgumentTransformer extends WadCommandArgumentTransformer<Coordinates> {

@@ -1,5 +1,3 @@
-/* eslint-disable @angular-eslint/component-selector */
-/* eslint-disable @angular-eslint/prefer-standalone */
 import {
   Component,
   computed,
@@ -10,16 +8,18 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CanvasClickEvent } from 'app/wad/rendering/canvas-click.event';
-import { Coordinates } from '../../rendering/coordinate.type';
+import { Coordinates } from '../../rendering/coordinates.type';
+import { WadCommandLog } from '../command-log/command-log';
 import { WadCoordinatesCommandArgumentTransformer } from '../commands/arguments/transformers';
 import { WadCommandService } from '../commands/command.service';
 
 @Component({
-  selector: 'wad-command-input',
+  selector: 'app-wad-command-input',
   templateUrl: './command-input.html',
   styleUrl: './command-input.scss',
-  standalone: false,
+  imports: [FormsModule, WadCommandLog],
   host: {
     '[class.active]': 'isActive$()',
   },
@@ -43,7 +43,7 @@ export class WadCommandInput implements OnInit {
       : `Press [Enter] to activate`,
   );
 
-  commandInputElement = viewChild<ElementRef<HTMLInputElement>>('commandInput');
+  commandInputElement = viewChild<ElementRef<HTMLInputElement>>('wadCommandInput');
 
   command = '';
 
