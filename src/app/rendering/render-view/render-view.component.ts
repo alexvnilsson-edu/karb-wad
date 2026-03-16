@@ -2,12 +2,14 @@ import { NgClass } from '@angular/common';
 import {
   afterNextRender,
   Component,
+  computed,
+  contentChild,
   ElementRef,
   inject,
-  linkedSignal,
   signal,
 } from '@angular/core';
-import { WadElementContainer } from 'app/wad/rendering/elements.container';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { WadElementGroup } from 'app/wad/rendering/element-group';
 import { createCoordinates } from '../../wad/rendering/coordinate.type';
 import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { WadElementService } from '../../wad/rendering/element.service';
@@ -22,7 +24,7 @@ import { RenderViewCanvas } from './render-view-canvas.component';
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [WadModule, RenderViewCanvas, WadElementContainer, RenderStatusComponent, NgClass],
+  imports: [WadModule, RenderViewCanvas, WadElementGroup, RenderStatusComponent, NgClass],
 })
 export class RenderViewComponent {
   private elementRef = inject(ElementRef);
@@ -30,14 +32,14 @@ export class RenderViewComponent {
   elementService = inject(WadElementService);
   renderService = inject(WadRenderService);
 
-  readonly elements = linkedSignal(() => this.elementService.elements());
+  canvasViewChild = contentChild<ElementRef<HTMLElement>>('renderViewCanvas');
 
-  readonly allElements = linkedSignal(() => Array.from(this.elements().entries()));
+  readonly elements = computed(() => this.elementService.elements());
+  readonly allElements = computed(() => Array.from(this.elements()));
 
-  readonly origin$ = linkedSignal(() => this.renderService.origin());
-  readonly area$ = linkedSignal(() => this.renderService.area());
-
-  readonly scale$ = linkedSignal(() => this.renderService.scale() / 100);
+  readonly origin = computed(() => this.renderService.origin());
+  readonly area = computed(() => this.renderService.area());
+  readonly scale = computed(() => this.renderService.scale() / 100);
 
   private _isPointerDown = signal(false);
   private _isPanning = signal(false);
@@ -51,15 +53,33 @@ export class RenderViewComponent {
   }
 
   constructor() {
+    toObservable(this.canvasViewChild).subscribe((canvas) => {
+      if (canvas) {
+        console.debug(`${this.canvasViewChild.name} got value:`, canvas);
+      }
+    });
+
     afterNextRender(() => {
       const canvas = this.getCanvas();
-      this.renderService.setArea(canvas.clientWidth, canvas.clientHeight);
-      this.renderService.setHeight(canvas.clientHeight);
+      canvas.addEventListener('resize', (e) => this.onCanvasResize(e));
+      const dimensions = this.getCanvasDimensions();
+      if (dimensions) {
+        this.renderService.setArea(dimensions[0], dimensions[1]);
+        this.renderService.setHeight(dimensions[1]);
+      }
     });
   }
 
-  protected getCanvas(): HTMLCanvasElement {
-    const canvas = this.elementRef.nativeElement.querySelector('svg#renderView');
+  private getCanvasDimensions() {
+    const canvas = this.getCanvas();
+
+    return [canvas.clientWidth, canvas.clientHeight];
+  }
+
+  private onCanvasResize(event: Event) {}
+
+  protected getCanvas(): HTMLElement {
+    const canvas = this.elementRef.nativeElement.querySelector('svg#renderViewCanvas');
     if (canvas == undefined) {
       throw new Error('Canvas not found.');
     }
