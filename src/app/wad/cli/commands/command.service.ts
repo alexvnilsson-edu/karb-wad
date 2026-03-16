@@ -89,17 +89,12 @@ export class WadCommandService {
     if (argsPostName.length !== command.arguments.size) {
       const argSyntax = Array.from(command.arguments.values())
         .map((a) => {
-          const [name, description, typeDescription, typeExample] = [
-            a.name,
-            a.description,
-            a.type.description,
-            a.type.example,
-          ];
-          return `${name} <${description}: ${typeDescription} (${typeExample}]>`;
+          const [name, description, typeDescription] = [a.name, a.description, a.type.description];
+          return `<${name} [${description}: ${typeDescription}]>`;
         })
         .join(' ');
-      this.logs.error(`Unexpected syntax. ${commandName} ${argSyntax}`);
-      throw new Error(`Syntax error. Expected: ${commandName} ${argSyntax}`);
+      this.logs.error(`Unexpected syntax. ${command.name} ${argSyntax}`);
+      throw new Error(`Syntax error. Expected: ${command.name} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {
       const input = argsPostName[argIndex];
