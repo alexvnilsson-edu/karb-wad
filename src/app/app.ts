@@ -15,6 +15,7 @@ import { WadModule } from './wad/wad.module';
   styleUrl: './app.scss',
   host: {
     '(window:keyup.enter)': 'onEnterKeyup()',
+    '(window:keyup.escape)': 'onEscapeKeyup()',
   },
 })
 export class App {

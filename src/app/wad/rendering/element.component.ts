@@ -13,7 +13,11 @@ import { WadRenderService } from './render.service';
     fill: 'none',
     '[attr.stroke-width]': 'strokeWidth$()',
     '[attr.stroke]': 'stroke$()',
+    '[attr.stroke-dasharray]': 'strokeDashArray$()',
     '(click)': 'click()',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(pointermove)': 'onPointerMove($event)',
+    '(pointerup)': 'onPointerUp($event)',
   },
   standalone: false,
 })
@@ -29,9 +33,9 @@ export class WadElementComponent<TModel extends WadElementModel> {
 
   isFocused$ = linkedSignal(() => this.model()?.isFocused ?? false);
 
-  strokeWidth$ = linkedSignal(() => 1);
-
-  stroke$ = linkedSignal(() => (this.isFocused$() ? 'rgb(255, 255, 255)' : 'rgb(200, 200, 200)'));
+  strokeWidth$ = linkedSignal(() => 2);
+  strokeDashArray$ = linkedSignal(() => (this.isFocused$() ? '2' : undefined));
+  stroke$ = linkedSignal(() => (this.isFocused$() ? 'rgb(200, 200, 255)' : 'rgb(200, 200, 200)'));
 
   protected click() {
     console.debug(`Element ${this.model()?.id || 'unknown id'} was clicked.`);
@@ -44,4 +48,12 @@ export class WadElementComponent<TModel extends WadElementModel> {
 
     this.changeDetection.markForCheck();
   }
+
+  onPointerDown(event: PointerEvent) {}
+
+  onPointerMove(event: PointerEvent) {
+    const [dx, dy] = [event.movementX, event.movementY];
+  }
+
+  onPointerUp(event: PointerEvent) {}
 }
