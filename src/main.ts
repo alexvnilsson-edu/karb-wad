@@ -1,3 +1,5 @@
+/// <reference types="@angular/localize" />
+
 import { enableProfiling } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
