@@ -7,7 +7,7 @@ import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
 import { WadCommandExecutor } from './command-executor.type';
 
-@Injectable({ providedIn: 'any' })
+@Injectable({ providedIn: 'root' })
 export class WadLineCommandExecutor extends WadCommandExecutor {
   static ExecutorName = 'line';
 
