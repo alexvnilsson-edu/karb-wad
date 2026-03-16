@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { WadElementComponent } from './rendering/element.component';
 
@@ -13,7 +14,7 @@ import { TextWadSystemElement } from './rendering/system/text';
 import { WadCommandInput } from './cli/command-input/command-input';
 import { WadCommandLog } from './cli/command-log/command-log';
 
-import { FormsModule } from '@angular/forms';
+import { WadCommandLogMessageComponent } from './cli/command-log/command-log-message';
 import { CircleWadElementComponent } from './rendering/circle';
 import { WadElementService } from './rendering/element.service';
 import { WadRenderService } from './rendering/render.service';
@@ -25,12 +26,11 @@ const ELEMENT_DECLARATIONS = [
   RectangleWadElementComponent,
   TriangleWadElementComponent,
   LineWadElementComponent,
-
   LineWadSystemElement,
   TextWadSystemElement,
 ];
 
-const COMMAND_DECLARATIONS = [WadCommandInput, WadCommandLog];
+const COMMAND_DECLARATIONS = [WadCommandInput, WadCommandLog, WadCommandLogMessageComponent];
 
 @NgModule({
   imports: [FormsModule],

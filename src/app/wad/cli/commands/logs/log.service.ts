@@ -27,6 +27,7 @@ export class WadCommandLogService {
   }
 
   private add(message: string, level: WadCommandLogMessageLevel = WadCommandLogMessageLevel.INFO) {
+    console.debug(`[${WadCommandLogService.name}#${this.add.name}]`, message, level);
     this._log.update((log) => {
       log.push(new WadCommandLogMessage(message, level));
       return log;

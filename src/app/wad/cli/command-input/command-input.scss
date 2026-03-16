@@ -9,7 +9,8 @@
   right: 0;
 
   min-height: 20px;
-  max-height: 20%;
+  max-height: 80%;
+  overflow-y: auto;
 
   z-index: 100;
 
@@ -19,15 +20,20 @@
     opacity 250ms,
     height 500ms;
 
+  &:not(.active) {
+    opacity: 0.5;
+  }
+
   .command-input-container {
     pointer-events: all;
   }
-}
 
-:host:not(.active) {
-  opacity: 0.66;
-}
+  .command-input-text {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 
-:host.error > input {
-  border-color: red;
+    outline: none;
+
+    font-size: 0.85rem;
+  }
 }

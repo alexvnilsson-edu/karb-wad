@@ -21,8 +21,7 @@ import { WadCommandService } from '../commands/command.service';
   styleUrl: './command-input.scss',
   standalone: false,
   host: {
-    '[class.active]': 'inFocus$()',
-    '[class.error]': 'error$()',
+    '[class.active]': 'isActive$()',
   },
 })
 export class WadCommandInput implements OnInit {
@@ -30,7 +29,7 @@ export class WadCommandInput implements OnInit {
 
   private coordinatesTransformer = new WadCoordinatesCommandArgumentTransformer();
 
-  inFocus$ = signal(false);
+  isActive$ = signal(false);
 
   error$ = signal(false);
   showResult$ = signal(false);
@@ -39,12 +38,17 @@ export class WadCommandInput implements OnInit {
   isInputting = () => this.command.length > 0;
 
   inputPlaceholder$ = computed(() =>
-    this.inFocus$() ? 'Type help for a list of commands' : `Press [Enter] to focus command window`,
+    this.isActive$()
+      ? 'Type command then [Enter] or [Escape] to hide'
+      : `Press [Enter] to activate`,
   );
 
-  commandInput = viewChild<ElementRef<HTMLInputElement>>('commandInput');
+  commandInputElement = viewChild<ElementRef<HTMLInputElement>>('commandInput');
 
   command = '';
+
+  private _commandHistory = signal<string[]>([]);
+  readonly commandHistory$ = this._commandHistory.asReadonly();
 
   commandPreviewName$ = signal('');
   commandPreview$ = linkedSignal(() => {
@@ -94,6 +98,7 @@ export class WadCommandInput implements OnInit {
 
   onEnterKeyup() {
     try {
+      this.appendCommandHistory(this.command);
       const command = this.commandService.interpret(this.command);
       const result = this.commandService.execute(command);
       if (result.success) {
@@ -111,20 +116,28 @@ export class WadCommandInput implements OnInit {
     }
   }
 
+  onEscapeKeyup() {
+    this.deactivate();
+  }
+
+  deactivate() {
+    this.isActive$.set(false);
+
+    if (this.commandInputElement() && this.commandInputElement()!.nativeElement) {
+      this.commandInputElement()!.nativeElement.blur();
+    }
+  }
+
   setFocus() {
-    if (this.commandInput() && this.commandInput()!.nativeElement) {
-      this.commandInput()?.nativeElement.focus();
+    if (this.commandInputElement() && this.commandInputElement()!.nativeElement) {
+      this.commandInputElement()?.nativeElement.focus();
     } else {
       console.warn(`Unable to query command input element for focusing.`);
     }
   }
 
   onFocus(_event: FocusEvent) {
-    this.inFocus$.set(true);
-  }
-
-  onBlur(_event: FocusEvent) {
-    this.inFocus$.set(false);
+    this.isActive$.set(true);
   }
 
   protected addCoordinate(coordinate: Coordinates) {
@@ -143,5 +156,12 @@ export class WadCommandInput implements OnInit {
   protected resetCommand() {
     this.command = '';
     this.commandPreviewName$.set('');
+  }
+
+  private appendCommandHistory(command: string) {
+    this._commandHistory.update((history) => {
+      history.push(command);
+      return history;
+    });
   }
 }

@@ -1,52 +1,22 @@
 <div class="command-input-container mx-auto w-xl lg:w-lg flex justify-center">
   <div
-    class="flex flex-col justify-stretch items-stretch flex-1 p-1 bg-gray-800 border-gray-600 border-2 rounded-lg font-mono"
+    class="flex flex-col justify-stretch items-stretch flex-1 p-1 px-2 bg-gray-900 border-gray-600 border-2 rounded-lg font-mono text-white"
   >
-    @if (inFocus$()) {
-      @if (error$()) {
-        <p class="p-1 mb-2 text-red-400">
-          {{ message$() }}
-        </p>
-      } @else if (showResult$()) {
-        <p class="p-1 mb-2 text-gray-100">
-          {{ message$() }}
-        </p>
-      }
-    }
-
-    @if (commandPreview$()) {
-      @let command = commandPreview$();
-      <p class="p-1 mb-2 text-gray-200">
-        <span>Usage:&nbsp;</span>
-        <strong>{{ command!.name }}</strong>
-        <span>&nbsp;</span>
-        @for (entry of command!.arguments; track entry[0]) {
-          @let argument = entry[1];
-          <span
-            >&lt;{{ argument.description }}: {{ argument.type.description }} ({{
-              argument.type.example
-            }})&gt;</span
-          >
-          <span>&nbsp;</span>
-        }
-      </p>
-    }
-
-    <div>
+    @if (isActive$()) {
       <wad-command-log />
-    </div>
+    }
 
     <input
       #commandInput
       type="text"
-      class="flex-1 bg-gray-900 text-white text-lg p-1 px-2"
+      class="command-input-text flex-1 p-1"
       [attr.placeholder]="inputPlaceholder$()"
       spellcheck="false"
       [(ngModel)]="command"
       (keyup.enter)="onEnterKeyup()"
+      (keyup.escape)="onEscapeKeyup()"
       (input)="onInput()"
       (focus)="onFocus($event)"
-      (blur)="onBlur($event)"
     />
   </div>
 </div>

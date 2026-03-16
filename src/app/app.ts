@@ -14,7 +14,7 @@ import { WadModule } from './wad/wad.module';
   templateUrl: './app.html',
   styleUrl: './app.scss',
   host: {
-    '(window:keyup.enter)': 'keyupEnter()',
+    '(window:keyup.enter)': 'onEnterKeyup()',
   },
 })
 export class App {
@@ -25,10 +25,18 @@ export class App {
     configureCommands(getCommandsForConfiguration(), this.environmentInjector);
   }
 
-  keyupEnter() {
+  onEnterKeyup() {
     if (this.commandInput()) {
-      if (!this.commandInput()!.inFocus$()) {
+      if (!this.commandInput()!.isActive$()) {
         this.commandInput()!.setFocus();
+      }
+    }
+  }
+
+  onEscapeKeyup() {
+    if (this.commandInput()) {
+      if (this.commandInput()!.isActive$()) {
+        this.commandInput()!.deactivate();
       }
     }
   }
