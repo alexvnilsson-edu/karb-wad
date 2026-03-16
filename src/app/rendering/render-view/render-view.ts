@@ -9,13 +9,29 @@ import {
   signal,
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { WadElementGroup } from 'app/wad/rendering/element-group';
+import { WadElementGroup } from 'app/wad/rendering/elements/element-group';
 import { createCoordinates } from '../../wad/rendering/coordinates.type';
-import { WadElementClickEvent } from '../../wad/rendering/element-click.event';
 import { WadElementService } from '../../wad/rendering/element.service';
+import { WadElementActivatedEvent } from '../../wad/rendering/elements/element-activated.event';
 import { WadRenderService } from '../../wad/rendering/render.service';
-import { RenderViewCanvas } from '../render-view-canvas/render-view-canvas';
-import { RenderViewStatus } from '../render-view-status/render-view-status';
+import { RenderViewCanvas } from './render-view-canvas/render-view-canvas';
+import { RenderViewStatus } from './render-view-status/render-view-status';
+
+import {
+  WadCircleElementDirective,
+  WadLineElementDirective,
+  WadPolylineElementDirective,
+  WadRectangleElementDirective,
+  WadTriangleElementDirective,
+} from 'app/wad/rendering/elements/directives';
+
+const ELEMENT_DIRECTIVES = [
+  WadCircleElementDirective,
+  WadLineElementDirective,
+  WadPolylineElementDirective,
+  WadRectangleElementDirective,
+  WadTriangleElementDirective,
+];
 
 @Component({
   selector: 'app-render-view',
@@ -23,7 +39,7 @@ import { RenderViewStatus } from '../render-view-status/render-view-status';
   host: {
     class: 'flex-1 flex flex-col items-stretch',
   },
-  imports: [RenderViewCanvas, WadElementGroup, RenderViewStatus, NgClass],
+  imports: [RenderViewCanvas, WadElementGroup, RenderViewStatus, NgClass, ELEMENT_DIRECTIVES],
 })
 export class RenderView {
   private elementRef = inject(ElementRef);
@@ -48,9 +64,27 @@ export class RenderView {
   readonly isMouseDown = this._isPointerDown.asReadonly();
   readonly isPanning = this._isPanning.asReadonly();
 
-  onElementClick(event: WadElementClickEvent) {
+  onElementClick(event: WadElementActivatedEvent) {
     console.debug(`Element clicked: ${event.element.id}`, event);
     this.elementService.focus(event.element);
+  }
+
+  onElementActivated(event: WadElementActivatedEvent) {
+    console.debug(`Element activated: ${event.element.id}`, event);
+
+    if (!event?.element) {
+      throw new Error(`Reference to element is undefined.`);
+    }
+
+    if (!this.elementService.elements().has(event.element.id)) {
+      throw new Error(`Element does not exist: ${event.element.id}`);
+    }
+
+    const element = this.elementService.elements().get(event.element.id);
+
+    if (!element) {
+      throw new Error(`Element is undefined.`);
+    }
   }
 
   constructor() {

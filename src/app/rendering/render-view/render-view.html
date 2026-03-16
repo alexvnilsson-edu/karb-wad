@@ -77,16 +77,16 @@
             }
             @case ('triangle') {
               <polygon
-                wad-triangle
-                [elementModel]="model"
-                (elementClick)="onElementClick($event)"
+                appWadTriangleElement
+                [model]="model"
+                (activated)="onElementClick($event)"
               ></polygon>
             }
             @case ('circle') {
               <circle
-                wad-circle
+                appWadCircleElement
                 [elementModel]="model"
-                (elementClick)="onElementClick($event)"
+                (activated)="onElementClick($event)"
               ></circle>
             }
             @case ('line') {

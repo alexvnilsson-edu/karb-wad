@@ -1,6 +1,6 @@
 import { computed, Directive, inject, input, linkedSignal } from '@angular/core';
 import { WadRenderService } from 'app/wad/rendering/render.service';
-import { Coordinates } from '../../wad/rendering/coordinates.type';
+import { Coordinates } from '../../../wad/rendering/coordinates.type';
 
 @Directive({
   selector: '[appRenderViewCanvas]',

@@ -1,5 +1,5 @@
 import { Component, inject, linkedSignal } from '@angular/core';
-import { WadElementService } from '../../wad/rendering/element.service';
+import { WadElementService } from '../../../wad/rendering/element.service';
 
 @Component({
   selector: 'app-render-view-sidebar',

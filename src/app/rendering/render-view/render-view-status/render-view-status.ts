@@ -1,8 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { WadCoordinatesCommandArgumentTransformer } from 'app/wad/cli/commands/arguments/transformers';
-import { createCoordinates } from '../../wad/rendering/coordinates.type';
-import { WadRenderService } from '../../wad/rendering/render.service';
+import { createCoordinates } from '../../../wad/rendering/coordinates.type';
+import { WadRenderService } from '../../../wad/rendering/render.service';
 
 @Component({
   selector: 'app-render-view-status',
