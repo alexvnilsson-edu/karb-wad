@@ -17,7 +17,7 @@ import { WadElementModel } from '../models/model';
 })
 export class WadElementBaseDirective<T extends WadElementModel> {
   protected changeDetection = inject(ChangeDetectorRef);
-  protected rendering = inject(WadRenderService);
+  protected renderService = inject(WadRenderService);
 
   elementModel = input.required<WadElementModel>();
   model = computed(() => this.elementModel() as T);

@@ -1,8 +1,14 @@
-import { Directive } from '@angular/core';
+import { computed, Directive } from '@angular/core';
 import { WadPolylineElementModel } from '../models';
 import { WadElementBaseDirective } from './base.directive';
 
 @Directive({
   selector: '[appWadPolylineElement]',
 })
-export class WadPolylineElementDirective extends WadElementBaseDirective<WadPolylineElementModel> {}
+export class WadPolylineElementDirective extends WadElementBaseDirective<WadPolylineElementModel> {
+  points = computed(() =>
+    this.model()
+      .points.map((c) => this.renderService.translateCoordinate(c).join(','))
+      .join(' '),
+  );
+}
