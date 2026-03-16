@@ -2,19 +2,18 @@
 @use '@angular/material' as mat;
 
 // Temporärt medan migration till Material sker.
-@use "tailwindcss";
-
-
+@use 'tailwindcss';
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$violet-palette,
-      secondary: mat.$blue-palette,
-      theme-type: dark,
-    ),
-    typography: Roboto,
-    density: 0
-  ));
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$violet-palette,
+        secondary: mat.$blue-palette,
+        theme-type: dark,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
-

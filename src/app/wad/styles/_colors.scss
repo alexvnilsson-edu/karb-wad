@@ -1,0 +1,41 @@
+// @use 'sass:map';
+
+// $systems: (
+//   'primary': (
+//     'container': oklab(56.123% 0.19942 -0.02143),
+//   ),
+//   'secondary': (),
+//   'surface': (
+//     'container': rgb(16, 24, 40),
+//     'content': rgb(239, 231, 216),
+//   ),
+// );
+// $parts: bg, fg;
+
+// $s: (
+//   'primary': (),
+// );
+
+// $bgs: (
+//   'primary': rgb(0, 0, 0),
+//   'secondary': rgb(0, 0, 0),
+//   'surface': rgb(16, 24, 40),
+// );
+// $fgs: (
+//   'primary': rgb(255, 255, 255),
+//   'secondary': rgb(255, 255, 255),
+//   'surface': rgb(239, 231, 216),
+// );
+
+// @each $system in $systems {
+//   $bg: map.get($bgs, $system);
+//   $fg: map.get($fgs, $system);
+//   #{$color-$system-bg}: $bg;
+//   #{$color-$system-bg}: $fg;
+// }
+
+@use 'sass:color';
+
+$color-surface-bg: oklch(20.992% 0.03416 263.451);
+$color-surface-outline: color.scale($color-surface-bg, $lightness: +25%, $space: oklch);
+$color-surface-fg: oklch(95.952% 0.02013 285.942);

@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use '../../styles/wad';
+
 :host {
   display: flex;
   justify-content: stretch;
@@ -25,7 +28,32 @@
   }
 
   .command-input-container {
+    // mx-auto w-xl lg:w-lg flex justify-center
+    width: wad.$dimension-xl;
+    @include wad.breakpoint-xl {
+      width: wad.$dimension-lg;
+    }
+    margin-left: auto;
+    margin-right: auto;
     pointer-events: all;
+
+    .command-input-container-inner {
+      // flex flex-col justify-stretch items-stretch flex-1 p-1 px-2 bg-gray-900 border-gray-600 border-2 rounded-lg font-mono text-white
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      align-items: stretch;
+      flex: 1;
+      padding: 0.25rem 0.5rem;
+
+      background-color: wad.$color-surface-bg;
+      border-color: wad.$color-surface-outline;
+      border-width: 0.125rem;
+      border-radius: 0.5rem;
+
+      font-family: monospace;
+      color: wad.$color-surface-fg;
+    }
   }
 
   .command-input-text {

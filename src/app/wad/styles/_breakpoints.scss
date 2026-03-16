@@ -1,0 +1,27 @@
+// X-large breakpoint.
+@mixin breakpoint-xl {
+  @media screen, print and (width >= 1440px) {
+    @content;
+  }
+}
+
+// Large breakpoint.
+@mixin breakpoint-lg {
+  @media screen, print and (width < 1080px) and (width >= 720px) {
+    @content;
+  }
+}
+
+// Medium breakpoint.
+@mixin breakpoint-md {
+  @media screen, print and (width < 720px) and (width >= 480px) {
+    @content;
+  }
+}
+
+// Small breakpoint.
+@mixin breakpoint-sm {
+  @media screen, print and (width < 480px) {
+    @content;
+  }
+}
