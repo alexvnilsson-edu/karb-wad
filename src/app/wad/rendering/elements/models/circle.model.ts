@@ -1,6 +1,6 @@
-import { WadElementModel } from '../element.model';
+import { WadBaseElementModel } from './model';
 
-export class CircleWadElementModel extends WadElementModel {
+export class WadCircleElementModel extends WadBaseElementModel {
   x!: number;
   y!: number;
   radius!: number;

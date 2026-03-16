@@ -1,8 +1,8 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, linkedSignal } from '@angular/core';
-import { WadElementComponent } from '../element.component';
-import { LineWadElementModel } from '../line/line.model';
+import { WadLineElementModel } from '../models/line.model';
+import { WadBaseElementComponent } from './base.component';
 
 @Component({
   selector: '[wad-polyline]',
@@ -12,7 +12,7 @@ import { LineWadElementModel } from '../line/line.model';
   },
   standalone: false,
 })
-export class PolylineWadElement extends WadElementComponent<LineWadElementModel> {
+export class WadPolylineElementComponent extends WadBaseElementComponent<WadLineElementModel> {
   points$ = linkedSignal(() => {
     return [this.model()?.start ?? [0, 0], this.model()?.end ?? [0, 0]]
       .map((c) => this.rendering.translateCoordinate(c))

@@ -1,31 +1,28 @@
 /* eslint-disable @angular-eslint/component-selector */
-/* eslint-disable @angular-eslint/prefer-standalone */
 
 import { ChangeDetectorRef, Component, inject, input, linkedSignal, output } from '@angular/core';
-import { WadElementClickEvent } from './element-click.event';
-import { WadElementModel } from './element.model';
-import { WadRenderService } from './render.service';
+import { WadElementClickEvent } from '../../element-click.event';
+import { WadRenderService } from '../../render.service';
+import { WadBaseElementModel } from '../models/model';
 
 @Component({
-  selector: '[wad-base]',
+  selector: '[app-wad-base]',
   template: ``,
   host: {
-    fill: 'none',
     '[attr.stroke-width]': 'strokeWidth$()',
     '[attr.stroke]': 'stroke$()',
     '[attr.stroke-dasharray]': 'strokeDashArray$()',
     '(click)': 'click()',
-    '(pointerdown)': 'onPointerDown($event)',
-    '(pointermove)': 'onPointerMove($event)',
-    '(pointerup)': 'onPointerUp($event)',
+    // '(pointerdown)': 'onPointerDown($event)',
+    // '(pointermove)': 'onPointerMove($event)',
+    // '(pointerup)': 'onPointerUp($event)',
   },
-  standalone: false,
 })
-export class WadElementComponent<TModel extends WadElementModel> {
+export class WadBaseElementComponent<TModel extends WadBaseElementModel> {
   protected changeDetection = inject(ChangeDetectorRef);
   protected rendering = inject(WadRenderService);
 
-  elementModel = input.required<WadElementModel>();
+  elementModel = input.required<WadBaseElementModel>();
 
   model = linkedSignal<TModel>(() => this.elementModel() as TModel);
 
@@ -49,11 +46,11 @@ export class WadElementComponent<TModel extends WadElementModel> {
     this.changeDetection.markForCheck();
   }
 
-  onPointerDown(event: PointerEvent) {}
+  // onPointerDown(event: PointerEvent) {}
 
-  onPointerMove(event: PointerEvent) {
-    const [dx, dy] = [event.movementX, event.movementY];
-  }
+  // onPointerMove(event: PointerEvent) {
+  //   const [dx, dy] = [event.movementX, event.movementY];
+  // }
 
-  onPointerUp(event: PointerEvent) {}
+  // onPointerUp(event: PointerEvent) {}
 }

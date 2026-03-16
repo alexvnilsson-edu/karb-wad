@@ -1,8 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
-/* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, linkedSignal } from '@angular/core';
-import { WadElementComponent } from '../element.component';
-import { LineWadElementModel } from './line.model';
+import { WadLineElementModel } from '../models/line.model';
+import { WadBaseElementComponent } from './base.component';
 
 @Component({
   selector: '[wad-line]',
@@ -14,9 +13,8 @@ import { LineWadElementModel } from './line.model';
     '[attr.y2]': 'y2$()',
     '[attr.length]': 'length$()',
   },
-  standalone: false,
 })
-export class LineWadElementComponent extends WadElementComponent<LineWadElementModel> {
+export class WadLineElementComponent extends WadBaseElementComponent<WadLineElementModel> {
   x1$ = linkedSignal(() => this.model()?.start[0] ?? 0);
   y1$ = linkedSignal(() => this.rendering.translateCoordinateY(this.model()?.start[1]) ?? 0);
 

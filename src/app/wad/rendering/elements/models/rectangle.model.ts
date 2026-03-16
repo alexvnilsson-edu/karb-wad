@@ -1,7 +1,7 @@
-import { Coordinates } from '../coordinate.type';
-import { WadElementModel } from '../element.model';
+import { Coordinates } from '../../coordinates.type';
+import { WadBaseElementModel } from './model';
 
-export class RectangleWadElementModel extends WadElementModel {
+export class WadRectangleElementModel extends WadBaseElementModel {
   a!: Coordinates;
   b!: Coordinates;
   c!: Coordinates;

@@ -1,8 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
-/* eslint-disable @angular-eslint/prefer-standalone */
 import { Component, linkedSignal } from '@angular/core';
-import { WadElementComponent } from '../element.component';
-import { RectangleWadElementModel } from './rectangle.model';
+import { WadRectangleElementModel } from '../models/rectangle.model';
+import { WadBaseElementComponent } from './base.component';
 
 @Component({
   selector: `[wad-rectangle]`,
@@ -10,9 +9,8 @@ import { RectangleWadElementModel } from './rectangle.model';
   host: {
     '[attr.points]': 'coordinates$()',
   },
-  standalone: false,
 })
-export class RectangleWadElementComponent extends WadElementComponent<RectangleWadElementModel> {
+export class WadRectangleElementComponent extends WadBaseElementComponent<WadRectangleElementModel> {
   coordinates$ = linkedSignal(() =>
     this.model()
       ? this.model()
