@@ -8,7 +8,6 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { WadElementGroup } from 'app/wad/rendering/elements/element-group';
 import { createCoordinates } from '../../wad/rendering/coordinates.type';
 import { WadElementService } from '../../wad/rendering/element.service';
@@ -86,12 +85,6 @@ export class RenderView {
   }
 
   constructor() {
-    toObservable(this.canvasViewChild).subscribe((canvas) => {
-      if (canvas) {
-        console.debug(`${this.canvasViewChild.name} got value:`, canvas);
-      }
-    });
-
     afterNextRender(() => {
       const canvas = this.getCanvas();
       canvas.addEventListener('resize', (e) => this.onCanvasResize(e));
@@ -102,8 +95,7 @@ export class RenderView {
 
   private _registerResizeObserver() {
     if (!this._canvasResizeObserver) {
-      this._canvasResizeObserver = new ResizeObserver((entries) => {
-        console.debug(`${this._registerResizeObserver.name}`, entries);
+      this._canvasResizeObserver = new ResizeObserver((_) => {
         this.setRenderArea();
       });
     }
