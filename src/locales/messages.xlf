@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="7317638000981631050" datatype="html">
         <source>Web-aided design (<x id="START_TAG_ABBR" ctype="x-abbr" equiv-text="&lt;abbr&gt;"/>WAD<x id="CLOSE_TAG_ABBR" ctype="x-abbr" equiv-text="&lt;/abbr&gt;"/>)</source>
@@ -124,6 +124,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
           <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4407206238998644792" datatype="html">
+        <source>Unexpected syntax. <x id="PH" equiv-text="command.name"/> <x id="PH_1" equiv-text="argSyntax"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/wad/cli/commands/command.service.ts</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="21275452006765587" datatype="html">
