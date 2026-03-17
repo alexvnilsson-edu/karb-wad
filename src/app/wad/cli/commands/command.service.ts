@@ -75,6 +75,7 @@ export class WadCommandService {
   }
 
   interpret(input: string): WadCommand {
+    this.logs.info(`> ${input}`);
     const args = input.split(' ');
     if (args.length === 0) {
       throw new Error(`Invalid command argument length: 0`);
@@ -90,10 +91,10 @@ export class WadCommandService {
       const argSyntax = Array.from(command.arguments.values())
         .map((a) => {
           const [name, description, typeDescription] = [a.name, a.description, a.type.description];
-          return `<${name} [${description}: ${typeDescription}]>`;
+          return `<${name}: ${typeDescription}>`;
         })
         .join(' ');
-      this.logs.error($localize`Unexpected syntax. ${command.name} ${argSyntax}`);
+      this.logs.error($localize`Usage: ${command.name} ${argSyntax}`);
       throw new Error(`Syntax error. Expected: ${command.name} ${argSyntax}`);
     }
     for (let argIndex = 0; argIndex < argsPostName.length; argIndex++) {

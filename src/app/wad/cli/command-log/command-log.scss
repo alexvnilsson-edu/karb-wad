@@ -17,6 +17,9 @@
     scrollbar-color: var(--mat-sys-on-background) transparent;
 
     p {
+      &.disabled {
+        opacity: 0.75;
+      }
       &.error {
         color: wad.$color-error-fg;
       }

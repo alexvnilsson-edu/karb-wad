@@ -10,7 +10,7 @@ export class WadCoordinatesCommandArgumentTransformer extends WadCommandArgument
 
   override transform(value: string): Coordinates {
     if (!value.includes(this.separator)) {
-      throw new Error(`Missing separator (..) in input: ${value}`);
+      throw new Error(`Missing separator (${this.separator}) in input: ${value}`);
     }
     const parts = value.split(this.separator);
     if (parts.length !== 2) {

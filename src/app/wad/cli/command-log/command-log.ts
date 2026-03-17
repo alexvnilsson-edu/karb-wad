@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, SlicePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { WadCommandLogMessage } from '../commands/logs/command-log-message';
 import { WadCommandLogMessageLevel } from '../commands/logs/command-log-message-levels';
@@ -8,12 +8,12 @@ import { WadCommandLogService } from '../commands/logs/command-log.service';
   selector: 'app-wad-command-log',
   templateUrl: './command-log.html',
   styleUrl: './command-log.scss',
-  imports: [NgClass],
+  imports: [NgClass, SlicePipe],
 })
 export class WadCommandLog {
   logService = inject(WadCommandLogService);
 
-  lookBack = signal(10);
+  lookBack = signal(3);
 
   messages = computed(() => this.logService.log$());
 

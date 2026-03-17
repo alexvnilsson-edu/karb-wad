@@ -1,6 +1,9 @@
 @if (messages() && messages().length > 0) {
   <div class="command-log-container">
-    @for (message of messages(); track message.id) {
+    @if (messages().length > lookBack()) {
+      <p class="disabled">...</p>
+    }
+    @for (message of messages() | slice: -lookBack(); track message.id) {
       <p [ngClass]="getMessageLevelClass(message)">{{ message.message }}</p>
     }
   </div>

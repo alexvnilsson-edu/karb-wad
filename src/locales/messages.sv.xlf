@@ -51,6 +51,7 @@
       </trans-unit>
       <trans-unit id="6131970232975984693" datatype="html">
         <source>Enter command, or help to get help</source>
+        <target>Mata in kommando, eller help för hjälp</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.ts</context>
           <context context-type="linenumber">42</context>
@@ -58,6 +59,7 @@
       </trans-unit>
       <trans-unit id="3852746099411806808" datatype="html">
         <source>[Enter] to open command window</source>
+        <target>Öppna kommandofönstret med [Retur]</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.ts</context>
           <context context-type="linenumber">43</context>
@@ -149,6 +151,9 @@
         <source>Enter command into command prompt and press [Enter] to execute. Press [Escape] to minimise command window.
 
     Commands: <x id="PH" equiv-text="commands.join(&apos;, &apos;)"/></source>
+        <target>Mata in kommando i kommandoprompten och exekvera med [Retur]. Stäng kommandofönstret med [Escape].
+
+        Kommandon: <x id="PH" equiv-text="commands.join(&apos;, &apos;)"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/help.command-executor.ts</context>
           <context context-type="linenumber">26,28</context>
