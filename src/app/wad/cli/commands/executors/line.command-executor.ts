@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Coordinates } from 'app/wad/rendering/coordinates.type';
 import { WadElementService } from 'app/wad/rendering/element.service';
-import { WadLineElementModel } from 'app/wad/rendering/elements/models';
+import { WadPolylineElementModel } from 'app/wad/rendering/elements/models';
 import { WadCommand } from '../command';
 import { WadCommandLogService } from '../logs/command-log.service';
 import { WadCommandExecutorResult } from './command-executor-result';
@@ -20,11 +20,11 @@ export class WadLineCommandExecutor extends WadCommandExecutor {
 
   execute(command: WadCommand) {
     try {
-      const [[startX, startY], [endX, endY]] = [
+      const [start, end] = [
         command.arguments.get('start')?.value as Coordinates,
         command.arguments.get('end')?.value as Coordinates,
       ];
-      const element = new WadLineElementModel(startX, startY, endX, endY);
+      const element = new WadPolylineElementModel([start, end]);
       this.elementService.add(element);
 
       this.logService.info($localize`Created line (#${element.id})`);
