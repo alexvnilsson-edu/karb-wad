@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en-GB" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="7317638000981631050" datatype="html">
         <source>Web-aided design (<x id="START_TAG_ABBR" ctype="x-abbr" equiv-text="&lt;abbr&gt;"/>WAD<x id="CLOSE_TAG_ABBR" ctype="x-abbr" equiv-text="&lt;/abbr&gt;"/>)</source>
@@ -37,15 +37,22 @@
           <context context-type="linenumber">11,12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5204961363860060789" datatype="html">
-        <source>Enter command or press [Escape] to close</source>
+      <trans-unit id="2803866371862642878" datatype="html">
+        <source> Enter command into text field and press [Enter] to execute. Press [Escape] to minimise command window. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6131970232975984693" datatype="html">
+        <source>Enter command, or help to get help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.ts</context>
           <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1326298069163174547" datatype="html">
-        <source>Press [Enter] to open</source>
+      <trans-unit id="3852746099411806808" datatype="html">
+        <source>[Enter] to open command window</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.ts</context>
           <context context-type="linenumber">43</context>
@@ -133,11 +140,13 @@
           <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="21275452006765587" datatype="html">
-        <source>Commands</source>
+      <trans-unit id="3421765493835251652" datatype="html">
+        <source>Enter command into command prompt and press [Enter] to execute. Press [Escape] to minimise command window.
+
+    Commands: <x id="PH" equiv-text="commands.join(&apos;, &apos;)"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/help.command-executor.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2622711262288077036" datatype="html">

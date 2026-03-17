@@ -1,13 +1,13 @@
 <div class="command-input-container">
   <div class="command-input-container-inner">
-    @if (isActive$()) {
+    @if (isActive()) {
       <app-wad-command-log />
     }
 
     <input
       #wadCommandInput
       type="text"
-      class="command-input-text p-1"
+      class="command-input-text"
       [attr.placeholder]="inputPlaceholder$()"
       spellcheck="false"
       [(ngModel)]="command"

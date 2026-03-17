@@ -13,16 +13,7 @@ import { WadCommandLogService } from '../commands/logs/command-log.service';
 export class WadCommandLog {
   logService = inject(WadCommandLogService);
 
-  lookBack$ = signal(10);
-  lastLogMessages$ = computed(
-    () =>
-      this.logService.log$().length < this.lookBack$()
-        ? this.logService.log$()
-        : this.logService.log$().slice(this.lookBack$(), 10),
-    {
-      debugName: 'wadCommandLogLast',
-    },
-  );
+  lookBack = signal(10);
 
   messages = computed(() => this.logService.log$());
 

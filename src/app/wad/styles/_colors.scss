@@ -39,3 +39,6 @@
 $color-surface-bg: oklch(20.992% 0.03416 263.451);
 $color-surface-outline: color.scale($color-surface-bg, $lightness: +25%, $space: oklch);
 $color-surface-fg: oklch(95.952% 0.02013 285.942);
+
+$color-error-fg: oklch(62.177% 0.12769 21.399);
+$color-warning-fg: oklch(76.994% 0.1032 95.693);

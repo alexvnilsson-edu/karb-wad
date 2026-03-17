@@ -1,3 +1,7 @@
-@for (message of lastLogMessages$(); track message.id) {
-  <p [ngClass]="getMessageLevelClass(message)">{{ message.message }}</p>
+@if (messages() && messages().length > 0) {
+  <div class="command-log-container">
+    @for (message of messages(); track message.id) {
+      <p [ngClass]="getMessageLevelClass(message)">{{ message.message }}</p>
+    }
+  </div>
 }

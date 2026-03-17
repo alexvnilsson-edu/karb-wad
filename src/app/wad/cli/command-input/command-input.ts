@@ -4,7 +4,6 @@ import {
   ElementRef,
   inject,
   linkedSignal,
-  OnInit,
   signal,
   viewChild,
 } from '@angular/core';
@@ -21,26 +20,26 @@ import { WadCommandService } from '../commands/command.service';
   styleUrl: './command-input.scss',
   imports: [FormsModule, WadCommandLog],
   host: {
-    '[class.active]': 'isActive$()',
+    '[class.active]': 'isActive()',
   },
 })
-export class WadCommandInput implements OnInit {
+export class WadCommandInput {
   commandService = inject(WadCommandService);
 
   private coordinatesTransformer = new WadCoordinatesCommandArgumentTransformer();
 
-  isActive$ = signal(false);
+  isActive = signal(false);
 
-  error$ = signal(false);
-  showResult$ = signal(false);
-  message$ = signal('');
+  error = signal(false);
+  showResult = signal(false);
+  message = signal('');
 
   isInputting = () => this.command.length > 0;
 
   inputPlaceholder$ = computed(() =>
-    this.isActive$()
-      ? $localize`Enter command or press [Escape] to close`
-      : $localize`Press [Enter] to open`,
+    this.isActive()
+      ? $localize`Enter command, or help to get help`
+      : $localize`[Enter] to open command window`,
   );
 
   commandInputElement = viewChild<ElementRef<HTMLInputElement>>('wadCommandInput');
@@ -61,10 +60,6 @@ export class WadCommandInput implements OnInit {
 
   constructor() {
     this.commandService.canvasClick.subscribe((event) => this.canvasClick(event));
-  }
-
-  ngOnInit() {
-    this.commandService.logs.info(`Type help for commands`);
   }
 
   canvasClick(event: CanvasClickEvent) {
@@ -104,15 +99,15 @@ export class WadCommandInput implements OnInit {
       if (result.success) {
         this.resetCommand();
         if (result.message) {
-          this.showResult$.set(true);
-          this.message$.set(result.message!);
+          this.showResult.set(true);
+          this.message.set(result.message!);
         }
       } else {
-        this.error$.set(true);
+        this.error.set(true);
       }
     } catch (ex: unknown) {
-      this.error$.set(true);
-      this.message$.set(`${ex}`);
+      this.error.set(true);
+      this.message.set(`${ex}`);
     }
   }
 
@@ -121,7 +116,7 @@ export class WadCommandInput implements OnInit {
   }
 
   deactivate() {
-    this.isActive$.set(false);
+    this.isActive.set(false);
 
     if (this.commandInputElement() && this.commandInputElement()!.nativeElement) {
       this.commandInputElement()!.nativeElement.blur();
@@ -137,7 +132,7 @@ export class WadCommandInput implements OnInit {
   }
 
   onFocus(_event: FocusEvent) {
-    this.isActive$.set(true);
+    this.isActive.set(true);
   }
 
   protected addCoordinate(coordinate: Coordinates) {
@@ -148,9 +143,9 @@ export class WadCommandInput implements OnInit {
   }
 
   protected reset() {
-    this.error$.set(false);
-    this.showResult$.set(false);
-    this.message$.set('');
+    this.error.set(false);
+    this.showResult.set(false);
+    this.message.set('');
   }
 
   protected resetCommand() {

@@ -22,10 +22,13 @@ export class WadHelpCommandExecutor extends WadCommandExecutor {
     const commands = Array.from(this.commandService.commands.keys()).filter(
       (c) => c.toLowerCase() !== 'help',
     );
-    const helpMessagePrefix = $localize`Commands`;
-    const helpMessage = `${helpMessagePrefix}: ${commands.join(', ')}`;
-    this.logService.info(helpMessage);
 
-    return new WadCommandExecutorResult(true, helpMessage);
+    const message = $localize`Enter command into command prompt and press [Enter] to execute. Press [Escape] to minimise command window.
+
+    Commands: ${commands.join(', ')}`;
+
+    this.logService.info(message);
+
+    return new WadCommandExecutorResult(true);
   }
 }

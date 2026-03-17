@@ -27,7 +27,9 @@ export class WadCircleCommandExecutor extends WadCommandExecutor {
       const element = new WadCircleElementModel(x, y, radius);
       this.elementService.add(element);
 
-      this.logService.info(`Created triangle (#${element.id})`);
+      this.logService.info(
+        `Created circle (#${element.id}) with center coordinates ${element.x}..${element.y} and radius ${element.radius}`,
+      );
       return new WadCommandExecutorResult(true, `Circle #${element.id} was created.`);
     } catch (ex) {
       this.logService.error(

@@ -24,7 +24,7 @@ export class App {
 
   onEnterKeyup() {
     if (this.commandInput()) {
-      if (!this.commandInput()!.isActive$()) {
+      if (!this.commandInput()!.isActive()) {
         this.commandInput()!.setFocus();
       }
     }
@@ -32,7 +32,7 @@ export class App {
 
   onEscapeKeyup() {
     if (this.commandInput()) {
-      if (this.commandInput()!.isActive$()) {
+      if (this.commandInput()!.isActive()) {
         this.commandInput()!.deactivate();
       }
     }
