@@ -1,13 +1,14 @@
-import { wadElementModelIdGenerator } from './model-id-generator';
+import { customAlphabet } from 'nanoid';
+
+const generateId = customAlphabet('abcdef0123456789', 8);
 
 export class WadElementModel {
-  id!: string;
+  id = generateId();
   type!: string;
 
   isFocused = false;
 
   constructor(type: string) {
-    this.id = this.generateId();
     this.type = type;
   }
 
@@ -17,9 +18,5 @@ export class WadElementModel {
 
   defocus() {
     this.isFocused = false;
-  }
-
-  private generateId(): string {
-    return wadElementModelIdGenerator();
   }
 }
