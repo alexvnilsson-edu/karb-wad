@@ -4,7 +4,6 @@ import {
   Directive,
   inject,
   input,
-  linkedSignal,
   output,
   signal,
 } from '@angular/core';
@@ -14,6 +13,11 @@ import { WadElementModel } from '../models/model';
 
 @Directive({
   selector: '[appWadBaseElement]',
+  host: {
+    '[attr.stroke]': 'stroke()',
+    '[attr.stroke-width]': 'strokeWidth()',
+    '(click)': 'onClick()',
+  },
 })
 export class WadElementBaseDirective<T extends WadElementModel> {
   protected changeDetection = inject(ChangeDetectorRef);
@@ -26,5 +30,10 @@ export class WadElementBaseDirective<T extends WadElementModel> {
 
   isActive = signal(false);
 
-  strokeWidth = linkedSignal(() => (this.isActive() ? '2' : '1'));
+  stroke = computed(() => (this.isActive() ? 'rgb(255, 255, 255)' : 'rgb(200, 200, 200)'));
+  strokeWidth = computed(() => (this.isActive() ? '2' : '1'));
+
+  onClick() {
+    console.debug(`Element ${this.model().id} clicked.`);
+  }
 }

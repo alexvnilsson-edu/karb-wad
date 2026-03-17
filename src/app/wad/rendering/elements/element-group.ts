@@ -3,7 +3,9 @@ import { WadRenderService } from '../render.service';
 
 @Directive({
   selector: '[appWadElementGroup]',
-  host: {},
+  host: {
+    '[attr.fill]': '`none`',
+  },
 })
 export class WadElementGroup {
   private renderService = inject(WadRenderService);
