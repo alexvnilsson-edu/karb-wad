@@ -20,7 +20,7 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": "en-GB",
         "locales": {
           "sv": {
             "translation": "src/locales/messages.sv.xlf"
