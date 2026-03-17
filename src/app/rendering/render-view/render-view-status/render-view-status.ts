@@ -1,4 +1,4 @@
-import { PercentPipe } from '@angular/common';
+import { DecimalPipe, PercentPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { WadCoordinatesCommandArgumentTransformer } from 'app/wad/cli/commands/arguments/transformers';
 import { createCoordinates } from '../../../wad/rendering/coordinates.type';
@@ -7,7 +7,7 @@ import { WadRenderService } from '../../../wad/rendering/render.service';
 @Component({
   selector: 'app-render-view-status',
   templateUrl: './render-view-status.html',
-  imports: [PercentPipe],
+  imports: [DecimalPipe, PercentPipe],
 })
 export class RenderViewStatus {
   private renderService = inject(WadRenderService);
@@ -23,7 +23,7 @@ export class RenderViewStatus {
     );
   });
 
-  scale = computed(() => this.renderService.scale());
+  scale = computed(() => this.renderService.scale() / 100);
 
   origin$ = computed(() => {
     const origin = this.renderService.origin() ?? createCoordinates(0, 0);
