@@ -44,86 +44,30 @@
           <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2382659092551956052" datatype="html">
-        <source>coordinates to center of circle</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8077348203418212961" datatype="html">
-        <source>radius of circle</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6493938331930127404" datatype="html">
-        <source>coordinates to start of line</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6457344841117653973" datatype="html">
-        <source>coordinates to end of line</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7611761200694531605" datatype="html">
-        <source>coordinates of first corner</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8323825990280096986" datatype="html">
-        <source>coordinates of second corner</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">88</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8435441088279682933" datatype="html">
-        <source>coordinates of third corner</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">71</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">89</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4139681855761638453" datatype="html">
-        <source>coordinates of fourth corner</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9013578883881081825" datatype="html">
-        <source>number of elements (square root)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/command-config.ts</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1783038408147120677" datatype="html">
         <source>Usage: <x id="PH" equiv-text="command.name"/> <x id="PH_1" equiv-text="argSyntax"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/command.service.ts</context>
           <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="268028058084288980" datatype="html">
+        <source>Unable to create element: <x id="PH" equiv-text="ex"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/wad/cli/commands/executors/circle.command-executor.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/wad/cli/commands/executors/line.command-executor.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/wad/cli/commands/executors/rectangle.command-executor.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3421765493835251652" datatype="html">
@@ -135,67 +79,18 @@
           <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2622711262288077036" datatype="html">
-        <source>Created line (#<x id="PH" equiv-text="element.id"/>)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/line.command-executor.ts</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5131415094255341690" datatype="html">
-        <source>Unable to create line with arguments: <x id="PH" equiv-text="Array.from(command.arguments.values())
-          .map((arg) =&gt; [arg.name, arg.value].join(&apos;=&apos;))
-          .join(&apos; &apos;)"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/line.command-executor.ts</context>
-          <context context-type="linenumber">34,36</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="5404258371478013753" datatype="html">
         <source>Error creating line: <x id="PH" equiv-text="ex"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/line.command-executor.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4275050200404401175" datatype="html">
-        <source>Created rectangle (#<x id="PH" equiv-text="element.id"/>)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/rectangle.command-executor.ts</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4410379448160646024" datatype="html">
-        <source>Rectangle #<x id="PH" equiv-text="element.id"/> was created.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/rectangle.command-executor.ts</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4662647693157657978" datatype="html">
-        <source>Unable to create rectangle with arguments: <x id="PH" equiv-text="Array.from(
-          command.arguments.values(),
-        )
-          .map((arg) =&gt; [arg.name, arg.value].join(&apos;=&apos;))
-          .join(&apos; &apos;)"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/rectangle.command-executor.ts</context>
-          <context context-type="linenumber">37,41</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3684289768287448768" datatype="html">
         <source>Error creating rectangle: <x id="PH" equiv-text="ex"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/rectangle.command-executor.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="453414524028001177" datatype="html">
@@ -210,29 +105,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/test.command-executor.ts</context>
           <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3471455183611813541" datatype="html">
-        <source>Clearing elements...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/test.command-executor.ts</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1860076302307222053" datatype="html">
-        <source>Created triangle (#<x id="PH" equiv-text="element.id"/>)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1825467001072268313" datatype="html">
-        <source>Unable to create triangle with arguments: <x id="PH" equiv-text="Array.from(command.arguments.values())
-          .map((arg) =&gt; [arg.name, arg.value].join(&apos;=&apos;))
-          .join(&apos; &apos;)"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
-          <context context-type="linenumber">35,37</context>
         </context-group>
       </trans-unit>
     </body>

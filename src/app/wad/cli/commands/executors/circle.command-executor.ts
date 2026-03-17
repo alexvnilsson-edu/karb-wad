@@ -26,18 +26,10 @@ export class WadCircleCommandExecutor extends WadCommandExecutor {
       ];
       const element = new WadCircleElementModel(x, y, radius);
       this.elementService.add(element);
-
-      this.logService.info(
-        `Created circle (#${element.id}) with center coordinates ${element.x}..${element.y} and radius ${element.radius}`,
-      );
-      return new WadCommandExecutorResult(true, `Circle #${element.id} was created.`);
+      return new WadCommandExecutorResult(true);
     } catch (ex) {
-      this.logService.error(
-        `Unable to create circle with arguments: ${Array.from(command.arguments.values())
-          .map((arg) => [arg.name, arg.value].join('='))
-          .join(' ')}`,
-      );
-      return new WadCommandExecutorResult(false, `Error creating circle: ${ex}`);
+      this.logService.error($localize`Unable to create element: ${ex}`);
+      return new WadCommandExecutorResult(false);
     }
   }
 }

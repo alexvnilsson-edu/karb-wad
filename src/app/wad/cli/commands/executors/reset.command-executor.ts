@@ -19,7 +19,7 @@ export class WadResetCommandExecutor extends WadCommandExecutor {
   execute(_command: WadCommand) {
     const elementSize = this.elementService.elements().size;
     this.elementService.clear();
-    this.logService.debug($localize`Cleared ${elementSize > 0 ? elementSize : 'no'} elements.`);
+    this.logService.info($localize`Cleared ${elementSize > 0 ? elementSize : 'no'} elements.`);
 
     return new WadCommandExecutorResult(true);
   }

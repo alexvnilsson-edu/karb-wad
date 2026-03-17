@@ -29,18 +29,10 @@ export class WadRectangleCommandExecutor extends WadCommandExecutor {
       const element = new WadRectangleElementModel(a, b, c, d);
       this.elementService.add(element);
 
-      this.logService.info($localize`Created rectangle (#${element.id})`);
-
-      return new WadCommandExecutorResult(true, $localize`Rectangle #${element.id} was created.`);
+      return new WadCommandExecutorResult(true);
     } catch (ex) {
-      this.logService.error(
-        $localize`Unable to create rectangle with arguments: ${Array.from(
-          command.arguments.values(),
-        )
-          .map((arg) => [arg.name, arg.value].join('='))
-          .join(' ')}`,
-      );
-      return new WadCommandExecutorResult(false, $localize`Error creating rectangle: ${ex}`);
+      this.logService.error($localize`Unable to create element: ${ex}`);
+      return new WadCommandExecutorResult(false);
     }
   }
 }

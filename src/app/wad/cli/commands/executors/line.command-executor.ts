@@ -27,15 +27,10 @@ export class WadLineCommandExecutor extends WadCommandExecutor {
       const element = new WadPolylineElementModel([start, end]);
       this.elementService.add(element);
 
-      this.logService.info($localize`Created line (#${element.id})`);
-      return new WadCommandExecutorResult(true, `Line #${element.id} was created.`);
+      return new WadCommandExecutorResult(true);
     } catch (ex) {
-      this.logService.error(
-        $localize`Unable to create line with arguments: ${Array.from(command.arguments.values())
-          .map((arg) => [arg.name, arg.value].join('='))
-          .join(' ')}`,
-      );
-      return new WadCommandExecutorResult(false, $localize`Error creating line: ${ex}`);
+      this.logService.error($localize`Unable to create element: ${ex}`);
+      return new WadCommandExecutorResult(false);
     }
   }
 }
