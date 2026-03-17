@@ -30,32 +30,18 @@
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6566648025298360849" datatype="html">
-        <source>Scale:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/rendering/render-view/render-view-status/render-view-status.html</context>
-          <context context-type="linenumber">11,12</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2803866371862642878" datatype="html">
-        <source> Enter command into text field and press [Enter] to execute. Press [Escape] to minimise command window. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.html</context>
-          <context context-type="linenumber">8,9</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="6131970232975984693" datatype="html">
         <source>Enter command, or help to get help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3852746099411806808" datatype="html">
         <source>[Enter] to open command window</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/command-input/command-input.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2382659092551956052" datatype="html">
@@ -133,11 +119,11 @@
           <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4407206238998644792" datatype="html">
-        <source>Unexpected syntax. <x id="PH" equiv-text="command.name"/> <x id="PH_1" equiv-text="argSyntax"/></source>
+      <trans-unit id="1783038408147120677" datatype="html">
+        <source>Usage: <x id="PH" equiv-text="command.name"/> <x id="PH_1" equiv-text="argSyntax"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/command.service.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3421765493835251652" datatype="html">
