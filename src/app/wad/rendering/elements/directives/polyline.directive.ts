@@ -4,6 +4,9 @@ import { WadElementBaseDirective } from './base.directive';
 
 @Directive({
   selector: '[appWadPolylineElement]',
+  host: {
+    '[attr.points]': 'points()',
+  },
 })
 export class WadPolylineElementDirective extends WadElementBaseDirective<WadPolylineElementModel> {
   points = computed(() =>
