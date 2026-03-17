@@ -139,7 +139,7 @@
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/line.command-executor.ts</context>
           <context context-type="linenumber">30</context>
         </context-group>
-      <target>Skapade linje (#)</target></trans-unit>
+      <target>Skapade linje (#<x id="PH" equiv-text="element.id"/>)</target></trans-unit>
       <trans-unit id="5131415094255341690" datatype="html">
         <source>Unable to create line with arguments: <x id="PH" equiv-text="Array.from(command.arguments.values())           .map((arg) =&gt; [arg.name, arg.value].join('='))           .join(' ')"/></source>
         <context-group purpose="location">
@@ -178,7 +178,7 @@
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/rectangle.command-executor.ts</context>
           <context context-type="linenumber">37,41</context>
         </context-group>
-      <target>Kunde inte skapa rektangel med argumenten: </target></trans-unit>
+      <target>Kunde inte skapa rektangel med argumenten: <x id="PH" equiv-text="Array.from(           command.arguments.values(),         )           .map((arg) =&gt; [arg.name, arg.value].join('='))           .join(' ')"/></target></trans-unit>
       <trans-unit id="3684289768287448768" datatype="html">
         <source>Error creating rectangle: <x id="PH" equiv-text="ex"/></source>
         <context-group purpose="location">
@@ -189,42 +189,42 @@
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
           <context context-type="linenumber">39</context>
         </context-group>
-      <target>Fel uppstod när rektangeln skulle skapas:</target></trans-unit>
+      <target>Fel uppstod när rektangeln skulle skapas: <x id="PH" equiv-text="ex"/></target></trans-unit>
       <trans-unit id="453414524028001177" datatype="html">
         <source>Cleared <x id="PH" equiv-text="elementSize &gt; 0 ? elementSize : 'no'"/> elements.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/reset.command-executor.ts</context>
           <context context-type="linenumber">22</context>
         </context-group>
-      <target></target></trans-unit>
+      <target>Rensade <x id="PH" equiv-text="elementSize &gt; 0 ? elementSize : 'no'"/> element.</target></trans-unit>
       <trans-unit id="1236755733498558268" datatype="html">
         <source>[<x id="PH" equiv-text="WadTestCommandExecutor.ExecutorName"/>] number of elements: <x id="PH_1" equiv-text="squareRoot ** 2"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/test.command-executor.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
-      <target></target></trans-unit>
+      <target>antal element: <x id="PH_1" equiv-text="squareRoot ** 2"/></target></trans-unit>
       <trans-unit id="3471455183611813541" datatype="html">
         <source>Clearing elements...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/test.command-executor.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
-      <target></target></trans-unit>
+      <target>Rensar element...</target></trans-unit>
       <trans-unit id="1860076302307222053" datatype="html">
         <source>Created triangle (#<x id="PH" equiv-text="element.id"/>)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
-      <target></target></trans-unit>
+      <target>Skapade triangel (#<x id="PH" equiv-text="element.id"/>)</target></trans-unit>
       <trans-unit id="1825467001072268313" datatype="html">
         <source>Unable to create triangle with arguments: <x id="PH" equiv-text="Array.from(command.arguments.values())           .map((arg) =&gt; [arg.name, arg.value].join('='))           .join(' ')"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/wad/cli/commands/executors/triangle.command-executor.ts</context>
           <context context-type="linenumber">35,37</context>
         </context-group>
-      <target></target></trans-unit>
+      <target>Kunde inte skapa triangel med argumenten: <x id="PH" equiv-text="Array.from(command.arguments.values())           .map((arg) =&gt; [arg.name, arg.value].join('='))           .join(' ')"/></target></trans-unit>
     </body>
   </file>
 </xliff>
