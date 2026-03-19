@@ -20,10 +20,14 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en-GB",
+        "sourceLocale": {
+          "code": "en-GB",
+          "subPath": "en"
+        },
         "locales": {
           "sv": {
-            "translation": "src/locales/messages.sv.xlf"
+            "translation": "src/locales/messages.sv.xlf",
+            "subPath": ""
           }
         }
       },
@@ -107,7 +111,10 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/karb-wad/"
+          }
         }
       }
     }
